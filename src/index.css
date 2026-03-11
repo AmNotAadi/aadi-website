@@ -1,0 +1,558 @@
+@import "tailwindcss";
+
+/* ============================================
+   AADDI PORTFOLIO — GLOBAL STYLES
+   Dark Premium / Griflan-inspired / Brutalist
+   (Google Fonts loaded via <link> in index.html)
+   ============================================ */
+
+/* --- Local Fonts --- */
+
+/* Display Serif */
+@font-face {
+  font-family: 'Rosie Brown Serif';
+  src: url('../fonts/rosie_brown_serif/Rosie Brown Serif Demo.otf') format('opentype');
+  font-display: swap;
+}
+
+/* Display Sans - Bold & Modern */
+@font-face {
+  font-family: 'Akira';
+  src: url('../fonts/akira_expanded/Akira Expanded Demo.otf') format('opentype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Lemon Milk';
+  src: url('../fonts/lemon_milk/LEMONMILK-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Lemon Milk';
+  src: url('../fonts/lemon_milk/LEMONMILK-Medium.otf') format('opentype');
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Lemon Milk';
+  src: url('../fonts/lemon_milk/LEMONMILK-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Lemon Milk';
+  src: url('../fonts/lemon_milk/LEMONMILK-Light.otf') format('opentype');
+  font-weight: 300;
+  font-display: swap;
+}
+
+/* UI Sans - Clean & Minimal */
+@font-face {
+  font-family: 'TT Fors';
+  src: url('../fonts/tt_fors/TT Fors Trial Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'TT Fors';
+  src: url('../fonts/tt_fors/TT Fors Trial Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'TT Fors';
+  src: url('../fonts/tt_fors/TT Fors Trial Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Coolvetica';
+  src: url('../fonts/coolvetica/Coolvetica Rg.otf') format('opentype');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Coolvetica';
+  src: url('../fonts/coolvetica/Coolvetica Hv Comp.otf') format('opentype');
+  font-weight: 700;
+  font-display: swap;
+}
+
+/* Graffiti & Decorative */
+@font-face {
+  font-family: 'Street Wars';
+  src: url('../fonts/graffiti/street_wars/Street Wars Demo.otf') format('opentype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'A Another Tag';
+  src: url('../fonts/graffiti/a_another_tag/aAnotherTag.otf') format('opentype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Don Graffiti';
+  src: url('../fonts/graffiti/don_graffiti/DonGraffiti.otf') format('opentype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Aerosoldier';
+  src: url('../fonts/graffiti/aerosoldier/Aerosoldier_PERSONAL_USE_ONLY.otf') format('opentype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Lidakz One';
+  src: url('../fonts/graffiti/lidakz_one/LidakzOne_PERSONAL_USE_ONLY.otf') format('opentype');
+  font-display: swap;
+}
+
+/* Bold & Modern */
+@font-face {
+  font-family: 'Brunson';
+  src: url('../fonts/brunson/Brunson.ttf') format('truetype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Brunson Rough';
+  src: url('../fonts/brunson/Brunson Rough.ttf') format('truetype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Exclusive Editorial';
+  src: url('../fonts/exclusive_editorial/DR Exclusive Editorial.ttf') format('truetype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Vogue';
+  src: url('../fonts/vogue/Vogue.ttf') format('truetype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Redotic';
+  src: url('../fonts/redotic/Redotic.ttf') format('truetype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Sakire';
+  src: url('../fonts/sakire/Sakire.ttf') format('truetype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Moon Get';
+  src: url('../fonts/moon_get/moon_get-Heavy.otf') format('opentype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Magazine';
+  src: url('../fonts/magazine/Magazine.ttf') format('truetype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Magazine';
+  src: url('../fonts/magazine/Magazine-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Minecraft';
+  src: url('../fonts/minecraftt/MinecraftEvenings-lgvPd.ttf') format('truetype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Decipher';
+  src: url('../fonts/graffiti/decipher/decipher.otf') format('opentype');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Typewriter';
+  src: url('../fonts/typewriter_condensed/typewcond_regular.otf') format('opentype');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Typewriter2';
+  src: url('../fonts/type_machine/Type\ Machine.ttf') format('opentype');
+  font-display: swap;
+}
+
+
+
+
+/* --- Design Tokens via Tailwind v4 Theme --- */
+@theme {
+  --color-bone: #F5E6D3;
+  --color-cream: #EBD9C2;
+  --color-ink: #0A0A0A;
+  --color-dark: #111111;
+  --color-dark-surface: #1A1A1A;
+  --color-brutal-red: #E63B2E;
+  --color-ink-blue: #1D2440;
+  --color-muted: #777777;
+
+  /* Font families - use these with class names like 'font-rosie-serif', 'font-akira', etc. */
+  --font-timemachine:"Typewriter2", Georgia, "Times New Roman", serif;
+  --font-typewriter:"Typewriter", Georgia, "Times New Roman", serif;
+  --font-rosie-serif: "Rosie Brown Serif", Georgia, "Times New Roman", serif;
+  --font-akira: "Akira", "Helvetica Neue", "Arial Black", sans-serif;
+  --font-lemon-milk: "Lemon Milk", system-ui, -apple-system, sans-serif;
+  --font-tt-fors: "TT Fors", system-ui, -apple-system, sans-serif;
+  --font-coolvetica: "Coolvetica", system-ui, -apple-system, sans-serif;
+  --font-street-wars: "Street Wars", cursive;
+  --font-another-tag: "A Another Tag", cursive;
+  --font-don-graffiti: "Don Graffiti", cursive;
+  --font-aerosoldier: "Aerosoldier", cursive;
+  --font-lidakz: "Lidakz One", cursive;
+  --font-brunson: "Brunson", "Helvetica Neue", sans-serif;
+  --font-brunson-rough: "Brunson Rough", "Helvetica Neue", sans-serif;
+  --font-exclusive: "Exclusive Editorial", "Times New Roman", serif;
+  --font-vogue: "Vogue", "Times New Roman", serif;
+  --font-redotic: "Redotic", cursive;
+  --font-sakire: "Sakire", "Helvetica Neue", sans-serif;
+  --font-moon-get: "Moon Get", "Helvetica Neue", sans-serif;
+  --font-magazine: "Magazine", "Times New Roman", serif;
+  --font-minecraft: "Minecraft", monospace;
+  --font-decipher: "Decipher", cursive;
+
+  /* Default fonts used */
+  --font-heading: "Akira", "Helvetica Neue", "Arial Black", sans-serif;
+  --font-serif: "Playfair Display", Georgia, "Times New Roman", serif;
+  --font-mono: "JetBrains Mono", "Fira Code", "SF Mono", ui-monospace, monospace;
+  --font-body: "Inter", system-ui, -apple-system, sans-serif;
+  --font-display: "Rosie Brown Serif", Georgia, "Times New Roman", serif;
+  --font-ui: "TT Fors", system-ui, -apple-system, sans-serif;
+}
+
+@layer base {
+  /* --- Base Resets & Body --- */
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  html::-webkit-scrollbar {
+    display: none;
+  }
+
+  body {
+    margin: 0;
+    font-family: var(--font-body);
+    background-color: var(--color-ink);
+    color: var(--color-bone);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* --- Film Grain / Noise Texture Overlay --- */
+  body::after {
+    content: "";
+    position: fixed;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.035;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    animation: grainShift 0.5s steps(6) infinite;
+  }
+
+  /* --- Selection Color --- */
+  ::selection {
+    background-color: var(--color-brutal-red);
+    color: var(--color-bone);
+  }
+
+  video {
+    object-fit: cover;
+  }
+}
+
+@keyframes grainShift {
+  0%, 100% { transform: translate(0, 0); }
+  10% { transform: translate(-2%, -3%); }
+  30% { transform: translate(3%, -1%); }
+  50% { transform: translate(-1%, 2%); }
+  70% { transform: translate(2%, 1%); }
+  90% { transform: translate(-3%, -2%); }
+}
+
+@layer utilities {
+  /* --- Utility: Brutalist Heading Style --- */
+  .heading-brutal {
+    font-family: var(--font-heading);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -0.03em;
+    line-height: 0.9;
+  }
+
+  /* --- Utility: Serif Display Style (Griflan-style) --- */
+  .heading-serif {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+  }
+
+  /* --- Utility: Mono / Metadata Style --- */
+  .text-meta {
+    font-family: var(--font-mono);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.75rem;
+  }
+
+  /* --- Utility: Text Stroke (for Footer) --- */
+  .text-stroke {
+    -webkit-text-stroke: 2px rgba(245, 230, 211, 0.25);
+    color: transparent;
+  }
+
+  .text-stroke-fill {
+    -webkit-text-stroke: 2px var(--color-brutal-red);
+    color: var(--color-brutal-red);
+  }
+
+  /* --- Local Font Utilities --- */
+  .font-display  { font-family: var(--font-display); }
+  .font-ui       { font-family: var(--font-ui); }
+
+  .font-rosie-serif  { font-family: var(--font-rosie-serif); }
+  .font-akira        { font-family: var(--font-akira); }
+  .font-lemon-milk   { font-family: var(--font-lemon-milk); }
+  .font-tt-fors      { font-family: var(--font-tt-fors); }
+  .font-coolvetica   { font-family: var(--font-coolvetica); }
+  .font-street-wars  { font-family: var(--font-street-wars); }
+  .font-another-tag  { font-family: var(--font-another-tag); }
+  .font-don-graffiti { font-family: var(--font-don-graffiti); }
+  .font-aerosoldier  { font-family: var(--font-aerosoldier); }
+  .font-lidakz       { font-family: var(--font-lidakz); }
+  .font-brunson      { font-family: var(--font-brunson); }
+  .font-brunson-rough{ font-family: var(--font-brunson-rough); }
+  .font-exclusive    { font-family: var(--font-exclusive); }
+  .font-vogue        { font-family: var(--font-vogue); }
+  .font-redotic      { font-family: var(--font-redotic); }
+  .font-sakire       { font-family: var(--font-sakire); }
+  .font-moon-get     { font-family: var(--font-moon-get); }
+  .font-magazine     { font-family: var(--font-magazine); }
+  .font-minecraft    { font-family: var(--font-minecraft); }
+  .font-decipher     { font-family: var(--font-decipher); }
+
+  /* --- GSAP marker z-index --- */
+  .gsap-marker-start,
+  .gsap-marker-end,
+  .gsap-marker-scroller-start,
+  .gsap-marker-scroller-end {
+    z-index: 99999;
+  }
+
+  /* --- Hero video card --- */
+  .hero-video-card {
+    top: 65%;
+    left: 59%;
+    width: 30%;
+    height: 41%;
+    border-radius: 3px;
+  }
+}
+
+/* ================================================
+   ID CARD — Background & Card Animations
+   ================================================ */
+
+@keyframes id-orb-drift {
+  0%,  100% { transform: translate(0, 0) scale(1);        opacity: 0.6; }
+  33%        { transform: translate(50px, -40px) scale(1.12); opacity: 0.8; }
+  66%        { transform: translate(-35px, 25px) scale(0.92); opacity: 0.5; }
+}
+
+@keyframes id-shimmer-run {
+  0%   { background-position: 180% 0; }
+  100% { background-position: -80% 0; }
+}
+
+@keyframes id-border-glow {
+  0%,  100% { background-position: 0% 50%; }
+  50%        { background-position: 100% 50%; }
+}
+
+.id-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  animation: id-orb-drift 12s ease-in-out infinite;
+}
+
+.id-orb-1 {
+  width: 420px;
+  height: 420px;
+  background: rgba(139, 92, 246, 0.22);
+  top: -120px;
+  left: -60px;
+  animation-delay: 0s;
+}
+
+.id-orb-2 {
+  width: 320px;
+  height: 320px;
+  background: rgba(99, 102, 241, 0.18);
+  bottom: -80px;
+  right: 80px;
+  animation-delay: -5s;
+}
+
+.id-orb-3 {
+  width: 260px;
+  height: 260px;
+  background: rgba(244, 114, 182, 0.12);
+  top: 40%;
+  left: 55%;
+  animation-delay: -9s;
+}
+
+.id-dot-grid {
+  background-image: radial-gradient(circle, rgba(139, 92, 246, 0.18) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+.id-card-glow-border {
+  /* background: linear-gradient(135deg, #6d28d9 0%, #4f46e5 40%, #7c3aed 70%, #4338ca 100%); */
+  background-size: 300% 300%;
+  animation: id-border-glow 4s ease infinite;
+  box-shadow:
+    0 0 22px rgba(99, 60, 220, 0.5),
+    0 0 55px rgba(79, 70, 229, 0.2),
+    0 28px 55px rgba(0, 0, 0, 0.6);
+}
+
+.id-card-shimmer {
+  background: linear-gradient(
+    108deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.06) 42%,
+    rgba(255, 255, 255, 0.22) 50%,
+    rgba(200, 180, 255, 0.08) 58%,
+    transparent 70%
+  );
+  background-size: 200% 100%;
+  animation: id-shimmer-run 4s ease-in-out infinite;
+}
+
+/* ── Hologram text on "creative license" ── */
+@keyframes id-hologram-cycle {
+  0%   { background-position: 0%   50%; }
+  100% { background-position: 200% 50%; }
+}
+
+.id-hologram-text {
+  background: linear-gradient(
+    90deg,
+    #ff0080, #ff4500, #ffcc00, #00ff88,
+    #00cfff, #7c3aed, #ff0080, #ff4500
+  );
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: id-hologram-cycle 3s linear infinite;
+  filter: drop-shadow(0 0 6px rgba(168, 85, 247, 0.6));
+  transition: animation-duration 0.2s;
+}
+
+.id-hologram-text:hover {
+  animation-duration: 0.5s;
+  filter: drop-shadow(0 0 12px rgba(168, 85, 247, 0.95));
+}
+
+/* ── Graffiti score text ── */
+.id-graffiti-score {
+  color: rgb(157, 16, 110);
+  -webkit-text-stroke: 1px #60033f;
+  text-shadow:
+    3px 3px 0 #620a49,
+    -1px -1px 0 #ff0062,
+    0 0 16px rgb(255, 130, 130);
+}
+
+/* ── Graffiti marker scrawl absolutely over the card ── */
+.id-graffiti-overlay {
+  position: absolute;
+  bottom: 75px;
+  right: 50px;
+  font-size: 2.3rem;
+  line-height: 1;
+  transform: rotate(-1deg);
+  background: linear-gradient(
+    90deg,
+    #abb535 0%,
+    #daf416 30%,
+    #ffff00 50%,
+    #ffffff 70%,
+    #888888 100%
+  );
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  filter:
+    drop-shadow(0 1px 2px rgba(0,0,0,0.45))
+    drop-shadow(0 0 8px rgba(200,200,255,0.2));
+  pointer-events: none;
+  z-index: 30;
+  white-space: nowrap;
+  transition: filter 0.3s;
+}
+
+.id-graffiti-overlay:hover {
+  animation: id-silver-shine 1.2s linear infinite;
+  filter:
+    drop-shadow(0 1px 3px #aaba4380)
+    drop-shadow(0 0 14px rgba(220,220,255,0.55));
+}
+
+@keyframes id-silver-shine {
+  0%   { background-position: 0%   50%; }
+  100% { background-position: 300% 50%; }
+}
+
+.dame {
+  position: absolute;
+  bottom: 100px;
+  left: 10px;
+  font-size:3rem;
+  line-height: 1;
+  transform: rotate(-8deg);}
