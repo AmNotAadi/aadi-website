@@ -2,6 +2,7 @@
 import Tilt from 'react-parallax-tilt';
 import JsBarcode from 'jsbarcode';
 import TargetCursor from './TargetCursor';
+import portraitImg from '../assets/blog04.jpg';
 
 const PORTFOLIO_URL = 'https://www.youtube.com/watch?v=xnFvhn-1wHY&list=RDxnFvhn-1wHY&start_radio=1';
 
@@ -80,7 +81,7 @@ export default function IDCard() {
               <div className="flex-shrink-0 flex flex-col gap-2">
                 <div className="w-[100px] h-[130px] border-2 border-black/20 overflow-hidden rounded-sm shadow-inner cursor-target">
                   <img
-                    src="/src/assets/blog04.jpg"
+                    src={portraitImg}
                     alt="aadi2005"
                     className="w-full h-full object-cover"
                   />
