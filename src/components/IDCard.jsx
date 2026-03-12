@@ -69,7 +69,7 @@ export default function IDCard() {
                 <p className="text-[9px] text-black/35 font-mono">No.2345687981798</p>
               </div>
               <div className="font-decipher font-semibold text-3xl id-hologram-text">
-                creative license
+                 license for chaos
               </div>
             </div>
 

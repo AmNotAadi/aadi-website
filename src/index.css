@@ -549,6 +549,16 @@
   100% { background-position: 300% 50%; }
 }
 
+/* ── Services marquee scrollers ── */
+@keyframes svc-marquee-l {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@keyframes svc-marquee-r {
+  from { transform: translateX(-50%); }
+  to   { transform: translateX(0); }
+}
+
 .dame {
   position: absolute;
   bottom: 100px;
@@ -556,3 +566,8 @@
   font-size:3rem;
   line-height: 1;
   transform: rotate(-8deg);}
+
+
+  .box{
+    color: #8b2255;
+  }

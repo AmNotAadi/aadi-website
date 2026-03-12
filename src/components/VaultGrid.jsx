@@ -438,9 +438,9 @@ export default function VaultGrid() {
       {/* Header */}
       <div className="px-6 md:px-14 flex items-end justify-between mb-6">
         <div>
-          <p className="font-mono text-[10px] tracking-widest text-bone/40 uppercase mb-2">◆ &nbsp; THE VAULT</p>
+          <p className="font-aerosoldier text-6xl tracking-widest text-fuchsia-200 uppercase mb-2">THE VAULT</p>
           <h2 className="heading-brutal text-bone text-6xl leading-none">
-            SELECTED<br /><span className="text-brutal-red">WORK</span>
+            MY RECENT<br /><span className="text-brutal-red">WORK</span>
           </h2>
         </div>
         <p className="font-mono text-[10px] tracking-wider text-bone/35 hidden md:block uppercase">
@@ -466,7 +466,7 @@ export default function VaultGrid() {
       <HoverCard data={hoverData} anchorRect={hoverRect} visible={cardVisible} />
 
       {/* CTA */}
-      <div className="px-6 md:px-14 flex justify-center mt-12">
+      <div className="px-6 md:px-14 py-5  bg-brutal-red w-5 flex justify-center mt-12">
         <a href="#" className="group relative inline-block cursor-target">
           <span className="heading-brutal text-xl tracking-wider text-bone">VIEW ALL WORK</span>
           <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-brutal-red origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out" />
