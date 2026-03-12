@@ -69,13 +69,10 @@ const ARTISTS = [
   },
 ]
 
-const CARD_W = 310
-const CARD_GAP = 16
-
-// ── Inline platform icons ────────────────────────────────────────────────
+// ── Inline platform icons ─────────────────────────────────────────────────
 function IgIcon() {
   return (
-    <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
       <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
     </svg>
   )
@@ -83,33 +80,38 @@ function IgIcon() {
 
 function YtIcon() {
   return (
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
       <path d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z" />
     </svg>
   )
 }
 
-// ── Single card ───────────────────────────────────────────────────────────
+// ── Single grid card ──────────────────────────────────────────────────────
 function ArtistCard({ artist }) {
   return (
-    <div
-      className="shrink-0 cursor-target"
+    <a
+      href={artist.href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="client-card cursor-target"
       style={{
-        width: `${CARD_W}px`,
-        height: `${CARD_W + 20}px`,
+        display: 'block',
+        position: 'relative',
+        width: '80%',
+        aspectRatio: '1/ 1.05',
         borderRadius: '10px',
         overflow: 'hidden',
-        position: 'relative',
-        boxShadow: '0 8px 36px rgba(0,0,0,0.55)',
-        transition: 'transform 0.35s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.35s ease',
+        boxShadow: '0 8px 32px rgba(0,0,0,0.5)',
+        textDecoration: 'none',
+        transition: 'transform 0.4s cubic-bezier(0.34,1.4,0.64,1), box-shadow 0.4s ease',
       }}
       onMouseEnter={e => {
-        e.currentTarget.style.transform = 'translateY(-8px) scale(1.02)'
-        e.currentTarget.style.boxShadow = '0 28px 72px rgba(0,0,0,0.75)'
+        e.currentTarget.style.transform = 'translateY(-6px) scale(1.02)'
+        e.currentTarget.style.boxShadow = '0 24px 64px rgba(0,0,0,0.7)'
       }}
       onMouseLeave={e => {
         e.currentTarget.style.transform = 'translateY(0) scale(1)'
-        e.currentTarget.style.boxShadow = '0 8px 36px rgba(0,0,0,0.55)'
+        e.currentTarget.style.boxShadow = '0 8px 32px rgba(0,0,0,0.5)'
       }}
     >
       {/* Full-bleed image */}
@@ -120,33 +122,30 @@ function ArtistCard({ artist }) {
         style={{
           position: 'absolute',
           top: 0, left: 0,
-          width: '100%',
-          height: '100%',
+          width: '100%', height: '100%',
           objectFit: 'cover',
           display: 'block',
         }}
       />
 
-      {/* Strong gradient — bottom two-thirds */}
+      {/* Dark gradient from bottom */}
       <div style={{
-        position: 'absolute',
-        inset: 0,
-        background: 'linear-gradient(to bottom, transparent 20%, rgba(0,0,0,0.55) 55%, rgba(0,0,0,0.92) 100%)',
+        position: 'absolute', inset: 0,
+        background: 'linear-gradient(to bottom, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0.35) 45%, rgba(0,0,0,0.88) 100%)',
       }} />
 
-      {/* Tag pill — top left */}
+      {/* Tag — top left */}
       <span
-        className="font-decipher uppercase"
+        className="font-mono uppercase"
         style={{
           position: 'absolute',
-          top: '14px',
-          left: '14px',
-          fontSize: '15px',
-          letterSpacing: '0.14em',
-          // background: artist.accent,
-          color: artist.accent,
-          // padding: '4px 10px',
-          // borderRadius: '4px',
+          top: '14px', left: '14px',
+          fontSize: '7px',
+          letterSpacing: '0.15em',
+          background: artist.accent,
+          color: '#0a0a0a',
+          padding: '4px 9px',
+          borderRadius: '3px',
           fontWeight: 700,
           lineHeight: 1,
         }}
@@ -157,159 +156,278 @@ function ArtistCard({ artist }) {
       {/* Arrow — top right */}
       <div style={{
         position: 'absolute',
-        top: '12px',
-        right: '12px',
-        width: '32px',
-        height: '32px',
+        top: '12px', right: '12px',
+        width: '28px', height: '28px',
         borderRadius: '50%',
-        background: 'rgba(255,255,255,0.12)',
+        background: 'rgba(255,255,255,0.1)',
         backdropFilter: 'blur(8px)',
-        border: '1px solid rgba(255,255,255,0.18)',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
+        border: '1px solid rgba(255,255,255,0.15)',
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
       }}>
-        <span style={{ color: '#fff', fontSize: '15px', lineHeight: 1 }}>↗</span>
+        <span style={{ color: '#fff', fontSize: '13px', lineHeight: 1 }}>↗</span>
       </div>
 
-      {/* Text overlay — bottom */}
+      {/* Bottom text */}
       <div style={{
         position: 'absolute',
         bottom: 0, left: 0, right: 0,
-        padding: '0 18px 20px',
+        padding: '0 16px 16px',
       }}>
-        {/* Channel / brand name — big chunky */}
         <h3
           className="font-akira leading-none"
           style={{
-            fontSize: '35px',
-            color: '#ffffff',
-            letterSpacing: '-0.02em',
+            fontSize: 'clamp(1.1rem, 2.2vw, 1.6rem)',
+            color: '#fff',
+            letterSpacing: '-0.01em',
             marginBottom: '8px',
-            textShadow: '0 2px 12px rgba(0,0,0,0.6)',
+            textShadow: '0 1px 8px rgba(0,0,0,0.5)',
           }}
         >
           {artist.name}
         </h3>
 
-        {/* Audience stats row */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
-            <span style={{ color: 'rgba(255,255,255,0.6)' }}><IgIcon /></span>
-            <span
-              className="font-moon-get"
-              style={{ fontSize: '30px', fontWeight: 700, letterSpacing: '0.06em', color: '#fff' }}
-            >{artist.ig}</span>
+        {/* Stats */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+            <span style={{ color: 'rgba(255,255,255,0.55)' }}><IgIcon /></span>
+            <span className="font-mono" style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.05em', color: '#fff' }}>
+              {artist.ig}
+            </span>
           </div>
-          <div style={{ width: '1px', height: '10px', background: 'rgba(255,255,255,0.25)' }} />
-          <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
-            <span style={{ color: 'rgba(255,255,255,0.6)' }}><YtIcon /></span>
-            <span
-              className="font-moon-get"
-              style={{ fontSize: '30px', fontWeight: 700, letterSpacing: '0.06em', color: '#fff' }}
-            >{artist.yt}</span>
+          <div style={{ width: '1px', height: '9px', background: 'rgba(255,255,255,0.2)' }} />
+          <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+            <span style={{ color: 'rgba(255,255,255,0.55)' }}><YtIcon /></span>
+            <span className="font-mono" style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.05em', color: '#fff' }}>
+              {artist.yt}
+            </span>
           </div>
-          <div style={{ marginLeft: 'auto', width: '6px', height: '6px', borderRadius: '50%', background: artist.accent }} />
+          <div style={{ marginLeft: 'auto', width: '5px', height: '5px', borderRadius: '50%', background: artist.accent }} />
         </div>
       </div>
 
-      {/* Accent color bottom border */}
+      {/* Accent bottom bar */}
       <div style={{
         position: 'absolute',
         bottom: 0, left: 0, right: 0,
-        height: '3px',
+        height: '2.5px',
         background: artist.accent,
-        opacity: 0.9,
       }} />
-
-    </div>
+    </a>
   )
 }
 
 // ── Main section ──────────────────────────────────────────────────────────
 export default function ClientCards() {
   const sectionRef = useRef(null)
-  const trackRef   = useRef(null)
-  const tweenRef   = useRef(null)
 
-  const allArtists = [...ARTISTS, ...ARTISTS]
-  const LOOP_W     = ARTISTS.length * (CARD_W + CARD_GAP)
+  const colA = ARTISTS.filter((_, i) => i % 2 === 0)  // left col: 0, 2, 4
+  const colB = ARTISTS.filter((_, i) => i % 2 !== 0)  // right col: 1, 3, 5 (shifted down)
 
   useGSAP(
     () => {
-      gsap.from(sectionRef.current, {
+      gsap.from('.client-card', {
         scrollTrigger: {
           trigger: sectionRef.current,
-          start: 'top 85%',
+          start: 'top 80%',
           toggleActions: 'play none none none',
         },
+        y: 60,
         opacity: 0,
-        y: 40,
         duration: 0.85,
+        stagger: 0.1,
         ease: 'expo.out',
-      })
-
-      // Start at -LOOP_W, animate to 0 → rightward scroll
-      gsap.set(trackRef.current, { x: -LOOP_W })
-      tweenRef.current = gsap.to(trackRef.current, {
-        x: 0,
-        duration: 24,
-        ease: 'none',
-        repeat: -1,
       })
     },
     { scope: sectionRef },
   )
 
-  const pauseScroll  = () => tweenRef.current?.pause()
-  const resumeScroll = () => tweenRef.current?.resume()
-
   return (
     <section
       ref={sectionRef}
-      className="w-full bg-ink overflow-hidden"
-      style={{ paddingTop: '80px', paddingBottom: '80px' }}
+      className="w-full bg-ink"
+      style={{ position: 'relative' }}
     >
-      {/* ── Header ── */}
-      <div className="px-8 md:px-14 mb-12">
-        <p
-          className="font-mono text-[10px] tracking-widest uppercase mb-3"
-          style={{ color: 'rgba(245,230,211,0.35)' }}
-        >
-          {/* ◆&nbsp;&nbsp;ARTISTS I&apos;VE WORKED WITH */}
+      {/* Top label */}
+      <div
+        className="px-8 md:px-14 pt-16 pb-4 flex items-center justify-between"
+        style={{ borderBottom: '1px solid rgba(245,230,211,0.08)' }}
+      >
+        <p className="font-mono text-[10px] tracking-widest uppercase" style={{ color: 'rgba(245,230,211,0.35)' }}>
+          ◆&nbsp;&nbsp;WORKED WITH
         </p>
-        <div className="flex items-end gap-4 flex-wrap">
-          <h2
-            className="font-moon-get leading-none"
-            style={{ fontSize: "60px", color: '#F5E6D3', letterSpacing: '-0.02em' }}
-          >
-            THE ARTISTS I HAVE WORKED WITH
-          </h2>
-          <span
-            className="font-decipher mb-1"
-            style={{ fontSize: '2.2rem', color: '#8b2255', transform: 'rotate(-2deg)', display: 'inline-block' }}
-          >
-            worked with best~
-          </span>
-        </div>
+        <p className="font-mono text-[10px] tracking-widest uppercase" style={{ color: 'rgba(245,230,211,0.35)' }}>
+          0{ARTISTS.length} CLIENTS
+        </p>
       </div>
 
-      {/* ── Card track ── */}
-      <div
-        style={{ overflow: 'hidden', paddingLeft: '56px', paddingBottom: '8px' }}
-        onMouseEnter={pauseScroll}
-        onMouseLeave={resumeScroll}
-      >
+      {/* ── Two-panel layout ── */}
+      <div style={{ display: 'flex', alignItems: 'flex-start' }}>
+
+        {/* ── LEFT: sticky info panel ── */}
         <div
-          ref={trackRef}
-          className="flex"
-          style={{ gap: `${CARD_GAP}px`, width: 'max-content' }}
+          style={{
+            position: 'sticky',
+            top: 0,
+            width: '50%',
+            flexShrink: 0,
+            height: '100vh',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            padding: '0 40px 0 56px',
+            borderRight: '1px solid rgba(245,230,211,0.08)',
+            overflow: 'hidden',
+          }}
         >
-          {allArtists.map((a, i) => (
-            <ArtistCard key={`${a.name}-${i}`} artist={a} />
-          ))}
+          {/* Ghost decoration */}
+          <p
+            className="font-aerosoldier pointer-events-none select-none absolute"
+            style={{
+              bottom: '40px', left: '40px',
+              fontSize: '6rem',
+              color: 'rgba(200,255,0,0.035)',
+              transform: 'rotate(-8deg)',
+              lineHeight: 1,
+            }}
+          >aadi</p>
+
+          {/* Label */}
+          <p
+            className="font-mono uppercase"
+            style={{
+              fontSize: '8px',
+              letterSpacing: '0.18em',
+              color: 'rgba(245,230,211,0.3)',
+              marginBottom: '20px',
+            }}
+          >
+            ◆ &nbsp;MY RECENT CLIENTS
+          </p>
+
+          {/* Big graffiti title */}
+          <div style={{ marginBottom: '24px' }}>
+            <div
+              className="font-street-wars"
+              style={{
+                fontSize: 'clamp(2.4rem, 4.2vw, 4rem)',
+                color: '#cfe240',
+                lineHeight: 0.9,
+                transform: 'rotate(-1.5deg)',
+                display: 'inline-block',
+                marginBottom: '4px',
+              }}
+            >The artists </div>
+            <br />
+            <div
+              className="font-moon-get"
+              style={{
+                fontSize: 'clamp(2rem, 3.8vw, 3.5rem)',
+                color: '#F5E6D3',
+                lineHeight: 0.95,
+                letterSpacing: '-0.02em',
+              }}
+            >I HAVE </div>
+            <br />
+            <div
+              className="font-moon-get"
+              style={{
+                fontSize: 'clamp(2rem, 3.8vw, 3.5rem)',
+                color: '#F5E6D3',
+                lineHeight: 0.95,
+                letterSpacing: '-0.02em',
+              }}
+            >WORKED WITH  </div>
+            <br />
+            <div
+              className="font-decipher"
+              style={{
+                fontSize: 'clamp(1.6rem, 2.8vw, 2.6rem)',
+                color: '#8b2255',
+                lineHeight: 1,
+                transform: 'rotate(-2deg)',
+                display: 'inline-block',
+                marginTop: '6px',
+              }}
+            >worked with best~</div>
+          </div>
+
+          {/* Paragraph */}
+          <p
+            className="font-mono uppercase leading-relaxed"
+            style={{
+              fontSize: '8.5px',
+              letterSpacing: '0.05em',
+              color: 'rgba(245,230,211,0.45)',
+              maxWidth: '320px',
+              marginBottom: '28px',
+            }}
+          >
+            Every creator here trusted me to make their content hit different.
+            From hooks to full edits, I've built their audience, their brand, and their identity.
+          </p>
+
+          {/* What I delivered list */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+            {['Long-form editing', 'Brand identity', 'Reels & short-form', 'Retention strategy', 'Hook engineering'].map(item => (
+              <div key={item} style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                <div style={{ width: '5px', height: '5px', borderRadius: '50%', background: '#C8FF00', flexShrink: 0 }} />
+                <span
+                  className="font-mono uppercase"
+                  style={{ fontSize: '8px', letterSpacing: '0.1em', color: 'rgba(245,230,211,0.45)' }}
+                >
+                  {item}
+                </span>
+              </div>
+            ))}
+          </div>
+
+          {/* Red accent line */}
+          <div style={{
+            marginTop: '32px',
+            height: '2px', width: '48px',
+            background: '#E63B2E',
+            borderRadius: '2px',
+            transform: 'rotate(-1deg)',
+          }} />
         </div>
+
+        {/* ── RIGHT: staggered 2-col grid ── */}
+        <div
+          style={{
+            flex: 1,
+            padding: '60px 40px 80px 36px',
+            display: 'flex',
+            gap: '14px',
+            alignItems: 'flex-start',
+          }}
+        >
+          {/* Column A — starts at top */}
+          <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '14px' }}>
+            {colA.map(a => <ArtistCard key={a.name} artist={a} />)}
+          </div>
+
+          {/* Column B — offset down for stagger effect */}
+          <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '14px', marginTop: '72px' }}>
+            {colB.map(a => <ArtistCard key={a.name} artist={a} />)}
+          </div>
+        </div>
+
       </div>
+
+      {/* Footer CTA */}
+      <div
+        className="px-8 md:px-14 py-8 flex items-center gap-6"
+        style={{ borderTop: '1px solid rgba(245,230,211,0.08)' }}
+      >
+        <div className="h-0.5 w-10 bg-brutal-red shrink-0" />
+        <a
+          href="mailto:contact@aaddi.com"
+          className="font-mono text-[10px] tracking-widest text-bone/50 hover:text-bone uppercase transition-colors duration-300 cursor-target"
+        >
+          WANT RESULTS LIKE THESE? LET&apos;S TALK →
+        </a>
+      </div>
+
     </section>
   )
 }

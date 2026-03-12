@@ -69,7 +69,7 @@ export default function IDCard() {
                 <p className="text-[9px] tracking-widest uppercase text-black/60 font-bold">Identification Card</p>
                 <p className="text-[9px] text-black/35 font-mono">No.2345687981798</p>
               </div>
-              <div className="font-decipher font-semibold text-3xl id-hologram-text">
+              <div className="font-decipher font-semibold mark text-3xl id-hologram-text">
                  license for chaos
               </div>
             </div>
@@ -97,11 +97,11 @@ export default function IDCard() {
               <div className="flex-1 flex flex-col gap-[2px] text-black text-[10px] font-bold">
                 <div className="flex justify-between">
                   <span>[Name] aadi2005</span>
-                  <span>[DOB] 25/0X/2005</span>
+                  <span>[DOB] 09/12/2005</span>
                 </div>
                 <div className="flex justify-between">
                   <span>[gender] male</span>
-                  <span>[location] cosmos</span>
+                  <span>[location] internet</span>
                 </div>
 
                 <div className="border-t border-black/10 pt-1">
@@ -133,11 +133,11 @@ export default function IDCard() {
             </div>
 
             {/* ── Graffiti marker scrawl over the card ── */}
-            <div className="id-graffiti-overlay font-aerosoldier cursor-target" aria-hidden="true">
+            {/* <div className="id-graffiti-overlay font-aerosoldier cursor-target" aria-hidden="true">
               always stay awesome
-            </div>
+            </div> */}
 
-            <div className="font-brunson-rough text-5xl dame text-brutal-red cursor-target">DAME</div>
+            <div className="font-brunson-rough text-5xl dame text-brutal-red cursor-target">AADI</div>
 
             {/* ── Horizontal JsBarcode strip — clickable & scannable ── */}
             <a
