@@ -432,7 +432,7 @@ function ProjectCard({ project, index, total }) {
               {/* Title row: index number floats top-right */}
               <div className="ca relative flex flex-col gap-1.5">
                 {/* Index — absolutely positioned top-right of this row */}
-                <div className="absolute top-0 right-0 font-akira font-black leading-none" style={{
+                <div className="absolute top-0 right-0 font-akira font-black leading-none cursor-target" style={{
                   fontSize: CONFIG.indexNum.fontSize[bp],
                   color: project.accent,
                   lineHeight: 0.85,
@@ -442,7 +442,7 @@ function ProjectCard({ project, index, total }) {
                 </div>
 
                 {/* Tagline */}
-                <span className="font-decipher" style={{ fontSize: CONFIG.tagline.fontSize[bp], color: `${project.accent}90`, transform: 'rotate(-1.5deg)', display: 'inline-block' }}>
+                <span className="font-decipher cursor-target" style={{ fontSize: CONFIG.tagline.fontSize[bp], color: `${project.accent}90`, transform: 'rotate(-1.5deg)', display: 'inline-block' }}>
                   {project.tagline}
                 </span>
 
@@ -451,7 +451,7 @@ function ProjectCard({ project, index, total }) {
                   shuffleDirection="right" duration={0.4} animationMode="evenodd"
                   shuffleTimes={1} ease="power3.out" stagger={0.025}
                   threshold={0.1} triggerOnce triggerOnHover respectReducedMotion loop={false}
-                  className="font-magazine text-bone tracking-tight"
+                  className="font-magazine text-bone tracking-tight cursor-target"
                   style={{ fontSize: CONFIG.title.fontSize[bp], lineHeight: 1.05, letterSpacing: '-0.01em', display: 'block', textAlign: 'left', paddingRight: '3.5rem' }}
                 />
 
@@ -460,7 +460,7 @@ function ProjectCard({ project, index, total }) {
               </div>
 
               {/* Media */}
-              <div className="ca relative" style={{
+              <div className="ca relative cursor-target" style={{
                 height: CONFIG.media.height[bp],
                 borderRadius: CONFIG.media.borderRadius,
               }}>
@@ -519,14 +519,14 @@ function ProjectCard({ project, index, total }) {
 
                 {/* Title row */}
                 <div className="ca flex flex-col gap-2">
-                  <span className="font-aerosoldier" style={{ fontSize: CONFIG.tagline.fontSize[bp], color: `${project.accent}90`, transform: 'rotate(-1.5deg)', display: 'inline-block' }}>
+                  <span className="font-aerosoldier cursor-target" style={{ fontSize: CONFIG.tagline.fontSize[bp], color: `${project.accent}90`, transform: 'rotate(-1.5deg)', display: 'inline-block' }}>
                     {project.tagline}
                   </span>
                   <Shuffle text={project.title} tag="h2"
                     shuffleDirection="right" duration={0.4} animationMode="evenodd"
                     shuffleTimes={1} ease="power3.out" stagger={0.025}
                     threshold={0.1} triggerOnce triggerOnHover respectReducedMotion loop={false}
-                    className="font-akira text-bone tracking-tight"
+                    className="font-akira text-bone tracking-tight cursor-target"
                     style={{ fontSize: CONFIG.title.fontSize[bp], lineHeight: 1.02, letterSpacing: '-0.01em', display: 'block', textAlign: 'left' }}
                   />
                   <div style={{ width: 'clamp(36px,4vw,52px)', height: 1.5, background: `linear-gradient(90deg,${project.accent},transparent)`, borderRadius: 2 }} />
@@ -549,7 +549,7 @@ function ProjectCard({ project, index, total }) {
 
               {/* RIGHT: media — fills full card height */}
               <div style={{ padding: `${py} ${px} ${py} 0`, display: 'flex', alignItems: 'stretch' }}>
-                <div className="ca relative w-full" style={{
+                <div className="ca relative w-full cursor-target" style={{
                   borderRadius: CONFIG.media.borderRadius,
                   minHeight: 'clamp(280px,35vw,500px)',
                 }}>
@@ -568,7 +568,7 @@ function ProjectCard({ project, index, total }) {
                       <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom,transparent 55%,rgba(0,0,0,0.5))' }} />
 
                       {/* BIG index number — sorateq style, top-right of media */}
-                      <div className="absolute font-mono font-black pointer-events-none select-none" style={{
+                      <div className="absolute font-mono font-black pointer-events-none select-none cursor-target" style={{
                         top: '-4%', right: '3%',
                         fontSize: CONFIG.indexNum.fontSize[bp],
                         color: project.accent,
@@ -624,15 +624,15 @@ export default function VaultGrid() {
         <div className="absolute inset-0 pointer-events-none">
           <div style={{ position: 'absolute', top: '15%', right: '8%', width: 'clamp(200px,35vw,420px)', height: 'clamp(200px,35vw,420px)', background: 'radial-gradient(circle,rgba(200,255,0,0.055) 0%,transparent 70%)', filter: 'blur(80px)' }} />
         </div>
-        <div className="absolute font-akira font-black pointer-events-none select-none" style={{ fontSize: 'clamp(7rem,22vw,18rem)', color: 'rgba(255,255,255,0.022)', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', lineHeight: 1, letterSpacing: '-0.04em', whiteSpace: 'nowrap' }}>VAULT</div>
+        <div className="absolute font-akira font-black pointer-events-none select-none cursor-target" style={{ fontSize: 'clamp(7rem,22vw,18rem)', color: 'rgba(255,255,255,0.022)', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', lineHeight: 1, letterSpacing: '-0.04em', whiteSpace: 'nowrap' }}>VAULT</div>
 
         <div className="relative z-10 text-center max-w-3xl w-full flex flex-col items-center gap-4">
-          <p className="vi font-decipher inline-block" style={{ fontSize: 'clamp(0.9rem,2vw,1.1rem)', color: '#C8FF00', transform: 'rotate(-1.5deg)', textShadow: '0 0 18px rgba(200,255,0,0.35)' }}>
+          <p className="vi font-decipher inline-block cursor-target" style={{ fontSize: 'clamp(0.9rem,2vw,1.1rem)', color: '#C8FF00', transform: 'rotate(-1.5deg)', textShadow: '0 0 18px rgba(200,255,0,0.35)' }}>
             ~The best work I&apos;ve crafted~
           </p>
           <div className="vi">
             <Shuffle text="THE VAULT" tag="h1" shuffleDirection="right" duration={0.45} animationMode="evenodd" shuffleTimes={1} ease="expo.out" stagger={0.03} threshold={0.05} triggerOnce triggerOnHover respectReducedMotion loop={false}
-              className="font-akira text-bone"
+              className="font-akira text-bone cursor-target"
               style={{ fontSize: 'clamp(3.5rem,10vw,8rem)', lineHeight: 1, letterSpacing: '-0.02em', display: 'block', textAlign: 'center' }}
             />
           </div>
