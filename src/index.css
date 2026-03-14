@@ -544,17 +544,17 @@
 .id-graffiti-overlay {
   position: absolute;
   bottom: 35px;
-  right: 45px;
+  right: 60px;
   font-size: 2.1rem;
   line-height: 1;
-  transform: rotate(-2deg);
+  transform: rotate(-2.5deg);
   background: linear-gradient(
     90deg,
     #abb535 0%,
     #daf416 30%,
     #ffff00 50%,
-    #ffffff 70%,
-    #888888 100%
+    #cfdf94 70%,
+    #c1d679 100%
   );
   background-size: 300% 100%;
   -webkit-background-clip: text;
@@ -574,7 +574,7 @@
   animation: id-silver-shine 1.2s linear infinite;
   filter:
     drop-shadow(0 1px 3px #aaba4380)
-    drop-shadow(0 0 14px rgba(220,220,255,0.55));
+    drop-shadow(0 0 14px rgba(177, 181, 87, 0.681));
 }
 
 @keyframes id-silver-shine {
