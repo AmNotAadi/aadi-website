@@ -25,7 +25,7 @@ const SOCIALS = [
 ]
 
 export default function Footer() {
-  const sectionRef  = useRef(null)
+  const sectionRef = useRef(null)
   const fillTextRef = useRef(null) // the solid-red clone, clip-animated
 
   useGSAP(
@@ -75,7 +75,7 @@ export default function Footer() {
     <footer ref={sectionRef} className="w-full bg-dark-surface border-t border-bone/10">
 
       {/* ── Top strip ───────────────────────────────────────────────── */}
-      <div className="px-8 md:px-14 pt-16 pb-12 flex flex-col md:flex-row items-start md:items-end justify-between gap-12">
+      <div className="px-5 sm:px-8 md:px-14 pt-12 sm:pt-16 pb-10 sm:pb-12 flex flex-col md:flex-row items-start md:items-end justify-between gap-8 md:gap-12">
 
         {/* Left — label + contact CTA */}
         <div>
@@ -124,7 +124,7 @@ export default function Footer() {
       </div>
 
       {/* ── Divider ─────────────────────────────────────────────────── */}
-      <div className="mx-8 md:mx-14 h-[1px] bg-bone/10" />
+      <div className="mx-5 sm:mx-8 md:mx-14 h-[1px] bg-bone/10" />
 
       {/* ── Massive AADDI text ──────────────────────────────────────── */}
       {/*
@@ -165,7 +165,7 @@ export default function Footer() {
       </div>
 
       {/* ── Bottom meta bar ─────────────────────────────────────────── */}
-      <div className="flex items-center justify-between px-8 md:px-14 pb-6 pt-4">
+      <div className="flex flex-col sm:flex-row items-center justify-between px-5 sm:px-8 md:px-14 pb-5 pt-3 gap-2 sm:gap-0">
         <p className="text-meta text-[8px] tracking-[0.2em] text-bone/30">
           © 2026 AADDI MEDIA. ALL RIGHTS RESERVED.
         </p>

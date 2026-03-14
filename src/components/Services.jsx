@@ -53,7 +53,7 @@ const SERVICES = [
 function MarqueeRow({ keywords, reverse = false, outlined = false, accent }) {
   // Duplicate text for seamless infinite loop (translate -50% = one copy width)
   const chunk = keywords.join('  ◆  ') + '  ◆  '
-  const full  = chunk + chunk
+  const full = chunk + chunk
   return (
     <div style={{ overflow: 'hidden', lineHeight: 1 }}>
       <div
@@ -63,7 +63,7 @@ function MarqueeRow({ keywords, reverse = false, outlined = false, accent }) {
           whiteSpace: 'nowrap',
           animation: `${reverse ? 'svc-marquee-r' : 'svc-marquee-l'} 20s linear infinite`,
           willChange: 'transform',
-          fontSize: 'clamp(2rem, 4.2vw, 3.6rem)',
+          fontSize: 'clamp(1.4rem, 3.5vw, 3.6rem)',
           color: outlined ? 'transparent' : accent,
           WebkitTextStroke: outlined ? `1.5px ${accent}` : 'none',
           letterSpacing: '-0.01em',
@@ -78,22 +78,22 @@ function MarqueeRow({ keywords, reverse = false, outlined = false, accent }) {
 
 // ── ServiceRow ────────────────────────────────────────────────────────────
 function ServiceRow({ service, isActive, onEnter, onLeave }) {
-  const rowRef   = useRef(null)
+  const rowRef = useRef(null)
   const panelRef = useRef(null)
   const innerRef = useRef(null)
-  const vidRef   = useRef(null)
+  const vidRef = useRef(null)
   const { setServiceVideo } = useCursor()
 
   useEffect(() => {
     if (isActive) {
       const h = innerRef.current?.scrollHeight ?? 320
       gsap.to(panelRef.current, { height: h, duration: 0.58, ease: 'expo.out' })
-      gsap.to(rowRef.current,   { backgroundColor: '#000000', duration: 0.32, ease: 'power2.out' })
+      gsap.to(rowRef.current, { backgroundColor: '#000000', duration: 0.32, ease: 'power2.out' })
       setServiceVideo(service.video)
-      vidRef.current?.play().catch(() => {})
+      vidRef.current?.play().catch(() => { })
     } else {
       gsap.to(panelRef.current, { height: 0, duration: 0.42, ease: 'expo.in' })
-      gsap.to(rowRef.current,   { backgroundColor: 'transparent', duration: 0.28, ease: 'power2.out' })
+      gsap.to(rowRef.current, { backgroundColor: 'transparent', duration: 0.28, ease: 'power2.out' })
       setServiceVideo(null)
       if (vidRef.current) { vidRef.current.pause(); vidRef.current.currentTime = 0 }
     }
@@ -113,19 +113,19 @@ function ServiceRow({ service, isActive, onEnter, onLeave }) {
       onMouseLeave={onLeave}
     >
       {/* ── Always-visible header row ── */}
-      <div className="flex items-center gap-5 px-8 md:px-12 pr-8 md:pr-14 py-7 select-none">
+      <div className="flex items-center gap-3 sm:gap-5 px-4 sm:px-8 md:px-12 pr-4 sm:pr-8 md:pr-14 py-4 sm:py-7 select-none">
 
         {/* Graffiti number */}
         <span
           className="font-another-tag shrink-0"
           style={{
-            fontSize: '2.4rem',
+            fontSize: 'clamp(1.6rem, 3.5vw, 2.4rem)',
             lineHeight: 1,
             color: isActive ? service.accent : 'rgba(245,230,211,0.18)',
             transform: 'rotate(-3deg)',
             display: 'inline-block',
             transition: 'color 0.3s ease',
-            minWidth: '3rem',
+            minWidth: '2.2rem',
           }}
         >
           {service.id}
@@ -135,7 +135,7 @@ function ServiceRow({ service, isActive, onEnter, onLeave }) {
         <span
           className="flex-1 font-akira leading-none"
           style={{
-            fontSize: 'clamp(1.8rem, 4.5vw, 4rem)',
+            fontSize: 'clamp(1.1rem, 3.8vw, 4rem)',
             color: '#F5E6D3',
             transition: 'color 0.3s ease',
             letterSpacing: '-0.02em',
@@ -176,7 +176,7 @@ function ServiceRow({ service, isActive, onEnter, onLeave }) {
       <div ref={panelRef} style={{ height: 0, overflow: 'hidden' }}>
         <div
           ref={innerRef}
-          style={{ position: 'relative', height: '320px' }}
+          style={{ position: 'relative', height: 'clamp(200px, 35vw, 320px)' }}
         >
 
           {/* Ghost service number behind marquees */}
@@ -196,15 +196,15 @@ function ServiceRow({ service, isActive, onEnter, onLeave }) {
             }}
           >{service.id}</span>
 
-          {/* Marquee rows — fill left 68% */}
+          {/* Marquee rows — fill left 68% (hidden on small screens) */}
           <div
+            className="hidden sm:flex"
             style={{
               position: 'absolute',
               top: 0,
               left: 0,
               bottom: 0,
               right: '32%',
-              display: 'flex',
               flexDirection: 'column',
               justifyContent: 'center',
               overflow: 'hidden',
@@ -226,8 +226,8 @@ function ServiceRow({ service, isActive, onEnter, onLeave }) {
             zIndex: 2,
           }} />
 
-          {/* Right fade mask (before image) */}
-          <div style={{
+          {/* Right fade mask (before image) — hidden on mobile since marquees are hidden */}
+          <div className="hidden sm:block" style={{
             position: 'absolute',
             top: 0, bottom: 0,
             right: '32%',
@@ -237,14 +237,14 @@ function ServiceRow({ service, isActive, onEnter, onLeave }) {
             zIndex: 2,
           }} />
 
-          {/* Image strip — absolute on right, 30% wide with padding */}
+          {/* Image strip — full width on mobile, right 30% on sm+ */}
           <div
             style={{
               position: 'absolute',
-              top: '16px',
-              right: '16px',
-              bottom: '16px',
-              width: 'calc(30% - 16px)',
+              top: '12px',
+              right: '12px',
+              bottom: '12px',
+              width: 'min(calc(100% - 24px), calc(30% - 16px))',
               borderRadius: '12px',
               overflow: 'hidden',
               boxShadow: '0 12px 40px rgba(0,0,0,0.7)',
@@ -326,7 +326,7 @@ export default function Services() {
 
       {/* ── Header bar ── */}
       <div
-        className="flex items-end justify-between px-8 md:px-14 pt-20 pb-6"
+        className="flex items-end justify-between px-5 sm:px-8 md:px-14 pt-14 sm:pt-20 pb-4 sm:pb-6"
         style={{ borderBottom: '1px solid rgba(245,230,211,0.1)' }}
       >
         <p className="font-mono text-[10px] tracking-widest uppercase" style={{ color: 'rgba(245,230,211,0.4)' }}>
@@ -343,7 +343,7 @@ export default function Services() {
         {/* ── Left: sticky graffiti tagline ── */}
         <div
           className="svc-left relative md:w-[40%] md:sticky md:top-20 md:self-start
-                     px-8 md:px-14 pt-14 pb-10 md:pb-24"
+                     px-5 sm:px-8 md:px-14 pt-10 sm:pt-14 pb-8 sm:pb-10 md:pb-24"
         >
           {/* Mixed-font graffiti stack */}
           <div className="flex flex-col mb-8" style={{ gap: '3px' }}>
@@ -446,7 +446,7 @@ export default function Services() {
 
       {/* ── Footer CTA ── */}
       <div
-        className="px-8 md:px-14 py-10 flex items-center gap-6"
+        className="px-5 sm:px-8 md:px-14 py-8 sm:py-10 flex items-center gap-6"
         style={{ borderTop: '1px solid rgba(245,230,211,0.1)' }}
       >
         <div className="h-0.5 w-10 bg-brutal-red shrink-0" />

@@ -97,8 +97,8 @@ function ArtistCard({ artist }) {
       style={{
         display: 'block',
         position: 'relative',
-        width: '80%',
-        aspectRatio: '1/ 1.05',
+        width: '100%',
+        aspectRatio: '1 / 1.05',
         borderRadius: '10px',
         overflow: 'hidden',
         boxShadow: '0 8px 32px rgba(0,0,0,0.5)',
@@ -176,7 +176,7 @@ function ArtistCard({ artist }) {
         <h3
           className="font-akira leading-none"
           style={{
-            fontSize: 'clamp(1.1rem, 2.2vw, 1.6rem)',
+            fontSize: 'clamp(0.9rem, 2.2vw, 1.6rem)',
             color: '#fff',
             letterSpacing: '-0.01em',
             marginBottom: '8px',
@@ -249,7 +249,7 @@ export default function ClientCards() {
     >
       {/* Top label */}
       <div
-        className="px-8 md:px-14 pt-16 pb-4 flex items-center justify-between"
+        className="px-5 sm:px-8 md:px-14 pt-14 sm:pt-16 pb-4 flex items-center justify-between"
         style={{ borderBottom: '1px solid rgba(245,230,211,0.08)' }}
       >
         <p className="font-mono text-[10px] tracking-widest uppercase" style={{ color: 'rgba(245,230,211,0.35)' }}>
@@ -260,28 +260,21 @@ export default function ClientCards() {
         </p>
       </div>
 
-      {/* ── Two-panel layout ── */}
-      <div style={{ display: 'flex', alignItems: 'flex-start' }}>
+      {/* ── Two-panel layout (stacks on mobile) ── */}
+      <div className="flex flex-col md:flex-row" style={{ alignItems: 'flex-start' }}>
 
-        {/* ── LEFT: sticky info panel ── */}
+        {/* ── LEFT: info panel — full-width on mobile, sticky on md+ ── */}
         <div
-          style={{
-            position: 'sticky',
-            top: 0,
-            width: '50%',
-            flexShrink: 0,
-            height: '100vh',
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            padding: '0 40px 0 56px',
-            borderRight: '1px solid rgba(245,230,211,0.08)',
-            overflow: 'hidden',
-          }}
+          className="w-full md:w-[45%] lg:w-[40%] md:sticky md:top-0 md:h-screen
+                     flex flex-col justify-center
+                     px-5 sm:px-8 md:px-10 lg:px-14
+                     py-10 md:py-0
+                     border-b md:border-b-0 md:border-r border-bone/[0.08]
+                     overflow-hidden"
         >
-          {/* Ghost decoration */}
+          {/* Ghost decoration - only visible md+ */}
           <p
-            className="font-aerosoldier pointer-events-none select-none absolute"
+            className="font-aerosoldier pointer-events-none select-none absolute hidden md:block"
             style={{
               bottom: '40px', left: '40px',
               fontSize: '6rem',
@@ -305,11 +298,11 @@ export default function ClientCards() {
           </p>
 
           {/* Big graffiti title */}
-          <div style={{ marginBottom: '24px' }}>
+          <div style={{ marginBottom: '20px' }}>
             <div
               className="font-street-wars"
               style={{
-                fontSize: 'clamp(2.4rem, 4.2vw, 4rem)',
+                fontSize: 'clamp(2rem, 5vw, 4rem)',
                 color: '#cfe240',
                 lineHeight: 0.9,
                 transform: 'rotate(-1.5deg)',
@@ -321,7 +314,7 @@ export default function ClientCards() {
             <div
               className="font-moon-get"
               style={{
-                fontSize: 'clamp(2rem, 3.8vw, 3.5rem)',
+                fontSize: 'clamp(1.7rem, 4vw, 3.5rem)',
                 color: '#F5E6D3',
                 lineHeight: 0.95,
                 letterSpacing: '-0.02em',
@@ -331,7 +324,7 @@ export default function ClientCards() {
             <div
               className="font-moon-get"
               style={{
-                fontSize: 'clamp(2rem, 3.8vw, 3.5rem)',
+                fontSize: 'clamp(1.7rem, 4vw, 3.5rem)',
                 color: '#F5E6D3',
                 lineHeight: 0.95,
                 letterSpacing: '-0.02em',
@@ -341,7 +334,7 @@ export default function ClientCards() {
             <div
               className="font-decipher"
               style={{
-                fontSize: 'clamp(1.6rem, 2.8vw, 2.6rem)',
+                fontSize: 'clamp(1.3rem, 3vw, 2.6rem)',
                 color: '#8b2255',
                 lineHeight: 1,
                 transform: 'rotate(-2deg)',
@@ -359,11 +352,11 @@ export default function ClientCards() {
               letterSpacing: '0.05em',
               color: 'rgba(245,230,211,0.45)',
               maxWidth: '320px',
-              marginBottom: '28px',
+              marginBottom: '24px',
             }}
           >
             Every creator here trusted me to make their content hit different.
-            From hooks to full edits, I've built their audience, their brand, and their identity.
+            From hooks to full edits, I&apos;ve built their audience, their brand, and their identity.
           </p>
 
           {/* What I delivered list */}
@@ -393,21 +386,21 @@ export default function ClientCards() {
 
         {/* ── RIGHT: staggered 2-col grid ── */}
         <div
+          className="flex-1 px-5 sm:px-8 md:px-10"
           style={{
-            flex: 1,
-            padding: '60px 40px 80px 36px',
+            padding: 'clamp(32px, 5vw, 60px) clamp(16px, 4vw, 40px) clamp(40px, 6vw, 80px)',
             display: 'flex',
-            gap: '14px',
+            gap: 'clamp(8px, 2vw, 14px)',
             alignItems: 'flex-start',
           }}
         >
           {/* Column A — starts at top */}
-          <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '14px' }}>
+          <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 'clamp(8px, 2vw, 14px)' }}>
             {colA.map(a => <ArtistCard key={a.name} artist={a} />)}
           </div>
 
           {/* Column B — offset down for stagger effect */}
-          <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '14px', marginTop: '72px' }}>
+          <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 'clamp(8px, 2vw, 14px)', marginTop: 'clamp(36px, 6vw, 72px)' }}>
             {colB.map(a => <ArtistCard key={a.name} artist={a} />)}
           </div>
         </div>
@@ -416,7 +409,7 @@ export default function ClientCards() {
 
       {/* Footer CTA */}
       <div
-        className="px-8 md:px-14 py-8 flex items-center gap-6"
+        className="px-5 sm:px-8 md:px-14 py-8 flex items-center gap-6"
         style={{ borderTop: '1px solid rgba(245,230,211,0.08)' }}
       >
         <div className="h-0.5 w-10 bg-brutal-red shrink-0" />
@@ -431,5 +424,3 @@ export default function ClientCards() {
     </section>
   )
 }
-
-
