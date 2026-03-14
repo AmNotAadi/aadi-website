@@ -346,7 +346,7 @@ export default function Services() {
                      px-5 sm:px-8 md:px-14 pt-10 sm:pt-14 pb-8 sm:pb-10 md:pb-24"
         >
           {/* Mixed-font graffiti stack */}
-          <div className="flex flex-col mb-8" style={{ gap: '3px' }}>
+          <div className="flex flex-col mb-8 cursor-target" style={{ gap: '3px' }}>
             <span
               className="font-street-wars"
               style={{

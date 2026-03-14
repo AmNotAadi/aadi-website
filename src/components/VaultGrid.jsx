@@ -1,4 +1,4 @@
-﻿import { useRef } from 'react'
+import { useRef } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGSAP } from '@gsap/react'
@@ -186,7 +186,7 @@ function ProjectPage({ project, index }) {
         {/* Media */}
         <div
           ref={mediaRef}
-          className="relative rounded-2xl overflow-hidden w-full"
+          className="relative rounded-2xl overflow-hidden w-full cursor-target"
           style={{
             height: 'clamp(220px, 45vw, 580px)',
             boxShadow: `0 32px 80px rgba(0,0,0,0.6), 0 0 40px ${project.accent}18`,
@@ -326,7 +326,7 @@ export default function VaultGrid() {
             Ready to create something amazing?
           </h2>
           <button
-            className="font-lemon-milk uppercase tracking-widest px-8 py-3 md:px-10 md:py-4 rounded text-ink font-bold transition-all hover:scale-105"
+            className="font-lemon-milk uppercase tracking-widest px-8 py-3 md:px-10 md:py-4 rounded text-ink font-bold transition-all hover:scale-105 cursor-target"
             style={{ background: '#C8FF00', fontSize: 'clamp(0.7rem, 1.5vw, 0.875rem)' }}
           >
             Let&apos;s Work Together

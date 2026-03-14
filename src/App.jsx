@@ -10,6 +10,7 @@ import VaultGrid from './components/VaultGrid'
 import ClientCards from './components/ClientCards'
 import Footer from './components/Footer'
 import IDCard from './components/IDCard'
+import TargetCursor from './components/TargetCursor'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -31,6 +32,12 @@ function App() {
 
   return (
     <Layout>
+      <TargetCursor 
+        spinDuration={2}
+        hideDefaultCursor
+        parallaxOn
+        hoverDuration={0.2}
+      />
       <Hero />
       {/* <IDCard/> */}
       <VaultGrid />

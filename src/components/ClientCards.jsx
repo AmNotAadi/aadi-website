@@ -298,7 +298,7 @@ export default function ClientCards() {
           </p>
 
           {/* Big graffiti title */}
-          <div style={{ marginBottom: '20px' }}>
+          <div className="cursor-target" style={{ marginBottom: '20px' }}>
             <div
               className="font-street-wars"
               style={{

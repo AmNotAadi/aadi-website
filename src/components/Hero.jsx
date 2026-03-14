@@ -4,8 +4,8 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGSAP } from '@gsap/react'
 import Tilt from 'react-parallax-tilt'
 import JsBarcode from 'jsbarcode'
-import sampleVideo from '../assets/sample videp.mp4'
-import portraitImg from '../assets/blog04.jpg'
+import mainVideo from '../assets/main video.mp4'
+import portraitImg from '../assets/idcard.png'
 
 gsap.registerPlugin(ScrollTrigger, useGSAP)
 
@@ -24,36 +24,105 @@ const PORTFOLIO_URL = 'https://www.youtube.com/watch?v=xnFvhn-1wHY'
 const CONFIG = {
   heading: {
     // Font size for each breakpoint (Tailwind class string — edit freely)
-    fontSize: 'text-[2rem] sm:text-[3rem] md:text-[3.8rem] lg:text-[5.5rem] xl:text-[7rem] 2xl:text-[9rem]',
+    fontSize: 'text-[2rem] sm:text-[3rem] md:text-[2.8rem] lg:text-[5.5rem] xl:text-[7rem] 2xl:text-[9rem]',
   },
   video: {
     // Initial video size per breakpoint — GSAP owns these, not Tailwind
-    // Values used inside gsap.matchMedia breakpoints below
-    desktop: { width: 380, height: 230 },   // md+  initial size (bottom-right corner)
-    mobile:  { width: '88%' },              // <md  initial size (bottom-center)
-    // Where the video sits initially
-    desktop_pos: { right: 32, bottom: 32 },
-    mobile_pos:  { bottom: '4%' },
+    desktop:    { width: 380, height: 230 }, // lg–xl   bottom-right corner
+    desktop2xl: { width: 580, height: 345 }, // 2xl+    bigger for large screens
+    tablet:     { width: '88%', height: 200 },// md–lg  bottom-center
+    mobile:     { width: '88%' },             // <md    bottom-center
+    // Where video sits initially
+    desktop_pos:    { right: 32, bottom: 32 },
+    desktop2xl_pos: { right: 48, bottom: 48 }, // a bit more padding on huge screens
+    tablet_pos:     { bottom: 24 },
+    mobile_pos:     { bottom: '4%' },
     // Where it expands TO on scroll
-    scroll_end: { right: '5%', bottom: '5%', width: '90%', height: '90%' },
+    scroll_end:        { right: '5%', bottom: '5%', width: '90%', height: '90%' },
+    scroll_end_tablet: { width: '96%', bottom: '5%', height: '55%' },
     scroll_end_mobile: { width: '96%', bottom: '8%' },
   },
   idCard: {
-    // Desktop: bottom-left corner
-    desktop_pos: { bottom: 32, left: 40 },
-    // Mobile: centered in viewport
-    mobile_pos:  { top: '47%', left: '50%' },
-    // Card is always 420px wide — scaled down on small screens via GSAP scale
+    // lg–xl: bottom-left corner, card at native 420px (scale 1)
+    desktop_pos:    { bottom: 32, left: 40 },
+    // 2xl+: bottom-left with more padding
+    desktop2xl_pos: { bottom: 48, left: 48 },
+    // md–lg (tablet): centered between heading and video
+    tablet_pos:     { top: '54%', left: '50%' },
+    // <md (mobile): centered in viewport
+    mobile_pos:     { top: '47%', left: '50%' },
+    // The card HTML is always 420px wide internally.
+    // We use GSAP `scale` to resize it — this keeps every internal ratio
+    // (fonts, photo, barcode, spacing) perfectly intact with zero distortion.
     fixedWidth: 420,
+    scale2xl: 1.45, // ← tweak this one number to resize card on 2xl screens
   },
   tagline: {
-    // Tagline sits above the video at the bottom-center
     bottom: '20%',
     width: '300px',
   },
   heading_top: {
     desktop: '14%',
+    tablet:  '8%',
     mobile:  '10%',
+  },
+
+  /* ============================================================
+     GRAFFITI CONFIG — all text sizes and opacities in one place
+     ─────────────────────────────────────────────────────────────
+     fontSize uses CSS clamp(min, vw-scale, max):
+       • min   = smallest it gets (tiny phone)
+       • vw    = scales with viewport width
+       • max   = biggest it gets (large desktop)
+
+     opacity: 0.0 = invisible  →  1.0 = fully solid
+     ~0.05–0.15 = ghost/texture feel
+     ~0.4–0.7   = visible design element
+     ~1.0       = fully solid
+
+     To make something bigger: raise the clamp numbers.
+     To make something more visible: raise the opacity.
+     ============================================================ */
+  graffiti: {
+
+    // ── GHOST "A" — top-left corner, pure atmosphere ──
+    ghostA: {
+      fontSize: 'clamp(12rem, 40vw, 30rem)', // raise all 3 numbers to make bigger
+      opacity:  0.04,                          // raise to make more visible
+    },
+
+    // ── "chaos" — bottom area, md+ only ──
+    chaos: {
+      fontSize: 'clamp(4rem, 10vw, 10rem)',
+      opacity:  0.07,
+    },
+
+    // ── "~make em stay~" — top-right, md+ only ──
+    makeEmStay: {
+      fontSize: 'clamp(1.5rem, 2.5vw, 2.5rem)',
+      opacity:  0.18,
+    },
+
+    // ── "content hits diff" — mid screen, lg+ only ──
+    contentHits: {
+      fontSize: 'clamp(1rem, 1.5vw, 1.6rem)',
+      opacity:  0.09,
+    },
+
+    // ── LEFT TAG: "~i will help your imagination come true~" ──
+    leftTag: {
+      mobile:  { fontSize: 'clamp(0.85rem, 3.5vw, 1.1rem)', opacity: 0.7  },
+      tablet:  { fontSize: '1.4rem',                          opacity: 0.65 },
+      desktop: { fontSize: 'clamp(2rem, 2.7vw, 3.5rem)',   opacity: 1.0  },
+      color:   '#b01a67',
+    },
+
+    // ── RIGHT TAG: "~crafting the internet's most addictive content~" ──
+    rightTag: {
+      tablet:  { fontSize: 'clamp(0.9rem, 2vw, 1.3rem)', opacity: 0.65 },
+      desktop: { fontSize: 'clamp(1.2rem, 1.8vw, 2rem)', opacity: 1.0  },
+      color:   '#C8FF00',
+    },
   },
 }
 
@@ -129,7 +198,7 @@ function HeroIDCard() {
                 No.2345687981798
               </p>
             </div>
-            <div className="font-decipher id-hologram-text text-2xl graffiti-highlight font-semibold">
+            <div className="font-decipher id-hologram-text text-2xl graffiti-highlight font-semibold cursor-target">
               license for chaos
             </div>
           </div>
@@ -138,7 +207,7 @@ function HeroIDCard() {
           <div className="relative flex flex-row gap-4 px-4 pt-3 pb-3">
 
             {/* Photo */}
-            <div className="shrink-0">
+            <div className="shrink-0 cursor-target">
               <div style={{ width: 88, height: 120, border: '2px solid rgba(0,0,0,0.2)', overflow: 'hidden', borderRadius: 2 }}>
                 <img src={portraitImg} alt="aadi2005" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
               </div>
@@ -160,7 +229,7 @@ function HeroIDCard() {
                 <p className="font-mono" style={{ fontSize: 9, color: 'rgba(0,0,0,0.45)', fontWeight: 400, marginBottom: 1 }}>
                   [creativity score]
                 </p>
-                <div className="font-decipher id-graffiti-score" style={{ fontSize: 30, fontWeight: 700, lineHeight: 1 }}>
+                <div className="font-decipher id-graffiti-score cursor-target" style={{ fontSize: 30, fontWeight: 700, lineHeight: 1 }}>
                   tends to infinity
                 </div>
               </div>
@@ -188,7 +257,7 @@ function HeroIDCard() {
           </div>
 
           {/* Big name stamp */}
-          <div className="font-brunson-rough dame text-brutal-red" style={{ fontSize: '2.4rem' }}>AADI</div>
+          <div className="font-brunson-rough dame text-brutal-red cursor-target" style={{ fontSize: '2.4rem' }}>AADI</div>
 
           {/* ── Barcode strip ── */}
           <div className="flex items-center gap-3 border-t border-black/15 px-4 py-1">
@@ -202,7 +271,7 @@ function HeroIDCard() {
             </div>
             <a
               href={PORTFOLIO_URL} target="_blank" rel="noopener noreferrer"
-              className="flex flex-col items-end font-mono shrink-0"
+              className="flex flex-col items-end font-mono shrink-0 cursor-target"
               style={{ fontSize: 7, color: 'rgba(0,0,0,0.4)', lineHeight: 1, width: 56, textDecoration: 'none' }}
             >
               <span style={{ fontWeight: 700, color: 'rgba(0,0,0,0.6)' }}>↗ visit</span>
@@ -241,11 +310,56 @@ export default function Hero() {
       const mm = gsap.matchMedia()
 
       /* ──────────────────────────────────────────
-         DESKTOP (768px and above)
+         LARGE DESKTOP 2xl (1536px and above)
+         Same layout as desktop but card is scaled up (scale2xl)
+         and video is bigger. Everything else identical.
+         To adjust: change CONFIG.idCard.scale2xl and CONFIG.video.desktop2xl
          ────────────────────────────────────────── */
-      mm.add('(min-width: 768px)', () => {
+      mm.add('(min-width: 1536px)', () => {
 
-        // ── Set initial positions ──
+        gsap.set(headingRef.current, { top: CONFIG.heading_top.desktop })
+
+        gsap.set(idCardRef.current, {
+          ...CONFIG.idCard.desktop2xl_pos,  // bottom: 48, left: 48
+          top: 'auto',
+          xPercent: 0,
+          yPercent: 0,
+          x: 0,
+          y: 40,
+          opacity: 0,
+          scale: CONFIG.idCard.scale2xl,    // scales the whole card up uniformly
+          transformOrigin: 'bottom left',   // grows from bottom-left corner so it stays anchored
+        })
+
+        gsap.set(videoRef.current, {
+          ...CONFIG.video.desktop2xl_pos,   // right: 48, bottom: 48
+          ...CONFIG.video.desktop2xl,       // width: 580, height: 345
+          left: 'auto',
+          xPercent: 0,
+          x: 0,
+        })
+
+        // Entry animations (same as desktop)
+        gsap.from('.hero-line', { y: '115%', duration: 1.6, stagger: 0.13, ease: 'expo.out', delay: 0.2 })
+        gsap.from(taglineRef.current, { y: 28, opacity: 0, duration: 1.3, ease: 'power4.out', delay: 0.7 })
+        gsap.to(idCardRef.current, { y: 0, opacity: 1, duration: 1.4, ease: 'power4.out', delay: 0.5 })
+
+        // Scroll timeline
+        const tl = gsap.timeline({
+          scrollTrigger: { trigger: sectionRef.current, start: 'top top', end: 'bottom bottom', scrub: 1 },
+        })
+        tl.to(videoRef.current, { ...CONFIG.video.scroll_end, borderRadius: 6, ease: 'power2.inOut' }, 0)
+        tl.to(headingRef.current, { opacity: 0.08, y: -24, scale: 0.97, ease: 'power2.out' }, 0)
+        tl.to(idCardRef.current, { opacity: 0, x: -60, ease: 'power2.out' }, 0)
+        tl.to(taglineRef.current, { opacity: 0, y: 12, ease: 'power2.out' }, 0)
+      })
+
+      /* ──────────────────────────────────────────
+         DESKTOP lg–xl (1024px – 1535px)
+         Layout: heading top-center, ID card bottom-left, video bottom-right
+         ────────────────────────────────────────── */
+      mm.add('(min-width: 1024px) and (max-width: 1535px)', () => {
+
         gsap.set(headingRef.current, { top: CONFIG.heading_top.desktop })
 
         gsap.set(idCardRef.current, {
@@ -254,8 +368,10 @@ export default function Hero() {
           xPercent: 0,
           yPercent: 0,
           x: 0,
-          y: 40,         // starts 40px lower, animates up to y:0
+          y: 40,
           opacity: 0,
+          scale: 1,
+          transformOrigin: 'bottom left',
         })
 
         gsap.set(videoRef.current, {
@@ -266,51 +382,91 @@ export default function Hero() {
           x: 0,
         })
 
-        // ── Entry animations (play once on load) ──
-        gsap.from('.hero-line', {
-          y: '115%', duration: 1.6, stagger: 0.13, ease: 'expo.out', delay: 0.2,
-        })
-        gsap.from(taglineRef.current, {
-          y: 28, opacity: 0, duration: 1.3, ease: 'power4.out', delay: 0.7,
-        })
-        gsap.to(idCardRef.current, {
-          y: 0, opacity: 1, duration: 1.4, ease: 'power4.out', delay: 0.5,
-        })
+        // Entry animations
+        gsap.from('.hero-line', { y: '115%', duration: 1.6, stagger: 0.13, ease: 'expo.out', delay: 0.2 })
+        gsap.from(taglineRef.current, { y: 28, opacity: 0, duration: 1.3, ease: 'power4.out', delay: 0.7 })
+        gsap.to(idCardRef.current, { y: 0, opacity: 1, duration: 1.4, ease: 'power4.out', delay: 0.5 })
 
-        // ── Scroll timeline (scrubbed, tied to scroll position) ──
+        // Scroll timeline
         const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: 'top top',
-            end: 'bottom bottom',
-            scrub: 1,
-          },
+          scrollTrigger: { trigger: sectionRef.current, start: 'top top', end: 'bottom bottom', scrub: 1 },
         })
-
-        // Video expands to fill viewport
         tl.to(videoRef.current, { ...CONFIG.video.scroll_end, borderRadius: 6, ease: 'power2.inOut' }, 0)
-        // Heading fades and shrinks slightly
         tl.to(headingRef.current, { opacity: 0.08, y: -24, scale: 0.97, ease: 'power2.out' }, 0)
-        // ID card slides left and fades
         tl.to(idCardRef.current, { opacity: 0, x: -60, ease: 'power2.out' }, 0)
-        // Tagline fades down
         tl.to(taglineRef.current, { opacity: 0, y: 12, ease: 'power2.out' }, 0)
       })
 
       /* ──────────────────────────────────────────
+         TABLET (768px – 1023px) — iPad, iPad Mini, etc.
+         Layout: heading top-center, ID card center (between heading & video),
+                 video bottom-center (shorter so card doesn't overlap it)
+         Graffiti overlays are hidden entirely at this size.
+         ────────────────────────────────────────── */
+      mm.add('(min-width: 768px) and (max-width: 1023px)', () => {
+
+        // Scale card to fit tablet width
+        const scaleCard = () => {
+          gsap.set(idCardRef.current, {
+            scale: Math.min(1, (window.innerWidth - 64) / CONFIG.idCard.fixedWidth),
+          })
+        }
+
+        gsap.set(headingRef.current, { top: CONFIG.heading_top.tablet })
+
+        gsap.set(idCardRef.current, {
+          ...CONFIG.idCard.tablet_pos,    // top: '54%', left: '50%'
+          xPercent: -50,
+          yPercent: -50,
+          bottom: 'auto',
+          right: 'auto',
+          width: CONFIG.idCard.fixedWidth,
+          y: 40,
+          opacity: 0,
+          transformOrigin: 'center center',
+        })
+        scaleCard()
+        window.addEventListener('resize', scaleCard)
+
+        // Video: bottom-center, short height so card sits above it cleanly
+        gsap.set(videoRef.current, {
+          ...CONFIG.video.tablet_pos,     // bottom: 24
+          left: '50%',
+          xPercent: -50,
+          width: CONFIG.video.tablet.width,   // '88%'
+          height: CONFIG.video.tablet.height, // 200px
+          right: 'auto',
+        })
+
+        // Entry animations
+        gsap.from('.hero-line', { y: '115%', duration: 1.6, stagger: 0.1, ease: 'expo.out', delay: 0.2 })
+        gsap.from(taglineRef.current, { y: 20, opacity: 0, duration: 1.3, ease: 'power4.out', delay: 0.7 })
+        gsap.to(idCardRef.current, { y: 0, opacity: 1, duration: 1.4, ease: 'power4.out', delay: 0.5 })
+
+        // Scroll timeline
+        const tl = gsap.timeline({
+          scrollTrigger: { trigger: sectionRef.current, start: 'top top', end: 'bottom bottom', scrub: 1 },
+        })
+        tl.to(videoRef.current, { ...CONFIG.video.scroll_end_tablet, borderRadius: 6, ease: 'power2.inOut' }, 0)
+        tl.to(headingRef.current, { opacity: 0.1, y: -20, ease: 'power2.out' }, 0)
+        tl.to(idCardRef.current, { opacity: 0, y: -30, ease: 'power2.out' }, 0)
+        tl.to(taglineRef.current, { opacity: 0, ease: 'power2.out' }, 0)
+
+        return () => window.removeEventListener('resize', scaleCard)
+      })
+
+      /* ──────────────────────────────────────────
          MOBILE (below 768px)
+         Layout: heading top-center, ID card center, video bottom-center
          ────────────────────────────────────────── */
       mm.add('(max-width: 767px)', () => {
 
-        // Scale card to fit screen width (card is 420px fixed)
-        // e.g. on a 375px screen: scale = (375 - 32) / 420 ≈ 0.817
         const scaleCard = () => {
           gsap.set(idCardRef.current, {
             scale: Math.min(1, (window.innerWidth - 32) / CONFIG.idCard.fixedWidth),
           })
         }
 
-        // ── Set initial positions ──
         gsap.set(headingRef.current, { top: CONFIG.heading_top.mobile })
 
         gsap.set(idCardRef.current, {
@@ -318,8 +474,9 @@ export default function Hero() {
           xPercent: -50,
           yPercent: -50,
           bottom: 'auto',
+          right: 'auto',
           width: CONFIG.idCard.fixedWidth,
-          y: 40,         // starts 40px lower, animates up to y:0
+          y: 40,
           opacity: 0,
           transformOrigin: 'center center',
         })
@@ -330,38 +487,25 @@ export default function Hero() {
           ...CONFIG.video.mobile_pos,     // bottom: '4%'
           left: '50%',
           xPercent: -50,
-          width: CONFIG.video.mobile.width,  // '88%'
+          width: CONFIG.video.mobile.width,
           right: 'auto',
           height: 'auto',
         })
 
-        // ── Entry animations ──
-        gsap.from('.hero-line', {
-          y: '115%', duration: 1.6, stagger: 0.1, ease: 'expo.out', delay: 0.2,
-        })
-        gsap.from(taglineRef.current, {
-          y: 20, opacity: 0, duration: 1.3, ease: 'power4.out', delay: 0.7,
-        })
-        gsap.to(idCardRef.current, {
-          y: 0, opacity: 1, duration: 1.4, ease: 'power4.out', delay: 0.5,
-        })
+        // Entry animations
+        gsap.from('.hero-line', { y: '115%', duration: 1.6, stagger: 0.1, ease: 'expo.out', delay: 0.2 })
+        gsap.from(taglineRef.current, { y: 20, opacity: 0, duration: 1.3, ease: 'power4.out', delay: 0.7 })
+        gsap.to(idCardRef.current, { y: 0, opacity: 1, duration: 1.4, ease: 'power4.out', delay: 0.5 })
 
-        // ── Scroll timeline ──
+        // Scroll timeline
         const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: 'top top',
-            end: 'bottom bottom',
-            scrub: 1,
-          },
+          scrollTrigger: { trigger: sectionRef.current, start: 'top top', end: 'bottom bottom', scrub: 1 },
         })
-
         tl.to(headingRef.current, { opacity: 0.1, y: -20, ease: 'power2.out' }, 0)
         tl.to(idCardRef.current, { opacity: 0, y: -40, ease: 'power2.out' }, 0)
         tl.to(taglineRef.current, { opacity: 0, ease: 'power2.out' }, 0)
         tl.to(videoRef.current, { ...CONFIG.video.scroll_end_mobile, ease: 'power2.inOut' }, 0)
 
-        // Cleanup: remove resize listener when matchMedia context is reverted
         return () => window.removeEventListener('resize', scaleCard)
       })
 
@@ -378,40 +522,143 @@ export default function Hero() {
       <div className="sticky top-0 h-screen overflow-hidden">
 
         {/* ════════════════════════════════════════
-            GHOST GRAFFITI BACKGROUND
-            Purely decorative, hidden on mobile.
-            Safe to edit text / positions freely.
-            ════════════════════════════════════════ */}
-        <div className="absolute inset-0 pointer-events-none select-none overflow-hidden z-0 hidden md:block">
+            GRAFFITI LAYER
+            ─────────────────────────────────────────
+            RULE: graffiti never overlaps the heading, card, or video.
+            • Ghost texts sit at z-0 (behind everything)
+            • Styled tags sit at z-[1] (behind heading/card/video)
+            • Positions are chosen to fill the EMPTY SPACE around the 3 main elements
 
-          {/* Giant ghost "A" top-left */}
-          <span className="font-aerosoldier absolute" style={{
-            fontSize: '26rem', color: 'rgba(200,255,0,0.022)',
-            top: '-60px', left: '-40px', lineHeight: 1, transform: 'rotate(-5deg)',
+            BREAKPOINTS:
+            • Mobile (<768px)   — ghost A only (top-left corner, low opacity)
+            • Tablet (768–1023) — ghost A + "make em stay" (top-right) + left tag (very bottom-left)
+            • Desktop (1024px+) — full set
+
+            TO ADJUST VISIBILITY: change the last number in rgba() values.
+            0.05 = barely visible ghost, 0.5 = clearly visible
+            ════════════════════════════════════════ */}
+
+        {/* ── GHOST TEXTURE LAYER (z-0, behind everything) ── */}
+        <div className="absolute inset-0 pointer-events-none select-none overflow-hidden z-0">
+
+          {/* Giant ghost "A" — top-left corner, all screen sizes
+              It fills the empty space above/left of the heading on mobile */}
+          <span className="font-aerosoldier absolute cursor-target" style={{
+            fontSize: CONFIG.graffiti.ghostA.fontSize,
+            color: `rgba(200,255,0,${CONFIG.graffiti.ghostA.opacity})`,
+            top: '-20px', left: '-10px',
+            lineHeight: 1, transform: 'rotate(-5deg)',
           }}>A</span>
 
-          {/* "chaos" tag bottom-center */}
-          <span className="font-street-wars absolute" style={{
-            fontSize: '8rem', color: 'rgba(230,59,46,0.035)',
-            bottom: '110px', right: '540px', lineHeight: 1, transform: 'rotate(5deg)',
+          {/* "chaos" — sits bottom-center in the empty mid-section gap
+              Only on md+ where there's horizontal space */}
+          <span className="font-street-wars absolute hidden md:block cursor-target" style={{
+            fontSize: CONFIG.graffiti.chaos.fontSize,
+            color: `rgba(230,59,46,${CONFIG.graffiti.chaos.opacity})`,
+            bottom: '140px', left: '32%',
+            lineHeight: 1, transform: 'rotate(4deg)',
           }}>chaos</span>
 
-          {/* "make em stay" top-right */}
-          <span className="font-decipher absolute" style={{
-            fontSize: '2.2rem', color: 'rgba(200,255,0,0.1)',
-            top: '116px', right: '52px', transform: 'rotate(-8deg)',
-          }}>~make em stay~</span>
-
-          {/* "content hits diff" mid-screen */}
-          <span className="font-don-graffiti absolute" style={{
-            fontSize: '1.4rem', color: 'rgba(245,230,211,0.045)',
-            top: '60%', left: '44%', transform: 'rotate(3deg)',
+          {/* "content hits diff" — mid-screen gap, lg+ only */}
+          <span className="font-don-graffiti absolute hidden lg:block cursor-target" style={{
+            fontSize: CONFIG.graffiti.contentHits.fontSize,
+            color: `rgba(245,230,211,${CONFIG.graffiti.contentHits.opacity})`,
+            top: '56%', left: '40%',
+            transform: 'rotate(3deg)',
           }}>content hits diff</span>
-
-          {/* Accent dots */}
-          <div style={{ position: 'absolute', top: 180, left: '38%', width: 6, height: 6, borderRadius: '50%', background: 'rgba(200,255,0,0.15)' }} />
-          <div style={{ position: 'absolute', top: 240, left: '38.5%', width: 4, height: 4, borderRadius: '50%', background: 'rgba(230,59,46,0.2)' }} />
         </div>
+
+        {/* ── STYLED GRAFFITI TAGS (z-[1], behind heading/card/video) ──
+            Each tag is placed in the DEAD SPACE that exists at each breakpoint.
+            On desktop: left dead space (between left edge and heading) = left tag
+                        right dead space (below "make em stay", above video) = right tag
+            On tablet:  only tags that fit without touching the 3 main elements
+            On mobile:  nothing — the screen is too narrow, ghost A is enough ── */}
+
+        {/* TOP-RIGHT TAG: "~make em stay~"
+            Lives in the top-right dead space (navbar area, right side)
+            Hidden on mobile — no room. Shown md+. */}
+        <div className="absolute hidden md:block pointer-events-none z-[1]" style={{
+          top: '9%', right: '2%',
+        }}>
+          <span className="font-decipher cursor-target" style={{
+            fontSize: CONFIG.graffiti.makeEmStay.fontSize,
+            color: `rgba(200,255,0,${CONFIG.graffiti.makeEmStay.opacity})`,
+            display: 'block', transform: 'rotate(-7deg)',
+            textShadow: '0 0 14px rgba(200,255,0,0.25)',
+            pointerEvents: 'auto'
+          }}>~make em stay~</span>
+        </div>
+
+        {/* LEFT TAG: "~i will help your imagination come true~"
+            On desktop: left side, vertically centered — fits in the gap
+                        between the left edge and the heading text
+            On tablet: same but smaller, pushed lower so it's below the heading
+            Mobile: hidden */}
+        <div className="absolute hidden md:block pointer-events-none z-[1]" style={{
+          top: '38%', left: '1.5%',
+        }}>
+          {/* Tablet — shorter text, smaller font, stays below heading */}
+          <div className="font-aerosoldier block lg:hidden cursor-target" style={{
+            fontSize: CONFIG.graffiti.leftTag.tablet.fontSize,
+            color: CONFIG.graffiti.leftTag.color,
+            opacity: CONFIG.graffiti.leftTag.tablet.opacity,
+            transform: 'rotate(-3deg)', lineHeight: 1.3,
+            pointerEvents: 'auto'
+          }}>
+            <div>~i will help</div>
+            <div>your imagination</div>
+            <div>come true~</div>
+          </div>
+          {/* Desktop — full size */}
+          <div className="font-aerosoldier hidden lg:block cursor-target" style={{
+            fontSize: CONFIG.graffiti.leftTag.desktop.fontSize,
+            color: CONFIG.graffiti.leftTag.color,
+            opacity: CONFIG.graffiti.leftTag.desktop.opacity,
+            transform: 'rotate(-4deg)', lineHeight: 1.3,
+            textShadow: '2px 2px 0 rgba(0,0,0,0.5)',
+            pointerEvents: 'auto'
+          }}>
+            <div>~i will help</div>
+            <div>your imagination</div>
+            <div>come true~</div>
+          </div>
+        </div>
+
+        {/* RIGHT TAG: "~crafting the internet's most addictive content~"
+            Sits in the right dead space, between the "make em stay" tag
+            and the video (which is bottom-right).
+            Tablet+: shown. Mobile: hidden. */}
+        <div className="absolute hidden md:block pointer-events-none z-[1]" style={{
+          bottom: '32%', right: '1.5%',
+        }}>
+          {/* Tablet — compact */}
+          <div className="font-decipher block lg:hidden cursor-target" style={{
+            fontSize: CONFIG.graffiti.rightTag.tablet.fontSize,
+            color: CONFIG.graffiti.rightTag.color,
+            opacity: CONFIG.graffiti.rightTag.tablet.opacity,
+            transform: 'rotate(-3deg)', lineHeight: 1.3, textAlign: 'right',
+            pointerEvents: 'auto'
+          }}>
+            <div>~crafting the internet&apos;s</div>
+            <div>most addictive content~</div>
+          </div>
+          {/* Desktop — full size */}
+          <div className="font-decipher hidden lg:block cursor-target" style={{
+            fontSize: CONFIG.graffiti.rightTag.desktop.fontSize,
+            color: CONFIG.graffiti.rightTag.color,
+            opacity: CONFIG.graffiti.rightTag.desktop.opacity,
+            transform: 'rotate(-4deg)', lineHeight: 1.3, textAlign: 'right',
+            textShadow: '0 0 18px rgba(200,255,0,0.3)',
+            pointerEvents: 'auto'
+          }}>
+            <div>~crafting the internet&apos;s</div>
+            <div>most addictive content~</div>
+          </div>
+        </div>
+
+        {/* taglineRef kept as empty div so GSAP scroll animation still works */}
+        <div ref={taglineRef} className="absolute" style={{ bottom: '20%', left: '50%', opacity: 0 }} />
 
         {/* ════════════════════════════════════════
             NAVBAR
@@ -422,18 +669,18 @@ export default function Hero() {
           <div className="hidden md:flex flex-col gap-0.5">
             {['Work', 'Services', 'Agency'].map(l => (
               <a key={l} href="#"
-                className="text-sm font-lemon-milk text-neutral-500 hover:text-bone transition-colors"
+                className="text-sm font-lemon-milk text-neutral-500 hover:text-bone transition-colors cursor-target"
               >{l}</a>
             ))}
           </div>
 
           {/* Logo — centered on mobile, left-aligned on desktop */}
-          <div className="font-don-graffiti text-3xl md:text-4xl font-extrabold text-cream tracking-tight mx-auto md:mx-0">
+          <div className="font-don-graffiti text-3xl md:text-4xl font-extrabold text-cream tracking-tight mx-auto md:mx-0 cursor-target">
             aadi2005
           </div>
 
           {/* CTA button — desktop only */}
-          <button className="hidden md:block font-lemon-milk text-sm text-white bg-brutal-red px-5 py-2 rounded hover:opacity-90 transition-opacity">
+          <button className="hidden md:block font-lemon-milk text-sm text-white bg-brutal-red px-5 py-2 rounded hover:opacity-90 transition-opacity cursor-target">
             Let&apos;s Connect
           </button>
         </nav>
@@ -446,9 +693,8 @@ export default function Hero() {
         <div
           ref={headingRef}
           className="absolute inset-x-0 flex flex-col items-center justify-center z-10 px-4"
-          style={{ top: CONFIG.heading_top.desktop }} // default; GSAP overrides per breakpoint
+          style={{ top: CONFIG.heading_top.desktop }}
         >
-          {/* Lines 1 and 2 — plain text */}
           {['Helping our partners', 'build original brands'].map(line => (
             <div key={line} className="overflow-hidden">
               <h1 className={`hero-line font-magazine text-bone leading-none tracking-tight text-center ${CONFIG.heading.fontSize}`}>
@@ -456,8 +702,6 @@ export default function Hero() {
               </h1>
             </div>
           ))}
-
-          {/* Line 3 — text with ornaments either side */}
           <div className="overflow-hidden">
             <h1 className={`hero-line font-magazine text-bone leading-none tracking-tight text-center flex items-center justify-center gap-4 sm:gap-6 ${CONFIG.heading.fontSize}`}>
               <Ornament /> that shine. <Ornament flip />
@@ -470,67 +714,10 @@ export default function Hero() {
             Positioned and sized entirely by GSAP.
             Do not add position/size Tailwind classes here.
             ════════════════════════════════════════ */}
-        <div ref={idCardRef} className="absolute z-20">
+        <div ref={idCardRef} className="absolute z-20 cursor-target">
           <HeroIDCard />
         </div>
 
-        {/* ════════════════════════════════════════
-            TAGLINE
-            Hidden on xs screens (too cluttered).
-            Position from CONFIG.tagline
-            ════════════════════════════════════════ */}
-        <div
-          ref={taglineRef}
-          className="absolute z-20 hidden sm:block"
-          style={{
-            bottom: CONFIG.tagline.bottom,
-            left: '50%',
-            transform: 'translateX(-50%)',
-            textAlign: 'center',
-            pointerEvents: 'none',
-            width: CONFIG.tagline.width,
-          }}
-        >
-          <p className="font-extenda text-cream leading-relaxed" style={{ fontSize: '1.4rem' }}>
-            A strategy-led studio laying down the awesome sauce{' '}
-            <em className="italic text-bone/80">for</em>{' '}
-            creators &amp; brands.
-          </p>
-          <span className="font-decipher" style={{
-            fontSize: '1rem', color: '#C8FF00',
-            display: 'block', marginTop: 4, transform: 'rotate(-1.5deg)',
-          }}>~scroll down~</span>
-        </div>
-
-        {/* ════════════════════════════════════════
-            GRAFFITI TEXT OVERLAYS — desktop only
-            Decorative. Edit text / colors freely.
-            ════════════════════════════════════════ */}
-
-        {/* Left side — "i will help your imagination come true" */}
-        <div className="absolute hidden md:block pointer-events-none z-[1]"
-          style={{ top: 200, left: 30 }}>
-          <div className="font-aerosoldier text-right" style={{
-            fontSize: '3rem', color: '#b01a67',
-            transform: 'rotate(-4deg)', lineHeight: 1.3,
-          }}>
-            <div>~i will help </div>
-            <div>your imagination</div>
-            <div>come true~</div>
-          </div>
-        </div>
-
-        {/* Right side — "crafting the internet's most addictive content" */}
-        <div className="absolute hidden md:block pointer-events-none z-[1]"
-          style={{ bottom: 350, right: 30 }}>
-          <div className="font-decipher text-right" style={{
-            fontSize: '1.8rem', color: '#C8FF00',
-            transform: 'rotate(-4deg)', lineHeight: 1.3,
-          }}>
-            <div>~crafting the internet&apos;s</div>
-            <div>most addictive content~</div>
-          </div>
-        </div>
 
         {/* ════════════════════════════════════════
             VIDEO
@@ -539,13 +726,13 @@ export default function Hero() {
             ════════════════════════════════════════ */}
         <div
           ref={videoRef}
-          className="absolute z-10 overflow-hidden rounded-[12px]"
+          className="absolute z-10 overflow-hidden rounded-[12px] cursor-target"
           // No width/height/position classes here — all set by GSAP
         >
           <video
             autoPlay muted loop playsInline
             className="w-full h-full object-cover block"
-            src={sampleVideo}
+            src={mainVideo}
           />
 
           {/* "~the work~" graffiti tag bottom-left of video */}

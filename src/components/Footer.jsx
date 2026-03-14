@@ -85,7 +85,7 @@ export default function Footer() {
           <a
             href="mailto:contact@aaddi.com"
             data-cursor="view"
-            className="footer-link group relative inline-flex items-center gap-3"
+            className="footer-link group relative inline-flex items-center gap-3 cursor-target"
           >
             <span className="heading-brutal text-bone text-[clamp(1.6rem,3.5vw,2.6rem)] leading-none group-hover:text-brutal-red transition-colors duration-300">
               LET'S CONNECT
@@ -110,7 +110,7 @@ export default function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               data-cursor="view"
-              className="footer-link group flex items-center justify-center w-12 h-12 rounded-full border border-bone/15 hover:border-brutal-red hover:bg-brutal-red transition-all duration-300"
+              className="footer-link group flex items-center justify-center w-12 h-12 rounded-full border border-bone/15 hover:border-brutal-red hover:bg-brutal-red transition-all duration-300 cursor-target"
               aria-label={label}
             >
               <Icon
@@ -142,6 +142,7 @@ export default function Footer() {
             heading-brutal text-[23vw] leading-[0.82]
             text-stroke
             px-2 pb-[0.04em]
+            cursor-target
           "
         >
           AADDI
