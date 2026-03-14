@@ -3,6 +3,7 @@ import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGSAP } from '@gsap/react'
 import Shuffle from './Shuffle'
+import PixelCard from './PixelCard'
 
 gsap.registerPlugin(ScrollTrigger, useGSAP)
 
@@ -459,22 +460,30 @@ function ProjectCard({ project, index, total }) {
               </div>
 
               {/* Media */}
-              <div className="ca relative overflow-hidden" style={{
+              <div className="ca relative" style={{
                 height: CONFIG.media.height[bp],
                 borderRadius: CONFIG.media.borderRadius,
-                border: '1px solid rgba(255,255,255,0.07)',
               }}>
-                {project.type === 'video'
-                  ? <video src={project.src} poster={project.thumb} autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover" />
-                  : <img src={project.src} alt={project.title} className="absolute inset-0 w-full h-full object-cover" />
-                }
-                <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom,transparent 60%,rgba(0,0,0,0.4))' }} />
-                <div className="absolute top-2.5 right-2.5 font-mono font-bold px-2 py-0.5 rounded-full" style={{ fontSize: '0.55rem', background: 'rgba(0,0,0,0.7)', color: 'rgba(255,255,255,0.55)', border: '1px solid rgba(255,255,255,0.1)', backdropFilter: 'blur(8px)', letterSpacing: '0.1em' }}>
-                  {String(index + 1).padStart(2, '0')} / {total}
-                </div>
-                <div className="absolute bottom-2.5 left-3 font-decipher pointer-events-none" style={{ fontSize: '0.78rem', color: `${project.accent}75`, transform: 'rotate(-1.5deg)' }}>
-                  ~{project.tagline.toLowerCase()}~
-                </div>
+                <PixelCard 
+                  className="w-full h-full"
+                  colors={`${project.accent},#ffffff,${project.accent}80`}
+                  gap={6}
+                  speed={30}
+                >
+                  <div className="relative w-full h-full overflow-hidden" style={{ borderRadius: CONFIG.media.borderRadius, border: '1px solid rgba(255,255,255,0.07)' }}>
+                    {project.type === 'video'
+                      ? <video src={project.src} poster={project.thumb} autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover" />
+                      : <img src={project.src} alt={project.title} className="absolute inset-0 w-full h-full object-cover" />
+                    }
+                    <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom,transparent 60%,rgba(0,0,0,0.4))' }} />
+                    <div className="absolute top-2.5 right-2.5 font-mono font-bold px-2 py-0.5 rounded-full" style={{ fontSize: '0.55rem', background: 'rgba(0,0,0,0.7)', color: 'rgba(255,255,255,0.55)', border: '1px solid rgba(255,255,255,0.1)', backdropFilter: 'blur(8px)', letterSpacing: '0.1em' }}>
+                      {String(index + 1).padStart(2, '0')} / {total}
+                    </div>
+                    <div className="absolute bottom-2.5 left-3 font-decipher pointer-events-none" style={{ fontSize: '0.78rem', color: `${project.accent}75`, transform: 'rotate(-1.5deg)' }}>
+                      ~{project.tagline.toLowerCase()}~
+                    </div>
+                  </div>
+                </PixelCard>
               </div>
 
               {/* Description */}
@@ -540,40 +549,47 @@ function ProjectCard({ project, index, total }) {
 
               {/* RIGHT: media — fills full card height */}
               <div style={{ padding: `${py} ${px} ${py} 0`, display: 'flex', alignItems: 'stretch' }}>
-                <div className="ca relative overflow-hidden w-full" style={{
+                <div className="ca relative w-full" style={{
                   borderRadius: CONFIG.media.borderRadius,
-                  border: '1px solid rgba(255,255,255,0.07)',
-                  // Big index number sits inside the media, top-right
                   minHeight: 'clamp(280px,35vw,500px)',
                 }}>
-                  {project.type === 'video'
-                    ? <video src={project.src} poster={project.thumb} autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover" />
-                    : <img src={project.src} alt={project.title} className="absolute inset-0 w-full h-full object-cover" />
-                  }
-                  {/* Vignette */}
-                  <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom,transparent 55%,rgba(0,0,0,0.5))' }} />
+                  <PixelCard 
+                    className="w-full h-full"
+                    colors={`${project.accent},#ffffff,${project.accent}80`}
+                    gap={6}
+                    speed={30}
+                  >
+                    <div className="relative w-full h-full overflow-hidden" style={{ borderRadius: CONFIG.media.borderRadius, border: '1px solid rgba(255,255,255,0.07)' }}>
+                      {project.type === 'video'
+                        ? <video src={project.src} poster={project.thumb} autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover" />
+                        : <img src={project.src} alt={project.title} className="absolute inset-0 w-full h-full object-cover" />
+                      }
+                      {/* Vignette */}
+                      <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom,transparent 55%,rgba(0,0,0,0.5))' }} />
 
-                  {/* BIG index number — sorateq style, top-right of media */}
-                  <div className="absolute font-mono font-black pointer-events-none select-none" style={{
-                    top: '-4%', right: '3%',
-                    fontSize: CONFIG.indexNum.fontSize[bp],
-                    color: project.accent,
-                    lineHeight: 0.85,
-                    textShadow: `0 0 40px ${project.accent}60`,
-                    opacity: 0.9,
-                  }}>
-                    {String(index + 1).padStart(2, '0')}
-                  </div>
+                      {/* BIG index number — sorateq style, top-right of media */}
+                      <div className="absolute font-mono font-black pointer-events-none select-none" style={{
+                        top: '-4%', right: '3%',
+                        fontSize: CONFIG.indexNum.fontSize[bp],
+                        color: project.accent,
+                        lineHeight: 0.85,
+                        textShadow: `0 0 40px ${project.accent}60`,
+                        opacity: 0.9,
+                      }}>
+                        {String(index + 1).padStart(2, '0')}
+                      </div>
 
-                  {/* Counter badge */}
-                  <div className="absolute top-3 left-3 font-mono font-bold px-2 py-0.5 rounded-full" style={{ fontSize: '0.6rem', background: 'rgba(0,0,0,0.65)', color: 'rgba(255,255,255,0.5)', border: '1px solid rgba(255,255,255,0.1)', backdropFilter: 'blur(10px)', letterSpacing: '0.1em' }}>
-                    {String(index + 1).padStart(2, '0')} / {total}
-                  </div>
+                      {/* Counter badge */}
+                      <div className="absolute top-3 left-3 font-mono font-bold px-2 py-0.5 rounded-full" style={{ fontSize: '0.6rem', background: 'rgba(0,0,0,0.65)', color: 'rgba(255,255,255,0.5)', border: '1px solid rgba(255,255,255,0.1)', backdropFilter: 'blur(10px)', letterSpacing: '0.1em' }}>
+                        {String(index + 1).padStart(2, '0')} / {total}
+                      </div>
 
-                  {/* Graffiti label */}
-                  <div className="absolute bottom-3 left-4 font-decipher pointer-events-none" style={{ fontSize: 'clamp(0.78rem,1.1vw,0.92rem)', color: `${project.accent}80`, transform: 'rotate(-1.5deg)' }}>
-                    ~{project.tagline.toLowerCase()}~
-                  </div>
+                      {/* Graffiti label */}
+                      <div className="absolute bottom-3 left-4 font-decipher pointer-events-none" style={{ fontSize: 'clamp(0.78rem,1.1vw,0.92rem)', color: `${project.accent}80`, transform: 'rotate(-1.5deg)' }}>
+                        ~{project.tagline.toLowerCase()}~
+                      </div>
+                    </div>
+                  </PixelCard>
                 </div>
               </div>
 
