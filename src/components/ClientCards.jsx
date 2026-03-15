@@ -2,8 +2,16 @@ import { useRef, useState, useEffect } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGSAP } from '@gsap/react'
-import client1 from '../assets/client1.jpeg'
 
+// Image imports from assets/clientsname
+import climg1 from '../assets/clientsname/A car a day.jpg'
+import climg2 from '../assets/clientsname/Artemis.png'
+import climg3 from '../assets/clientsname/ClassDojo.jpg'
+import climg4 from '../assets/clientsname/Dainty Wilder.jpg'
+import climg5 from '../assets/clientsname/DeeperRealms.jpg'
+import climg6 from '../assets/clientsname/Emily.jpg'
+import climg7 from '../assets/clientsname/HackingTheSystem.jpg'
+import climg8 from '../assets/clientsname/Jubeeone.jpg'
 
 gsap.registerPlugin(ScrollTrigger, useGSAP)
 
@@ -122,12 +130,14 @@ const CONFIG = {
    CLIENTS DATA  — edit names, handles, platforms, subs, accents
 ══════════════════════════════════════════════════════════════ */
 const CLIENTS = [
-  { id:1, name:' Emily Black ASMR',         handle:'@emilyblackasmr',       platforms:['youtube','instagram','tiktok'],          subs:{youtube:'1.2M',instagram:'800K',tiktok:'3.1M'},             accent:'#C8FF00', portrait: client1 },
-  { id:2, name:'HACKING THE SYSTEM', handle:'@hackthesys',      platforms:['youtube','instagram','tiktok'], subs:{youtube:'2M',instagram:'600K',tiktok:'3.1M'}, accent:'#FFD700', portrait:'https://images.unsplash.com/photo-1492619375914-88005aa9e8fb?w=500&q=80' },
-  { id:3, name:'BUCH MEDIA',         handle:'@buchmedia',        platforms:['youtube','instagram'],          subs:{youtube:'180K',instagram:'340K'},             accent:'#FF6600', portrait:'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=500&q=80' },
-  { id:4, name:'ARTEMIS SIM RACING', handle:'@artemissimracing', platforms:['youtube','tiktok'],             subs:{youtube:'1.1M',tiktok:'450K'},                accent:'#00D9FF', portrait:'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=500&q=80' },
-  { id:5, name:'DEEPER REALMS',      handle:'@deeperrealms',     platforms:['youtube','instagram'],          subs:{youtube:'900K',instagram:'1.1M'},             accent:'#766dfa', portrait:'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=500&q=80' },
-  { id:6, name:'BABY NOJAMIE',       handle:'@babynojamie',      platforms:['instagram','tiktok'],           subs:{instagram:'210K',tiktok:'90K'},               accent:'#FF3B3B', portrait:'https://images.unsplash.com/photo-1536240478700-b869ad10fbe2?w=500&q=80' },
+  { id:1, name:'EMILY BLACK ASMR',    handle:'@emilyblackasmr',    platforms:['youtube','instagram','tiktok'], link:'https://www.youtube.com/@EmilyBlackASMR',       accent:'#FF00FF', portrait: climg6 },
+  { id:2, name:'CLASS DOJO INC',     handle:'@classdojo',         platforms:['youtube','tiktok'],             link:'https://www.youtube.com/@classdojo',             accent:'#C8FF00', portrait: climg3 },
+  { id:3, name:'DAINTY WILDER ASMR', handle:'@daintywilderasmr',  platforms:['youtube','instagram','tiktok'], link:'https://www.youtube.com/@DaintyWilderASMR',      accent:'#FF6600', portrait: climg4 },
+  { id:4, name:'A CAR A DAY',        handle:'@acaraday.automotive', platforms:['youtube'],                    link:'https://www.youtube.com/@acaraday.automotive',   accent:'#FF3B3B', portrait: climg1 },
+  { id:5, name:'ARTEMIS SIM RACING', handle:'@artemissimracing',  platforms:['youtube'],                    link:'https://www.youtube.com/@ArtemisSimRacing1',     accent:'#00D9FF', portrait: climg2 },
+  { id:6, name:'JUBEEONE',           handle:'@jubeeone',          platforms:['twitch','youtube'],             link:'https://www.youtube.com/@jubeeone1/videos',      accent:'#9146FF', portrait: climg8 },
+  { id:7, name:'HACKING THE SYSTEM', handle:'@hackingthesystem',  platforms:['youtube'],                    link:'https://www.youtube.com/@HackingTheSystemmm',    accent:'#FFD700', portrait: climg7 },
+  { id:8, name:'DEEPERREALMSTV',     handle:'@deeperrealmstv',    platforms:['youtube','instagram'],          link:'https://www.youtube.com/@DeeperRealms_TV',       accent:'#766dfa', portrait: climg5 },
 ]
 const N = CLIENTS.length
 
@@ -137,10 +147,12 @@ const N = CLIENTS.length
 const YTIcon = ({c,s=16})=><svg width={s} height={s} viewBox="0 0 24 24" fill={c}><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
 const IGIcon = ({c,s=16})=><svg width={s} height={s} viewBox="0 0 24 24" fill={c}><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
 const TTIcon = ({c,s=16})=><svg width={s} height={s} viewBox="0 0 24 24" fill={c}><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.16 8.16 0 004.78 1.52V6.77a4.85 4.85 0 01-1.01-.08z"/></svg>
+const TWIcon = ({c,s=16})=><svg width={s} height={s} viewBox="0 0 24 24" fill={c}><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0h1.714v5.143h-1.714zm-8.843 8.843L4.857 11.142h-1.714v10.286h4.572v2.857l2.857-2.857h3.429l6.285-6.286V2.428H3.143v13.143h4.286zM20.571 4.143v9.143l-3.428 3.428h-3.429l-2.857 2.857v-2.857H6.57V4.143h14.001z"/></svg>
 function PIcon({p,c,s=16}){
   if(p==='youtube')   return <YTIcon c={c} s={s}/>
   if(p==='instagram') return <IGIcon c={c} s={s}/>
   if(p==='tiktok')    return <TTIcon c={c} s={s}/>
+  if(p==='twitch')    return <TWIcon c={c} s={s}/>
   return null
 }
 
@@ -414,7 +426,7 @@ export default function ClientCards(){
 
                   {/* Name labels removed */}
 
-                  {/* Tick mark
+                  {/* Tick mark */}
                   <div style={{
                     position:'absolute',
                     width:1, height:CONFIG.node.tickHeight,
@@ -422,45 +434,14 @@ export default function ClientCards(){
                     transform:`translate(-50%,-50%) rotate(${deg}deg)`,
                     transformOrigin:'center top',
                     zIndex:2,
-                  }}/> */}
+                  }}/>
                 </div>
               )
             })}
           </div>
 
           {/* ── Static notch pointer (3-o'clock) ──────────── */}
-          {/* <div style={{
-            position:'absolute',
-            top:'50%',
-            left:D,
-            transform:'translateY(-50%)',
-            display:'flex',
-            alignItems:'center',
-            gap:0,
-            pointerEvents:'none',
-            zIndex:30,
-          }}>
-            <div
-              ref={notchTriRef}
-              style={{
-                width:0, height:0,
-                borderTop:`${CONFIG.notch.triangleSize}px solid transparent`,
-                borderBottom:`${CONFIG.notch.triangleSize}px solid transparent`,
-                borderRight:`${CONFIG.notch.triangleSize*1.6}px solid ${CLIENTS[0].accent}`,
-                filter:`drop-shadow(0 0 8px ${CLIENTS[0].accent})`,
-                flexShrink:0,
-              }}
-            />
-            <div
-              ref={notchLineRef}
-              style={{
-                width: CONFIG.notch.lineWidth,
-                height:1.5,
-                background:CLIENTS[0].accent,
-                opacity:CONFIG.notch.lineOpacity,
-              }}
-            />
-          </div> */}
+         
 
         </div>{/* end circle wrap */}
 
@@ -489,7 +470,7 @@ export default function ClientCards(){
 
           {/* Big name */}
           <h2
-            className="font-akira font-black text-bone leading-none mb-3"
+            className="font-lemon font-black text-bone leading-none mb-3"
             style={{
               fontSize:`clamp(${CONFIG.info.nameFontClamp[0]},${CONFIG.info.nameFontClamp[1]},${CONFIG.info.nameFontClamp[2]})`,
               letterSpacing:'-0.04em',
@@ -520,37 +501,95 @@ export default function ClientCards(){
             marginBottom:24,
           }}/>
 
-          {/* Platform stats */}
-          <div className="flex flex-col" style={{gap:'clamp(12px,2vh,22px)'}}>
+          {/* Platform icons + View pill button */}
+          <div className="flex items-center flex-wrap" style={{gap:'clamp(10px,1.2vw,14px)',marginBottom:'clamp(20px,3vh,32px)'}}>
+
+            {/* Social platform icon circles — display only, no link */}
             {cl.platforms.map(p=>(
-              <div key={p} className="flex items-center" style={{gap:'clamp(10px,1.2vw,18px)'}}>
-                <div
-                  className="flex items-center justify-center rounded-full flex-shrink-0"
-                  style={{
-                    width:'clamp(30px,3vw,40px)',
-                    height:'clamp(30px,3vw,40px)',
-                    background:'rgba(255,255,255,0.06)',
-                    border:'1px solid rgba(255,255,255,0.1)',
-                  }}
-                >
-                  <PIcon p={p} c={cl.accent} s={16}/>
-                </div>
-                <div>
-                  <p className="font-mono uppercase"
-                    style={{fontSize:'clamp(7px,0.8vw,9px)',letterSpacing:'0.1em',color:CONFIG.colors.meta,lineHeight:1,marginBottom:3}}>
-                    {p}
-                  </p>
-                  <p className="font-lemon-milk font-bold"
-                    style={{
-                      fontSize:`clamp(${CONFIG.info.statFontClamp[0]},${CONFIG.info.statFontClamp[1]},${CONFIG.info.statFontClamp[2]})`,
-                      lineHeight:1,
-                      color:CONFIG.colors.text,
-                    }}>
-                    {cl.subs[p]}
-                  </p>
-                </div>
+              <div
+                key={p}
+                className="flex items-center justify-center flex-shrink-0"
+                style={{
+                  width:'clamp(38px,3.8vw,50px)',
+                  height:'clamp(38px,3.8vw,50px)',
+                  borderRadius:'50%',
+                  background:'rgba(255,255,255,0.06)',
+                  border:`1px solid ${cl.accent}40`,
+                }}
+              >
+                <PIcon p={p} c={cl.accent} s={18}/>
               </div>
             ))}
+
+            {/* VIEW pill button — only clickable element, contains the link */}
+            <a
+              href={cl.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display:'inline-flex',
+                alignItems:'center',
+                gap:8,
+                padding:'0 clamp(14px,1.6vw,22px)',
+                height:'clamp(38px,3.8vw,50px)',
+                borderRadius:999,
+                border:`1px solid ${cl.accent}`,
+                background:'transparent',
+                color:cl.accent,
+                textDecoration:'none',
+                cursor:'pointer',
+                flexShrink:0,
+                position:'relative',
+                overflow:'hidden',
+                transition:'background 0.28s ease, box-shadow 0.28s ease, transform 0.28s cubic-bezier(0.34,1.56,0.64,1)',
+              }}
+              onMouseEnter={e=>{
+                e.currentTarget.style.background = cl.accent
+                e.currentTarget.style.boxShadow = `0 0 22px ${cl.accent}66`
+                e.currentTarget.style.transform  = 'scale(1.05)'
+                const txt = e.currentTarget.querySelector('.view-txt')
+                const arr = e.currentTarget.querySelector('.view-arr')
+                if(txt) txt.style.color = '#0A0A0A'
+                if(arr) { arr.style.color='#0A0A0A'; arr.style.transform='translate(2px,-2px)' }
+              }}
+              onMouseLeave={e=>{
+                e.currentTarget.style.background = 'transparent'
+                e.currentTarget.style.boxShadow  = 'none'
+                e.currentTarget.style.transform  = 'scale(1)'
+                const txt = e.currentTarget.querySelector('.view-txt')
+                const arr = e.currentTarget.querySelector('.view-arr')
+                if(txt) txt.style.color = cl.accent
+                if(arr) { arr.style.color=cl.accent; arr.style.transform='translate(0,0)' }
+              }}
+            >
+              {/* Label */}
+              <span
+                className="view-txt font-lemon-milk"
+                style={{
+                  fontSize:'clamp(0.62rem,0.9vw,0.78rem)',
+                  fontWeight:700,
+                  letterSpacing:'0.12em',
+                  textTransform:'uppercase',
+                  color:cl.accent,
+                  transition:'color 0.28s ease',
+                  whiteSpace:'nowrap',
+                }}
+              >View</span>
+              {/* SVG arrow — diagonal northeast */}
+              <svg
+                className="view-arr"
+                width="11" height="11" viewBox="0 0 11 11"
+                fill="none" xmlns="http://www.w3.org/2000/svg"
+                style={{
+                  color:cl.accent,
+                  flexShrink:0,
+                  transition:'color 0.28s ease, transform 0.28s cubic-bezier(0.34,1.56,0.64,1)',
+                }}
+              >
+                <line x1="1.5" y1="9.5" x2="9.5" y2="1.5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round"/>
+                <polyline points="4,1.5 9.5,1.5 9.5,7" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+              </svg>
+            </a>
           </div>
 
           {/* Ghost letter */}
