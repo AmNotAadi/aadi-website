@@ -237,7 +237,7 @@ function Hero({ onNavigate }) {
         <div ref={taglineRef} className="absolute" style={{ bottom: '20%', left: '50%', opacity: 0 }} />
         <nav className="absolute top-5 left-5 right-5 flex items-center justify-between z-50">
           <div className="hidden md:flex flex-col gap-0.5">
-            {['Work', 'Services', 'Agency'].map(l => (<a key={l} href="#" className="text-sm font-lemon-milk text-neutral-500 hover:text-bone transition-colors">{l}</a>))}
+            {['Discord-addi2005', 'email'].map(l => (<a key={l} href="#" className="text-sm font-lemon-milk text-neutral-500 hover:text-bone transition-colors">{l}</a>))}
           </div>
           <div className="font-don-graffiti text-3xl md:text-4xl font-extrabold text-cream tracking-tight mx-auto md:mx-0">aadi2005</div>
           <button onClick={() => onNavigate('connect')} className="hidden md:block font-lemon-milk text-sm text-white bg-brutal-red px-5 py-2 rounded hover:opacity-90 transition-opacity cursor-target">Let&apos;s Connect</button>
