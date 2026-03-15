@@ -20,6 +20,7 @@ gsap.registerPlugin(ScrollTrigger)
 function Home({ onNavigate }) {
   return (
     <>
+     
       <Hero onNavigate={onNavigate} />
       <VaultGrid />
       <MinecraftCursor skinUrl="https://minotar.net/skin/Eystreem" />
@@ -27,6 +28,8 @@ function Home({ onNavigate }) {
       <StatsMarquee />
       <ClientCards />
       <Footer onNavigate={onNavigate} />
+    
+
     </>
   )
 }

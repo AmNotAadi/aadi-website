@@ -161,7 +161,7 @@ function HeroIDCard() {
   )
 }
 
-export default function Hero({ onNavigate }) {
+function Hero({ onNavigate }) {
   const sectionRef = useRef(null)
   const videoRef = useRef(null)
   const headingRef = useRef(null)
@@ -226,7 +226,7 @@ export default function Hero({ onNavigate }) {
         </div>
         <div className="absolute hidden md:block pointer-events-none z-[1]" style={{ top: '38%', left: '1.5%' }}>
           <div className="font-aerosoldier block cursor-target" style={{ fontSize: CONFIG.graffiti.leftTag.desktop.fontSize, color: CONFIG.graffiti.leftTag.color, opacity: CONFIG.graffiti.leftTag.desktop.opacity, transform: 'rotate(-4deg)', lineHeight: 1.3, pointerEvents: 'auto' }}>
-            <div>~i will help</div><div>your imagination</div><div>come true~</div>
+            <div>~i will make</div><div>your imagination</div><div>come true~</div>
           </div>
         </div>
         <div className="absolute hidden md:block pointer-events-none z-[1]" style={{ bottom: '32%', right: '1.5%' }}>
@@ -243,8 +243,16 @@ export default function Hero({ onNavigate }) {
           <button onClick={() => onNavigate('connect')} className="hidden md:block font-lemon-milk text-sm text-white bg-brutal-red px-5 py-2 rounded hover:opacity-90 transition-opacity cursor-target">Let&apos;s Connect</button>
         </nav>
         <div ref={headingRef} className="absolute inset-x-0 flex flex-col items-center justify-center z-10 px-4" style={{ top: CONFIG.heading_top.desktop }}>
-          {['Helping our partners', 'build original brands'].map(line => (<div key={line} className="overflow-hidden"><h1 className={`hero-line font-magazine text-bone leading-none tracking-tight text-center ${CONFIG.heading.fontSize}`}>{line}</h1></div>))}
-          <div className="overflow-hidden"><h1 className={`hero-line font-magazine text-bone leading-none tracking-tight text-center flex items-center justify-center gap-4 sm:gap-6 ${CONFIG.heading.fontSize}`}><Ornament /> that shine. <Ornament flip /></h1></div>
+          <div className="overflow-hidden">
+            <h1 className={`hero-line font-magazine text-bone leading-none tracking-tight text-center ${CONFIG.heading.fontSize}`}>
+              TURNING CHAOS
+            </h1>
+          </div>
+          <div className="overflow-hidden">
+            <h1 className={`hero-line font-magazine text-bone leading-none tracking-tight text-center flex items-center justify-center gap-3 sm:gap-4 ${CONFIG.heading.fontSize}`}>
+              INTO <span className="font-rosie-serif text-brutal-red inline-block transform ml-4 pt-2">stories</span>
+            </h1>
+          </div>
         </div>
         <div ref={idCardRef} className="absolute z-20 cursor-target"><HeroIDCard /></div>
         <div ref={videoRef} className="absolute z-10 overflow-hidden rounded-[12px] cursor-target">
@@ -257,3 +265,5 @@ export default function Hero({ onNavigate }) {
     </section>
   )
 }
+
+export default Hero

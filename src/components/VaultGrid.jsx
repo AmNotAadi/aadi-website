@@ -406,7 +406,7 @@ function ProjectCard({ project, index, total }) {
             ══════════════════════════════════ */}
         <div
           ref={cardRef}
-          className="relative overflow-hidden"
+          className="relative"
           style={{
             background: 'linear-gradient(150deg, #0e0e0e 0%, #121212 100%)',
             borderRadius: br,
@@ -466,8 +466,8 @@ function ProjectCard({ project, index, total }) {
                 borderRadius: CONFIG.media.borderRadius,
               }}>
                 {index === 0 ? (
-                  <div className="relative w-full h-full overflow-hidden" style={{ borderRadius: CONFIG.media.borderRadius, border: '1px solid rgba(255,255,255,0.07)' }}>
-                    <div className="w-full h-full flex items-center justify-center bg-black/40">
+                  <div className="relative w-full h-full" style={{ borderRadius: CONFIG.media.borderRadius, border: '1px solid rgba(255,255,255,0.07)' }}>
+                    <div className="w-full h-full flex items-center justify-center">
                       <IDCard isInline />
                     </div>
                     <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom,transparent 60%,rgba(0,0,0,0.4))' }} />
@@ -571,8 +571,8 @@ function ProjectCard({ project, index, total }) {
                   minHeight: 'clamp(320px, 35vw, 750px)',
                 }}>
                   {index === 0 ? (
-                    <div className="relative w-full h-full overflow-hidden" style={{ borderRadius: CONFIG.media.borderRadius, border: '1px solid rgba(255,255,255,0.07)' }}>
-                      <div className="w-full h-full flex items-center justify-center bg-black/40">
+                    <div className="relative w-full h-full" style={{ borderRadius: CONFIG.media.borderRadius, border: '1px solid rgba(255,255,255,0.07)' }}>
+                      <div className="w-full h-full flex items-center justify-center">
                         <IDCard isInline />
                       </div>
                       <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom,transparent 55%,rgba(0,0,0,0.5))' }} />
@@ -706,3 +706,4 @@ export default function VaultGrid() {
     </div>
   )
 }
+

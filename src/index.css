@@ -210,6 +210,16 @@
   src: url('../fonts/highrise/HighriseFont-Bold-Demo.otf') format('opentype');
   font-display: swap;
 }
+@font-face {
+  font-family: 'ranger';
+  src: url('../fonts/rangers_thinkers/Rangers\ Thinkers\ Demo.otf') format('opentype');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'ink';
+  src: url('../fonts/the_ink_prophecy/The\ Ink\ Prophecy.ttf') format('opentype');
+  font-display: swap;
+}
 
 
 
@@ -228,6 +238,8 @@
   /* Font families - use these with class names like 'font-rosie-serif', 'font-akira', etc. */
 
   --font-timemachine:"Typewriter2", Georgia, "Times New Roman", serif;
+  --font-ranger:"ranger", Georgia, "Times New Roman", serif;
+  --font-ink:"ink", Georgia, "Times New Roman", serif;
   --font-cinemato:"cinemato", Georgia, "Times New Roman", serif;
   --font-highrise:"highrise", Georgia, "Times New Roman", serif;
   --font-extenda:"extenda", Georgia, "Times New Roman", serif;
