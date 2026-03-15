@@ -209,7 +209,7 @@ const TargetCursor = ({
 
         gsap.killTweensOf(corners);
         const { cornerSize } = constants;
-        
+
         // This is safe because GSAP will tween the 'x' and 'y' properties independently of percentages
         const positions = [
           { x: -cornerSize * 1.5, y: -cornerSize * 1.5 },
@@ -232,11 +232,11 @@ const TargetCursor = ({
           if (!activeTarget) {
             const currentRotation = gsap.getProperty(cursor, 'rotation') || 0;
             const normalizedRotation = currentRotation % 360;
-            
+
             spinTl.kill();
             spinTl = gsap.timeline({ repeat: -1 })
               .to(cursor, { rotation: '+=360', duration: spinDuration, ease: 'none' });
-            
+
             gsap.to(cursor, {
               rotation: normalizedRotation + 360,
               duration: spinDuration * (1 - normalizedRotation / 360),
@@ -282,8 +282,8 @@ const TargetCursor = ({
   if (isMobile) return null;
 
   return (
-    <div 
-      ref={cursorRef} 
+    <div
+      ref={cursorRef}
       className="target-cursor-wrapper"
       style={{
         opacity: isVisible ? 1 : 0,

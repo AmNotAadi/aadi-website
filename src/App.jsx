@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import Lenis from 'lenis'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -12,10 +12,27 @@ import Footer from './components/Footer'
 import IDCard from './components/IDCard'
 import TargetCursor from './components/TargetCursor'
 import MinecraftCursor from './components/MCCursor'
+import Connect from './components/Connect'
 
 gsap.registerPlugin(ScrollTrigger)
 
+function Home({ onNavigate }) {
+  return (
+    <>
+      <Hero onNavigate={onNavigate} />
+      <VaultGrid />
+      <MinecraftCursor skinUrl="https://minotar.net/skin/Eystreem" />
+      <Services onNavigate={onNavigate} />
+      <StatsMarquee />
+      <ClientCards />
+      <Footer onNavigate={onNavigate} />
+    </>
+  )
+}
+
 function App() {
+  const [currentPage, setCurrentPage] = useState('home');
+
   useEffect(() => {
     const lenis = new Lenis({ lerp: 0.07 })
 
@@ -33,20 +50,17 @@ function App() {
 
   return (
     <Layout>
-      <TargetCursor 
+      <TargetCursor
         spinDuration={2}
         hideDefaultCursor
         parallaxOn
         hoverDuration={0.2}
       />
-      <Hero />
-      {/* <IDCard/> */}
-      <VaultGrid />
-      <MinecraftCursor skinUrl="https://minotar.net/skin/Eystreem" />
-      <Services />
-      <StatsMarquee />
-      <ClientCards />
-      <Footer />
+      {currentPage === 'home' ? (
+        <Home onNavigate={setCurrentPage} />
+      ) : (
+        <Connect onNavigate={setCurrentPage} />
+      )}
     </Layout>
   )
 }

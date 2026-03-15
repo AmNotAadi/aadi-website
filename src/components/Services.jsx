@@ -285,7 +285,7 @@ function ServiceRow({ service, isActive, onEnter, onLeave }) {
 }
 
 /* ─── Section ──────────────────────────────────────────────────── */
-export default function Services() {
+export default function Services({ onNavigate }) {
   const sectionRef = useRef(null)
   const [activeIdx, setActiveIdx] = useState(null)
 
@@ -391,9 +391,12 @@ export default function Services() {
       {/* Footer CTA */}
       <div className="px-5 sm:px-8 md:px-14 py-8 sm:py-10 flex items-center gap-6" style={{ borderTop: '1px solid rgba(245,230,211,0.1)' }}>
         <div className="h-0.5 w-10 bg-brutal-red shrink-0" />
-        <a href="mailto:contact@aaddi.com" className="font-mono text-[10px] tracking-widest text-bone/50 hover:text-bone uppercase transition-colors duration-300 cursor-target">
+        <button 
+          onClick={() => onNavigate('connect')}
+          className="font-mono text-[10px] tracking-widest text-bone/50 hover:text-bone uppercase transition-colors duration-300 cursor-target text-left"
+        >
           GET IN TOUCH →
-        </a>
+        </button>
       </div>
 
     </section>
