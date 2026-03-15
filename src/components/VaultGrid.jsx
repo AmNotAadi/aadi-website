@@ -5,6 +5,7 @@ import { useGSAP } from '@gsap/react'
 import Shuffle from './Shuffle'
 import PixelCard from './PixelCard'
 import IDCard from './IDCard'
+import setupImage2 from '../assets/setup2.jpg'
 
 gsap.registerPlugin(ScrollTrigger, useGSAP)
 
@@ -25,8 +26,8 @@ const CONFIG = {
 
   /* ── Card inner padding ── */
   card: {
-    paddingX: { mobile: '1.25rem', tablet: '2rem', desktop: '2.5rem', wide: '3.5rem' },
-    paddingY: { mobile: '1.5rem', tablet: '2.5rem', desktop: '3.5rem', wide: '4rem' },
+    paddingX: { mobile: '1.25rem', tablet: '2rem', desktop: '1.5rem', wide: '2.5rem' },
+    paddingY: { mobile: '1.5rem', tablet: '2.5rem', desktop: '2.5rem', wide: '4rem' },
     borderRadius: { mobile: 16, tablet: 28, desktop: 32, wide: 40 },
     gap: { mobile: '1.25rem', tablet: '2rem', desktop: '2.5rem', wide: '3.5rem' },
   },
@@ -98,9 +99,9 @@ const PROJECTS = [
       'Powered by a a Ryzen 7 Series CPU, RTX 50 Series GPU and 32 Gigabytes of RAM, my workstation is capable of handling large projects, high-resolution footage, and fast turnaround times.',
 
     ],
-    type: 'video',
-    thumb: 'https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=600&q=80',
-    src: 'https://assets.mixkit.co/videos/preview/mixkit-aerial-view-of-a-beach-1089-large.mp4',
+    type: 'image',
+    thumb: setupImage2,
+    src: setupImage2,
     accent: '#FF6B6B',
     element: 'timeline',
   },
@@ -501,6 +502,18 @@ function ProjectCard({ project, index, total }) {
                     </div>
                   </PixelCard>
                 )}
+                {/* Overlay Index Number */}
+                <div className="absolute font-akira font-black pointer-events-none select-none cursor-target" style={{
+                  top: '-10%', right: '-4%',
+                  fontSize: CONFIG.indexNum.fontSize[bp],
+                  color: project.accent,
+                  lineHeight: 0.85,
+                  textShadow: `0 0 50px ${project.accent}80`,
+                  opacity: 1,
+                  zIndex: 100
+                }}>
+                  {String(index + 1).padStart(2, '0')}
+                </div>
               </div>
 
               {/* Description */}
@@ -525,7 +538,7 @@ function ProjectCard({ project, index, total }) {
               LEFT: content | RIGHT: media
               ════════════════════════════ */}
           {!isMobile && (
-            <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1.1fr) minmax(0, 0.9fr)', minHeight: 'clamp(450px, 45vw, 850px)' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 0.9fr) minmax(0, 1.1fr)', minHeight: 'clamp(450px, 45vw, 850px)' }}>
 
               {/* LEFT: title + desc + element */}
               <div style={{
@@ -576,16 +589,6 @@ function ProjectCard({ project, index, total }) {
                         <IDCard isInline />
                       </div>
                       <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom,transparent 55%,rgba(0,0,0,0.5))' }} />
-                      <div className="absolute font-mono font-black pointer-events-none select-none cursor-target" style={{
-                        top: '-4%', right: '3%',
-                        fontSize: CONFIG.indexNum.fontSize[bp],
-                        color: project.accent,
-                        lineHeight: 0.85,
-                        textShadow: `0 0 40px ${project.accent}60`,
-                        opacity: 0.9,
-                      }}>
-                        {String(index + 1).padStart(2, '0')}
-                      </div>
                       <div className="absolute top-3 left-3 font-mono font-bold px-2 py-0.5 rounded-full" style={{ fontSize: '0.6rem', background: 'rgba(0,0,0,0.65)', color: 'rgba(255,255,255,0.5)', border: '1px solid rgba(255,255,255,0.1)', backdropFilter: 'blur(10px)', letterSpacing: '0.1em' }}>
                         {String(index + 1).padStart(2, '0')} / {total}
                       </div>
@@ -607,16 +610,6 @@ function ProjectCard({ project, index, total }) {
                           <img src={project.src} alt={project.title} className="absolute inset-0 w-full h-full object-cover" />
                         )}
                         <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom,transparent 55%,rgba(0,0,0,0.5))' }} />
-                        <div className="absolute font-mono font-black pointer-events-none select-none cursor-target" style={{
-                          top: '-4%', right: '3%',
-                          fontSize: CONFIG.indexNum.fontSize[bp],
-                          color: project.accent,
-                          lineHeight: 0.85,
-                          textShadow: `0 0 40px ${project.accent}60`,
-                          opacity: 0.9,
-                        }}>
-                          {String(index + 1).padStart(2, '0')}
-                        </div>
                         <div className="absolute top-3 left-3 font-mono font-bold px-2 py-0.5 rounded-full" style={{ fontSize: '0.6rem', background: 'rgba(0,0,0,0.65)', color: 'rgba(255,255,255,0.5)', border: '1px solid rgba(255,255,255,0.1)', backdropFilter: 'blur(10px)', letterSpacing: '0.1em' }}>
                           {String(index + 1).padStart(2, '0')} / {total}
                         </div>
@@ -626,10 +619,21 @@ function ProjectCard({ project, index, total }) {
                       </div>
                     </PixelCard>
                   )}
+                  {/* Overlay Index Number */}
+                  <div className="absolute font-mono font-black pointer-events-none select-none cursor-target" style={{
+                    top: '-12%', right: '-6%',
+                    fontSize: CONFIG.indexNum.fontSize[bp],
+                    color: project.accent,
+                    lineHeight: 0.85,
+                    textShadow: `0 0 70px ${project.accent}90`,
+                    opacity: 1,
+                    zIndex: 100
+                  }}>
+                    {String(index + 1).padStart(2, '0')}
+                  </div>
                 </div>
               </div>
-
-            </div>
+          </div>
           )}
 
         </div>
