@@ -50,7 +50,7 @@
   font-display: swap;
 }
 
-/* UI Sans - Clean & Minimal */
+/* UI Sans - Clean & Minimal
 @font-face {
   font-family: 'TT Fors';
   src: url('../fonts/tt_fors/TT Fors Trial Regular.ttf') format('truetype');
@@ -71,6 +71,7 @@
   font-weight: 700;
   font-display: swap;
 }
+*/
 
 @font-face {
   font-family: 'Coolvetica';
@@ -234,7 +235,7 @@
   --font-rosie-serif: "Rosie Brown Serif", Georgia, "Times New Roman", serif;
   --font-akira: "Akira", "Helvetica Neue", "Arial Black", sans-serif;
   --font-lemon-milk: "Lemon Milk", system-ui, -apple-system, sans-serif;
-  --font-tt-fors: "TT Fors", system-ui, -apple-system, sans-serif;
+  --font-tt-fors: "TT Fors", "Inter", system-ui, -apple-system, sans-serif;
   --font-coolvetica: "Coolvetica", system-ui, -apple-system, sans-serif;
   --font-street-wars: "Street Wars", cursive;
   --font-another-tag: "A Another Tag", cursive;
@@ -258,7 +259,7 @@
   --font-mono: "JetBrains Mono", "Fira Code", "SF Mono", ui-monospace, monospace;
   --font-body: "Inter", system-ui, -apple-system, sans-serif;
   --font-display: "Rosie Brown Serif", Georgia, "Times New Roman", serif;
-  --font-ui: "TT Fors", system-ui, -apple-system, sans-serif;
+  --font-ui: "TT Fors", "Inter", system-ui, -apple-system, sans-serif;
 }
 
 @layer base {

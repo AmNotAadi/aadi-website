@@ -13,7 +13,7 @@ import IDCard from './components/IDCard'
 import TargetCursor from './components/TargetCursor'
 import MinecraftCursor from './components/MCCursor'
 import Connect from './components/Connect'
-import Preloader from './components/PreLoader'
+import Preloader from './components/Preloader'
 
 gsap.registerPlugin(ScrollTrigger)
 
