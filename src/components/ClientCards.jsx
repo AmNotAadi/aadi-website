@@ -1,425 +1,430 @@
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGSAP } from '@gsap/react'
 
 gsap.registerPlugin(ScrollTrigger, useGSAP)
 
-// ── Artist data ───────────────────────────────────────────────────────────
-const ARTISTS = [
+/* ================================================================
+   PROJECTS DATA
+   ─────────────────────────────────────────────────────────────────
+   aspect controls height of each card:
+     'square'    → 1:1
+     'portrait'  → 3:4 (taller)
+     'landscape' → 4:3 (shorter)
+   Mix these up within each column to get the staggered Pinterest look.
+   ================================================================ */
+const PROJECTS = [
+  // Column 1
   {
-    name: 'CLASS DOJO',
-    desc: 'K-12 education platform driving viral classroom moments worldwide.',
-    thumb: 'https://images.unsplash.com/photo-1536240478700-b869ad10fbe2?w=700&q=80',
-    ig: '1.2M',
-    yt: '2.4M',
-    href: 'https://classdojo.com',
-    tag: 'EDUCATION',
+    id: 1, col: 0,
+    client: 'CLASS DOJO',
+    category: 'VIDEO',
+    stats: { ig: '1.2M', yt: '800K' },
     accent: '#C8FF00',
+    aspect: 'portrait',
+    thumb: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?w=600&q=80',
+    src:   'https://assets.mixkit.co/videos/preview/mixkit-set-of-plateaus-seen-from-the-heights-in-a-sunset-26070-large.mp4',
   },
   {
-    name: 'EMILY BLACK',
-    desc: 'ASMR & lifestyle creator with a cult following across platforms.',
-    thumb: 'https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=700&q=80',
-    ig: '820K',
-    yt: '500K',
-    href: 'https://youtube.com',
-    tag: 'ASMR / LIFESTYLE',
-    accent: '#E63B2E',
+    id: 2, col: 0,
+    client: 'RETENTION CUT',
+    category: 'VIDEO',
+    stats: { ig: '600K', yt: '2M' },
+    accent: '#FFD700',
+    aspect: 'landscape',
+    thumb: 'https://images.unsplash.com/photo-1492619375914-88005aa9e8fb?w=600&q=80',
+    src:   'https://assets.mixkit.co/videos/preview/mixkit-young-woman-talking-on-a-video-call-at-home-43832-large.mp4',
   },
   {
-    name: 'BUCH MEDIA',
-    desc: 'Full-service branding & motion content studio for modern brands.',
-    thumb: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=700&q=80',
-    ig: '340K',
-    yt: '180K',
-    href: 'https://buchmedia.com',
-    tag: 'BRANDING',
-    accent: '#F5E6D3',
-  },
-  {
-    name: 'XSANDTOR',
-    desc: 'Ambient lo-fi producer blending hip-hop, soul, and raw energy.',
-    thumb: 'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=700&q=80',
-    ig: '670K',
-    yt: '1.1M',
-    href: 'https://youtube.com',
-    tag: 'MUSIC / BEATS',
+    id: 3, col: 0,
+    client: 'BUCH MEDIA',
+    category: 'BRANDING',
+    stats: { ig: '340K', yt: '180K' },
     accent: '#C8FF00',
+    aspect: 'portrait',
+    thumb: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=600&q=80',
+    src:   'https://assets.mixkit.co/videos/preview/mixkit-woman-working-with-a-laptop-at-a-coffee-shop-2518-large.mp4',
+  },
+  // Column 2
+  {
+    id: 4, col: 1,
+    client: 'EMILY BLACK',
+    category: 'VIDEO',
+    stats: { ig: '820K', yt: '500K' },
+    accent: '#FF3B3B',
+    aspect: 'landscape',
+    thumb: 'https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=600&q=80',
+    src:   'https://assets.mixkit.co/videos/preview/mixkit-aerial-view-of-a-beach-1089-large.mp4',
   },
   {
-    name: 'SOCIAL LAB',
-    desc: 'Reels & TikTok short-form content lab consistently pushing trends.',
-    thumb: 'https://images.unsplash.com/photo-1542435503-956c469947f6?w=700&q=80',
-    ig: '3.2M',
-    yt: '890K',
-    href: '#',
-    tag: 'SHORT-FORM',
-    accent: '#E63B2E',
+    id: 5, col: 1,
+    client: 'MEW STUDIO',
+    category: 'MOTION',
+    stats: { ig: '210K', yt: '90K' },
+    accent: '#FF6600',
+    aspect: 'portrait',
+    thumb: 'https://images.unsplash.com/photo-1536240478700-b869ad10fbe2?w=600&q=80',
+    src:   'https://assets.mixkit.co/videos/preview/mixkit-hands-of-a-man-typing-on-a-laptop-on-a-wooden-table-23609-large.mp4',
   },
   {
-    name: 'AD FACTORY',
-    desc: 'Paid ad creatives & hook testing built for D2C performance.',
-    thumb: 'https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=700&q=80',
-    ig: '210K',
-    yt: '420K',
-    href: '#',
-    tag: 'PAID ADS',
+    id: 6, col: 1,
+    client: 'YOUTUBE SERIES',
+    category: 'DIGITAL',
+    stats: { ig: '450K', yt: '1.1M' },
+    accent: '#00D9FF',
+    aspect: 'square',
+    thumb: 'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=800&q=80',
+    src:   'https://assets.mixkit.co/videos/preview/mixkit-set-of-plateaus-seen-from-the-heights-in-a-sunset-26070-large.mp4',
+  },
+  // Column 3
+  {
+    id: 7, col: 2,
+    client: 'CLASSDOJO',
+    category: 'DIGITAL',
+    stats: { ig: '1.1M', yt: '900K' },
+    accent: '#766dfa',
+    aspect: 'square',
+    thumb: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=600&q=80',
+    src:   'https://assets.mixkit.co/videos/preview/mixkit-aerial-view-of-a-beach-1089-large.mp4',
+  },
+  {
+    id: 8, col: 2,
+    client: 'PRIVATE CLIENT',
+    category: 'BRANDING',
+    stats: { ig: '200K', yt: '80K' },
+    accent: '#FF3B3B',
+    aspect: 'portrait',
+    thumb: 'https://images.unsplash.com/photo-1558655146-d09347e92766?w=600&q=80',
+    src:   'https://assets.mixkit.co/videos/preview/mixkit-woman-working-with-a-laptop-at-a-coffee-shop-2518-large.mp4',
+  },
+  {
+    id: 9, col: 2,
+    client: 'NEW COLLAB',
+    category: 'MOTION',
+    stats: { ig: '310K', yt: '140K' },
     accent: '#C8FF00',
+    aspect: 'landscape',
+    thumb: 'https://images.unsplash.com/photo-1627163439134-7a8c47e08208?w=600&q=80',
+    src:   'https://assets.mixkit.co/videos/preview/mixkit-hands-of-a-man-typing-on-a-laptop-on-a-wooden-table-23609-large.mp4',
   },
 ]
 
-// ── Inline platform icons ─────────────────────────────────────────────────
-function IgIcon() {
-  return (
-    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
-    </svg>
-  )
+/* Aspect ratio values */
+const ASPECTS = {
+  square:    '1 / 1',
+  portrait:  '1 / 1',
+  landscape: '1 / 1',
 }
 
-function YtIcon() {
-  return (
-    <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <path d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z" />
-    </svg>
-  )
+/* Category pill colors */
+const PILL = {
+  VIDEO:    { bg: 'rgba(0,0,0,0.55)',  text: '#fff'  },
+  BRANDING: { bg: '#C8FF00',            text: '#000'  },
+  MOTION:   { bg: '#FF6600',            text: '#fff'  },
+  DIGITAL:  { bg: '#766dfa',            text: '#fff'  },
 }
 
-// ── Single grid card ──────────────────────────────────────────────────────
-function ArtistCard({ artist }) {
+/* ================================================================
+   SINGLE CARD
+   ================================================================ */
+function Card({ project, delay = 0 }) {
+  const [hovered, setHovered] = useState(false)
+  const mediaRef = useRef(null)
+  const vidRef   = useRef(null)
+  const cardRef  = useRef(null)
+
+  const onEnter = () => {
+    setHovered(true)
+    vidRef.current?.play().catch(() => {})
+    gsap.to(mediaRef.current, { scale: 1.06, duration: 0.55, ease: 'power2.out' })
+  }
+  const onLeave = () => {
+    setHovered(false)
+    if (vidRef.current) { vidRef.current.pause(); vidRef.current.currentTime = 0 }
+    gsap.to(mediaRef.current, { scale: 1.0, duration: 0.55, ease: 'power2.out' })
+  }
+
+  const pill = PILL[project.category] || PILL.VIDEO
+
   return (
-    <a
-      href={artist.href}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="client-card cursor-target"
+    <div
+      ref={cardRef}
+      className="vault-card relative overflow-hidden cursor-target"
       style={{
-        display: 'block',
-        position: 'relative',
-        width: '100%',
-        aspectRatio: '1 / 1.05',
-        borderRadius: '10px',
-        overflow: 'hidden',
-        boxShadow: '0 8px 32px rgba(0,0,0,0.5)',
-        textDecoration: 'none',
-        transition: 'transform 0.4s cubic-bezier(0.34,1.4,0.64,1), box-shadow 0.4s ease',
+        aspectRatio: ASPECTS[project.aspect],
+        borderRadius: 10,
+        background: '#0e0e0e',
+        /* No border, no outline — completely free */
       }}
-      onMouseEnter={e => {
-        e.currentTarget.style.transform = 'translateY(-6px) scale(1.02)'
-        e.currentTarget.style.boxShadow = '0 24px 64px rgba(0,0,0,0.7)'
-      }}
-      onMouseLeave={e => {
-        e.currentTarget.style.transform = 'translateY(0) scale(1)'
-        e.currentTarget.style.boxShadow = '0 8px 32px rgba(0,0,0,0.5)'
-      }}
+      onMouseEnter={onEnter}
+      onMouseLeave={onLeave}
     >
-      {/* Full-bleed image */}
-      <img
-        src={artist.thumb}
-        alt={artist.name}
-        loading="lazy"
-        style={{
-          position: 'absolute',
-          top: 0, left: 0,
-          width: '100%', height: '100%',
-          objectFit: 'cover',
-          display: 'block',
-        }}
-      />
+      {/* Full-bleed media */}
+      <div ref={mediaRef} className="absolute inset-0" style={{ willChange: 'transform' }}>
+        <img
+          src={project.thumb} alt={project.client}
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{ opacity: hovered ? 0 : 1, transition: 'opacity 0.25s ease' }}
+        />
+        <video
+          ref={vidRef} src={project.src} muted loop playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{ opacity: hovered ? 1 : 0, transition: 'opacity 0.25s ease' }}
+        />
+      </div>
 
-      {/* Dark gradient from bottom */}
-      <div style={{
-        position: 'absolute', inset: 0,
-        background: 'linear-gradient(to bottom, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0.35) 45%, rgba(0,0,0,0.88) 100%)',
+      {/* Bottom gradient */}
+      <div className="absolute inset-0 pointer-events-none" style={{
+        background: 'linear-gradient(to bottom, transparent 25%, rgba(0,0,0,0.82) 100%)',
       }} />
 
-      {/* Tag — top left */}
-      <span
-        className="font-mono uppercase"
-        style={{
-          position: 'absolute',
-          top: '14px', left: '14px',
-          fontSize: '7px',
-          letterSpacing: '0.15em',
-          background: artist.accent,
-          color: '#0a0a0a',
-          padding: '4px 9px',
-          borderRadius: '3px',
-          fontWeight: 700,
-          lineHeight: 1,
-        }}
-      >
-        {artist.tag}
-      </span>
+      {/* Top-left: category pill */}
+      <div className="absolute top-3 left-3 z-10">
+        <span className="font-lemon-milk uppercase" style={{
+          fontSize: '0.56rem', letterSpacing: '0.1em', fontWeight: 700,
+          background: pill.bg, color: pill.text,
+          padding: '3px 9px', borderRadius: 20,
+          backdropFilter: 'blur(6px)',
+        }}>{project.category}</span>
+      </div>
 
-      {/* Arrow — top right */}
-      <div style={{
-        position: 'absolute',
-        top: '12px', right: '12px',
-        width: '28px', height: '28px',
-        borderRadius: '50%',
+      {/* Top-right: arrow */}
+      <div className="absolute top-3 right-3 z-10 flex items-center justify-center" style={{
+        width: 28, height: 28, borderRadius: '50%',
         background: 'rgba(255,255,255,0.1)',
         backdropFilter: 'blur(8px)',
         border: '1px solid rgba(255,255,255,0.15)',
-        display: 'flex', alignItems: 'center', justifyContent: 'center',
-      }}>
-        <span style={{ color: '#fff', fontSize: '13px', lineHeight: 1 }}>↗</span>
-      </div>
+        color: '#fff', fontSize: '0.75rem',
+        transform: hovered ? 'rotate(45deg)' : 'rotate(0deg)',
+        transition: 'transform 0.3s cubic-bezier(0.34,1.56,0.64,1)',
+      }}>↗</div>
 
-      {/* Bottom text */}
-      <div style={{
-        position: 'absolute',
-        bottom: 0, left: 0, right: 0,
-        padding: '0 16px 16px',
-      }}>
-        <h3
-          className="font-akira leading-none"
-          style={{
-            fontSize: 'clamp(0.9rem, 2.2vw, 1.6rem)',
-            color: '#fff',
-            letterSpacing: '-0.01em',
-            marginBottom: '8px',
-            textShadow: '0 1px 8px rgba(0,0,0,0.5)',
-          }}
-        >
-          {artist.name}
-        </h3>
+      {/* Bottom-right: accent dot */}
+      <div className="absolute bottom-3 right-3 z-10" style={{
+        width: 7, height: 7, borderRadius: '50%',
+        background: project.accent,
+        boxShadow: `0 0 10px ${project.accent}`,
+      }} />
 
-        {/* Stats */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-            <span style={{ color: 'rgba(255,255,255,0.55)' }}><IgIcon /></span>
-            <span className="font-mono" style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.05em', color: '#fff' }}>
-              {artist.ig}
+      {/* Bottom-left: client + stats */}
+      <div className="absolute bottom-0 left-0 right-10 z-10 px-3 pb-3">
+        <p className="font-akira font-black text-white leading-none mb-1" style={{
+          fontSize: 'clamp(0.75rem, 1.4vw, 1.05rem)',
+          letterSpacing: '-0.01em',
+          textShadow: '0 2px 10px rgba(0,0,0,0.7)',
+        }}>{project.client}</p>
+        <div className="flex items-center gap-2.5">
+          {project.stats?.ig && (
+            <span className="font-mono" style={{ fontSize: '0.56rem', color: 'rgba(255,255,255,0.55)', letterSpacing: '0.04em' }}>
+              <span style={{ opacity: 0.4 }}>IG </span>{project.stats.ig}
             </span>
-          </div>
-          <div style={{ width: '1px', height: '9px', background: 'rgba(255,255,255,0.2)' }} />
-          <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-            <span style={{ color: 'rgba(255,255,255,0.55)' }}><YtIcon /></span>
-            <span className="font-mono" style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.05em', color: '#fff' }}>
-              {artist.yt}
+          )}
+          {project.stats?.yt && (
+            <span className="font-mono" style={{ fontSize: '0.56rem', color: 'rgba(255,255,255,0.55)', letterSpacing: '0.04em' }}>
+              <span style={{ opacity: 0.4 }}>YT </span>{project.stats.yt}
             </span>
-          </div>
-          <div style={{ marginLeft: 'auto', width: '5px', height: '5px', borderRadius: '50%', background: artist.accent }} />
+          )}
         </div>
       </div>
-
-      {/* Accent bottom bar */}
-      <div style={{
-        position: 'absolute',
-        bottom: 0, left: 0, right: 0,
-        height: '2.5px',
-        background: artist.accent,
-      }} />
-    </a>
+    </div>
   )
 }
 
-// ── Main section ──────────────────────────────────────────────────────────
-export default function ClientCards() {
+/* ================================================================
+   VAULT GRID — main export
+   ─────────────────────────────────────────────────────────────────
+   Layout:
+     Left side:  "I HAVE WORKED WITH" heading — free, no box
+     Right side: TRUE masonry — 3 independent columns, each column
+                 is a flex column. Cards in each column stack vertically.
+                 Column 2 is offset down (margin-top) to create the
+                 Pinterest stagger effect.
+
+   No borders. No section boxes. Just floating content on dark bg.
+   ================================================================ */
+export default function VaultGrid() {
   const sectionRef = useRef(null)
 
-  const colA = ARTISTS.filter((_, i) => i % 2 === 0)  // left col: 0, 2, 4
-  const colB = ARTISTS.filter((_, i) => i % 2 !== 0)  // right col: 1, 3, 5 (shifted down)
+  // Split projects into 3 columns
+  const col0 = PROJECTS.filter(p => p.col === 0)
+  const col1 = PROJECTS.filter(p => p.col === 1)
+  const col2 = PROJECTS.filter(p => p.col === 2)
 
-  useGSAP(
-    () => {
-      gsap.from('.client-card', {
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top 80%',
-          toggleActions: 'play none none none',
-        },
-        y: 60,
-        opacity: 0,
-        duration: 0.85,
-        stagger: 0.1,
-        ease: 'expo.out',
-      })
-    },
-    { scope: sectionRef },
-  )
+  // Refs for each column so we can target them for parallax
+  const colRef0 = useRef(null)
+  const colRef1 = useRef(null)
+  const colRef2 = useRef(null)
+
+  useGSAP(() => {
+    // ── Entrance animations ──
+    gsap.from('.vault-heading', {
+      scrollTrigger: { trigger: sectionRef.current, start: 'top 72%', toggleActions: 'play none none none', fastScrollEnd: true },
+      y: 40, opacity: 0, duration: 1.0, ease: 'expo.out', force3D: true,
+    })
+    gsap.from('.col-0 .vault-card', {
+      scrollTrigger: { trigger: '.vault-masonry', start: 'top 80%', toggleActions: 'play none none none', fastScrollEnd: true },
+      y: 60, opacity: 0, duration: 0.8, stagger: 0.1, ease: 'expo.out', force3D: true,
+    })
+    gsap.from('.col-1 .vault-card', {
+      scrollTrigger: { trigger: '.vault-masonry', start: 'top 80%', toggleActions: 'play none none none', fastScrollEnd: true },
+      y: 60, opacity: 0, duration: 0.8, stagger: 0.1, ease: 'expo.out', force3D: true, delay: 0.12,
+    })
+    gsap.from('.col-2 .vault-card', {
+      scrollTrigger: { trigger: '.vault-masonry', start: 'top 80%', toggleActions: 'play none none none', fastScrollEnd: true },
+      y: 60, opacity: 0, duration: 0.8, stagger: 0.1, ease: 'expo.out', force3D: true, delay: 0.24,
+    })
+
+    /*
+      ── PARALLAX SCROLL SPEEDS ──
+      Each column moves at a different Y speed as you scroll.
+      Negative yPercent = column moves UP faster than scroll (feels faster)
+      Positive yPercent = column moves UP slower than scroll (feels slower)
+
+      col-0: fastest  (moves up most)  → -12%
+      col-1: medium   (normal speed)   →  0% (no offset, baseline)
+      col-2: slowest  (moves up least) → +12% (lags behind)
+
+      scrub: true = tied to scroll position, perfectly smooth with Lenis.
+      The start/end range covers the whole section so parallax runs
+      from when the section enters to when it leaves.
+
+      To change speeds: adjust the yPercent values.
+        More negative = column scrolls faster
+        More positive = column scrolls slower / drifts behind
+    */
+    gsap.to(colRef0.current, {
+      yPercent: -10,   // ← col 1 speed: raise this number to go faster
+      ease: 'none',
+      scrollTrigger: {
+        trigger: sectionRef.current,
+        start: 'top bottom',
+        end: 'bottom top',
+        scrub: 1.2,    // scrub = how closely it follows scroll (lower = more lag)
+      },
+    })
+
+    // col-1 intentionally has NO parallax — it's the baseline speed
+    // (regular document flow, moves at normal scroll speed)
+
+    gsap.to(colRef2.current, {
+      yPercent: 10,    // ← col 3 speed: raise this to slow it down more
+      ease: 'none',
+      scrollTrigger: {
+        trigger: sectionRef.current,
+        start: 'top bottom',
+        end: 'bottom top',
+        scrub: 1.2,
+      },
+    })
+
+  }, { scope: sectionRef })
 
   return (
-    <section
-      ref={sectionRef}
-      className="w-full bg-ink"
-      style={{ position: 'relative' }}
-    >
-      {/* Top label */}
-      <div
-        className="px-5 sm:px-8 md:px-14 pt-14 sm:pt-16 pb-4 flex items-center justify-between"
-        style={{ borderBottom: '1px solid rgba(245,230,211,0.08)' }}
-      >
-        <p className="font-mono text-[10px] tracking-widest uppercase" style={{ color: 'rgba(245,230,211,0.35)' }}>
+    /*
+      NO outer borders. NO section box. The section just lives
+      on the dark background — content floats freely.
+    */
+    <section ref={sectionRef} className="w-full bg-ink">
+
+      {/* ── Thin top label bar — just text, no box ── */}
+      <div className="flex items-center justify-between px-5 sm:px-10 md:px-16 pt-16 sm:pt-24 pb-10 sm:pb-14">
+        <p className="font-mono text-[9px] tracking-widest uppercase" style={{ color: 'rgba(245,230,211,0.3)' }}>
           ◆&nbsp;&nbsp;WORKED WITH
         </p>
-        <p className="font-mono text-[10px] tracking-widest uppercase" style={{ color: 'rgba(245,230,211,0.35)' }}>
-          0{ARTISTS.length} CLIENTS
+        <p className="font-mono text-[9px] tracking-widest uppercase" style={{ color: 'rgba(245,230,211,0.3)' }}>
+          0{PROJECTS.length} CLIENTS
         </p>
       </div>
 
-      {/* ── Two-panel layout (stacks on mobile) ── */}
-      <div className="flex flex-col md:flex-row" style={{ alignItems: 'flex-start' }}>
+      {/* ── Main layout: heading left + masonry right ── */}
+      <div className="flex flex-col md:flex-row gap-0 px-5 sm:px-10 md:px-16 pb-20 sm:pb-28">
 
-        {/* ── LEFT: info panel — full-width on mobile, sticky on md+ ── */}
-        <div
-          className="w-full md:w-[45%] lg:w-[40%] md:sticky md:top-0 md:h-screen
-                     flex flex-col justify-center
-                     px-5 sm:px-8 md:px-10 lg:px-14
-                     py-10 md:py-0
-                     border-b md:border-b-0 md:border-r border-bone/[0.08]
-                     overflow-hidden"
-        >
-          {/* Ghost decoration - only visible md+ */}
-          <p
-            className="font-aerosoldier pointer-events-none select-none absolute hidden md:block"
-            style={{
-              bottom: '40px', left: '40px',
-              fontSize: '6rem',
-              color: 'rgba(200,255,0,0.035)',
-              transform: 'rotate(-8deg)',
-              lineHeight: 1,
-            }}
-          >aadi</p>
+        {/* ── LEFT: floating heading, no box ── */}
+        <div className="vault-heading md:w-[36%] md:sticky md:top-20 md:self-start pr-0 md:pr-12 mb-12 md:mb-0">
 
-          {/* Label */}
-          <p
-            className="font-mono uppercase"
-            style={{
-              fontSize: '8px',
-              letterSpacing: '0.18em',
-              color: 'rgba(245,230,211,0.3)',
-              marginBottom: '20px',
-            }}
-          >
-            ◆ &nbsp;MY RECENT CLIENTS
+          <h2 className="font-moon-get font-black text-bone leading-none mb-4" style={{
+            fontSize: 'clamp(3rem, 5.5vw, 5.5rem)',
+            letterSpacing: '-0.025em',
+            lineHeight: 0.9,
+          }}>
+            I HAVE WORKED WITH          </h2>
+
+          <p className="font-decipher mb-6" style={{
+            fontSize: 'clamp(1.5rem, 2.8vw, 2.4rem)',
+            color: '#b30f63ff',
+            transform: 'rotate(-2deg)',
+            display: 'inline-block',
+            lineHeight: 1,
+          }}>
+            worked with best -
           </p>
 
-          {/* Big graffiti title */}
-          <div className="cursor-target" style={{ marginBottom: '20px' }}>
-            <div
-              className="font-street-wars"
-              style={{
-                fontSize: 'clamp(2rem, 5vw, 4rem)',
-                color: '#cfe240',
-                lineHeight: 0.9,
-                transform: 'rotate(-1.5deg)',
-                display: 'inline-block',
-                marginBottom: '4px',
-              }}
-            >The artists </div>
-            <br />
-            <div
-              className="font-moon-get"
-              style={{
-                fontSize: 'clamp(1.7rem, 4vw, 3.5rem)',
-                color: '#F5E6D3',
-                lineHeight: 0.95,
-                letterSpacing: '-0.02em',
-              }}
-            >I HAVE </div>
-            <br />
-            <div
-              className="font-moon-get"
-              style={{
-                fontSize: 'clamp(1.7rem, 4vw, 3.5rem)',
-                color: '#F5E6D3',
-                lineHeight: 0.95,
-                letterSpacing: '-0.02em',
-              }}
-            >WORKED WITH  </div>
-            <br />
-            <div
-              className="font-decipher"
-              style={{
-                fontSize: 'clamp(1.3rem, 3vw, 2.6rem)',
-                color: '#8b2255',
-                lineHeight: 1,
-                transform: 'rotate(-2deg)',
-                display: 'inline-block',
-                marginTop: '6px',
-              }}
-            >worked with best~</div>
-          </div>
-
-          {/* Paragraph */}
-          <p
-            className="font-mono uppercase leading-relaxed"
-            style={{
-              fontSize: '8.5px',
-              letterSpacing: '0.05em',
-              color: 'rgba(245,230,211,0.45)',
-              maxWidth: '320px',
-              marginBottom: '24px',
-            }}
-          >
+          <p className="font-mono uppercase leading-loose mb-8" style={{
+            fontSize: '9px', letterSpacing: '0.07em',
+            color: 'rgba(245,230,211,0.35)',
+            maxWidth: 260,
+            display: 'block',
+          }}>
             Every creator here trusted me to make their content hit different.
-            From hooks to full edits, I&apos;ve built their audience, their brand, and their identity.
+            From hooks to full edits, I&apos;ve built their audience, their brand,
+            and their identity.
           </p>
 
-          {/* What I delivered list */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-            {['Long-form editing', 'Brand identity', 'Reels & short-form', 'Retention strategy', 'Hook engineering'].map(item => (
-              <div key={item} style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                <div style={{ width: '5px', height: '5px', borderRadius: '50%', background: '#C8FF00', flexShrink: 0 }} />
-                <span
-                  className="font-mono uppercase"
-                  style={{ fontSize: '8px', letterSpacing: '0.1em', color: 'rgba(245,230,211,0.45)' }}
-                >
-                  {item}
-                </span>
-              </div>
+          <ul className="flex flex-col gap-2.5">
+            {['LONG-FORM EDITING', 'BRAND IDENTITY', 'REELS & SHORT-FORM', 'RETENTION STRATEGY'].map(s => (
+              <li key={s} className="flex items-center gap-2.5 font-mono uppercase"
+                style={{ fontSize: '9px', letterSpacing: '0.08em', color: 'rgba(245,230,211,0.45)' }}>
+                <span style={{ width: 5, height: 5, borderRadius: '50%', background: '#C8FF00', flexShrink: 0 }} />
+                {s}
+              </li>
             ))}
-          </div>
+          </ul>
 
-          {/* Red accent line */}
-          <div style={{
-            marginTop: '32px',
-            height: '2px', width: '48px',
-            background: '#E63B2E',
-            borderRadius: '2px',
-            transform: 'rotate(-1deg)',
-          }} />
+          {/* Ghost decoration behind text */}
+          <p className="font-aerosoldier select-none pointer-events-none hidden md:block" style={{
+            position: 'absolute',
+            bottom: -40, left: 0,
+            fontSize: '7rem',
+            color: 'rgba(200, 255, 0, 0.1)',
+            transform: 'rotate(-10deg)',
+            lineHeight: 1,
+          }}>work</p>
         </div>
 
-        {/* ── RIGHT: staggered 2-col grid ── */}
+        {/* ── RIGHT: true masonry — 3 independent flex columns ── */}
         <div
-          className="flex-1 px-5 sm:px-8 md:px-10"
-          style={{
-            padding: 'clamp(32px, 5vw, 60px) clamp(16px, 4vw, 40px) clamp(40px, 6vw, 80px)',
-            display: 'flex',
-            gap: 'clamp(8px, 2vw, 14px)',
-            alignItems: 'flex-start',
-          }}
+          className="vault-masonry md:flex-1 flex gap-3 items-start"
+          style={{ gap: 'clamp(8px, 1vw, 12px)' }}
         >
-          {/* Column A — starts at top */}
-          <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 'clamp(8px, 2vw, 14px)' }}>
-            {colA.map(a => <ArtistCard key={a.name} artist={a} />)}
+
+          {/* Column 1 — fastest parallax (moves up more) */}
+          <div ref={colRef0} className="col-0 flex-1 flex flex-col" style={{ gap: 'clamp(8px, 1vw, 12px)', willChange: 'transform' }}>
+            {col0.map(p => <Card key={p.id} project={p} />)}
           </div>
 
-          {/* Column B — offset down for stagger effect */}
-          <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 'clamp(8px, 2vw, 14px)', marginTop: 'clamp(36px, 6vw, 72px)' }}>
-            {colB.map(a => <ArtistCard key={a.name} artist={a} />)}
+          {/* Column 2 — baseline speed (no parallax offset) */}
+          <div ref={colRef1} className="col-1 flex-1 flex flex-col" style={{
+            gap: 'clamp(8px, 1vw, 12px)',
+            marginTop: 'clamp(40px, 6vw, 80px)',
+            willChange: 'transform',
+          }}>
+            {col1.map(p => <Card key={p.id} project={p} />)}
           </div>
+
+          {/* Column 3 — slowest parallax (drifts behind) */}
+          <div ref={colRef2} className="col-2 flex-1 flex flex-col" style={{
+            gap: 'clamp(8px, 1vw, 12px)',
+            marginTop: 'clamp(20px, 3vw, 40px)',
+            willChange: 'transform',
+          }}>
+            {col2.map(p => <Card key={p.id} project={p} />)}
+          </div>
+
         </div>
-
       </div>
 
-      {/* Footer CTA */}
-      <div
-        className="px-5 sm:px-8 md:px-14 py-8 flex items-center gap-6"
-        style={{ borderTop: '1px solid rgba(245,230,211,0.08)' }}
-      >
-        <div className="h-0.5 w-10 bg-brutal-red shrink-0" />
-        <a
-          href="mailto:contact@aaddi.com"
-          className="font-mono text-[10px] tracking-widest text-bone/50 hover:text-bone uppercase transition-colors duration-300 cursor-target"
-        >
-          WANT RESULTS LIKE THESE? LET&apos;S TALK →
-        </a>
-      </div>
+
 
     </section>
   )

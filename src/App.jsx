@@ -11,7 +11,7 @@ import ClientCards from './components/ClientCards'
 import Footer from './components/Footer'
 import IDCard from './components/IDCard'
 import TargetCursor from './components/TargetCursor'
-import MinecraftCursor from './components/MineCraftCursor'
+import MinecraftCursor from './components/MCCursor'
 
 gsap.registerPlugin(ScrollTrigger)
 
