@@ -13,7 +13,7 @@ import IDCard from './components/IDCard'
 import TargetCursor from './components/TargetCursor'
 import MinecraftCursor from './components/MCCursor'
 import Connect from './components/Connect'
-import Preloader from './components/PreLoader'
+import Preloader from './components/Preloader'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -34,20 +34,11 @@ function Home({ onNavigate }) {
 function App() {
   const [currentPage, setCurrentPage] = useState('home');
 
+  // Scroll functionality is handled by the ReactLenis wrapper in Layout.jsx
   useEffect(() => {
-    const lenis = new Lenis({ lerp: 0.07 })
-
-    lenis.on('scroll', ScrollTrigger.update)
-
-    const tickerFn = (time) => lenis.raf(time * 1000)
-    gsap.ticker.add(tickerFn)
-    gsap.ticker.lagSmoothing(0)
-
-    return () => {
-      lenis.destroy()
-      gsap.ticker.remove(tickerFn)
-    }
-  }, [])
+    // Refresh ScrollTrigger when layout changes
+    ScrollTrigger.refresh();
+  }, [currentPage]);
 
   return (
     <>
