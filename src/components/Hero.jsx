@@ -235,13 +235,33 @@ function Hero({ onNavigate }) {
           </div>
         </div>
         <div ref={taglineRef} className="absolute" style={{ bottom: '20%', left: '50%', opacity: 0 }} />
+
+        {/* ── NAV: aadi2005 center, Discord + email left, NO connect button ── */}
         <nav className="absolute top-5 left-5 right-5 flex items-center justify-between z-50">
           <div className="hidden md:flex flex-col gap-0.5">
-            {['Discord-addi2005', 'email'].map(l => (<a key={l} href="#" className="text-sm font-lemon-milk text-neutral-500 hover:text-bone cursor-target transition-colors">{l}</a>))}
+            <a
+              href="https://discord.com/users/aadi2005"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm font-lemon-milk text-neutral-500 hover:text-bone transition-colors cursor-target"
+            >
+              Discord-aadi2005
+            </a>
+            <a
+              href="mailto:edit@aadi2005.com"
+              className="text-sm font-lemon-milk text-neutral-500 hover:text-bone transition-colors cursor-target"
+            >
+              email-edit@aadi2005.com
+            </a>
           </div>
-          <div className="font-don-graffiti text-3xl md:text-4xl cursor-target font-extrabold text-cream tracking-tight mx-auto md:mx-0">aadi2005</div>
-          <button onClick={() => onNavigate('connect')} className="hidden md:block font-lemon-milk text-sm text-white bg-brutal-red px-5 py-2 rounded hover:opacity-90 transition-opacity cursor-target">Let&apos;s Connect</button>
+          {/* Brand — center on desktop, full width on mobile */}
+          <div className="font-don-graffiti text-3xl md:text-4xl cursor-target font-extrabold text-cream tracking-tight mx-auto md:mx-0">
+            aadi2005
+          </div>
+          {/* Right side — empty spacer so brand stays centered on desktop */}
+          <div className="hidden md:block" style={{ width: 120 }} />
         </nav>
+
         <div ref={headingRef} className="absolute inset-x-0 flex flex-col items-center justify-center z-10 px-4" style={{ top: CONFIG.heading_top.desktop }}>
           <div className="overflow-hidden">
             <h1 className={`hero-line font-magazine text-bone leading-none tracking-tight text-center ${CONFIG.heading.fontSize}`}>
@@ -260,7 +280,7 @@ function Hero({ onNavigate }) {
           <span className="font-decipher absolute" style={{ bottom: 14, left: 16, fontSize: '1.15rem', color: 'rgba(229, 255, 0, 0.75)', transform: 'rotate(-2deg)', pointerEvents: 'none' }}>~show that hits different~</span>
           <span className="font-mono absolute" style={{ top: 12, left: 14, fontSize: 9, color: 'rgba(255,255,255,0.5)', fontWeight: 700 }}>01 / SHOWREEL</span>
         </div>
-        <div className="absolute inset-0 pointer-events-none z-[5]" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 256 256\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noise\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.9\' numOctaves=\'4\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noise)\' opacity=\'0.04\'/%3E%3C/svg%3E")', opacity: 0.45 }} />
+        <div className="absolute inset-0 pointer-events-none z-[5]" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E")`, opacity: 0.45 }} />
       </div>
     </section>
   )
