@@ -355,9 +355,9 @@ export default function Services({ onNavigate }) {
             <span className="font-akira" style={{ fontSize: 'clamp(2.6rem, 4.2vw, 3.8rem)', color: '#F5E6D3', lineHeight: 0.95, letterSpacing: '-0.02em' }}>
               good at
             </span>
-            <span className="font-decipher" style={{ fontSize: 'clamp(1.8rem, 3.2vw, 3rem)', color: '#C8FF00', lineHeight: 1, transform: 'rotate(-2deg)', display: 'inline-block', marginTop: 6 }}>
+            {/* <span className="font-decipher" style={{ fontSize: 'clamp(1.8rem, 3.2vw, 3rem)', color: '#C8FF00', lineHeight: 1, transform: 'rotate(-2deg)', display: 'inline-block', marginTop: 6 }}>
               ~everything~
-            </span>
+            </span> */}
           </div>
 
           <div>

@@ -5,7 +5,6 @@ import { useGSAP } from '@gsap/react'
 import Shuffle from './Shuffle'
 import IDCard from './IDCard'
 import setupImage2 from '../assets/setup2.jpg'
-import page3 from '../assets/page3.jpeg'
 
 gsap.registerPlugin(ScrollTrigger, useGSAP)
 
@@ -84,9 +83,9 @@ const PROJECTS = [
     desc: [
       "I'm capable of scanning through long recordings to uncover the most engaging moments. The clips that capture attention, spark curiosity, and keep viewers watching. By identifying these \"hidden gems\", I turn hours of raw footage into concise, compelling highlights.",
     ],
-    type: 'image',
-    thumb: page3,
-    src: page3,
+    type: 'video',
+    thumb: 'https://images.unsplash.com/photo-1492619375914-88005aa9e8fb?w=600&q=80',
+    src: 'https://assets.mixkit.co/videos/preview/mixkit-hands-of-a-man-typing-on-a-laptop-on-a-wooden-table-23609-large.mp4',
     accent: '#FFD700',
     element: 'waveform',
   },
@@ -223,11 +222,11 @@ function LargeOrbitElement({ accent = '#00D9FF' }) {
   const LABEL_R = 230 // label centers pushed further out from ring
 
   const nodes = [
-    { label: 'YOU SEND FOOTAGE',   sub: 'videos',  angle: -90  },
+    { label: 'YOU SEND',   sub: 'footage',  angle: -90  },
     { label: 'I EDIT',     sub: 'the cut',  angle: -10  },
-    { label: 'I DELIVER',  sub: 'on time',  angle: 80   },
-    { label: 'YOU UPLOAD', sub: 'it live',  angle: 150  },
-    { label: 'YOU GET RESULTS',    sub: 'awesome',  angle: -150 },
+    { label: 'I DELIVER',  sub: 'on time',  angle: 70   },
+    { label: 'YOU UPLOAD', sub: 'it live',  angle: 160  },
+    { label: 'YOU GET',    sub: 'results',  angle: -170 },
   ]
 
   // Full circle path for animateMotion arrows (clockwise)
@@ -274,7 +273,7 @@ function LargeOrbitElement({ accent = '#00D9FF' }) {
           fill="rgba(245,230,211,0.92)"
         >SMOOTH</text>
         <text x={C} y={C + 14} textAnchor="middle"
-          fontFamily="'lemon-milk','Helvetica Neue',sans-serif"
+          fontFamily="'Moon Get','Helvetica Neue',sans-serif"
           fontSize="17" fontWeight="900" letterSpacing="1"
           fill={accent}
         >AF</text>
@@ -603,14 +602,20 @@ function ProjectCard({ project, index, total }) {
         {!isMobile && (
           <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 0.9fr) minmax(0, 1.1fr)', height: '100%' }}>
             {/* LEFT */}
-            <div style={{ padding: `${py} ${px}`, display: 'flex', flexDirection: 'column', gap, borderRight: '1px solid rgba(255,255,255,0.05)' }}>
+            <div style={{
+              padding: `${py} ${px}`,
+              display: 'flex', flexDirection: 'column', gap,
+              borderRight: '1px solid rgba(255,255,255,0.05)',
+              // Card 1 only: center content vertically on xl/2xl
+              justifyContent: (index === 0 && (bp === 'desktop' || bp === 'wide')) ? 'center' : 'flex-start',
+            }}>
               <div className="ca flex flex-col gap-2">
                 <span className="font-aerosoldier cursor-target" style={{ fontSize: CONFIG.tagline.fontSize[bp], color: `${project.accent}90`, transform: 'rotate(-1.5deg)', display: 'inline-block' }}>{project.tagline}</span>
                 <Shuffle text={project.title} tag="h2" shuffleDirection="right" duration={0.4} animationMode="evenodd" shuffleTimes={1} ease="power3.out" stagger={0.025} threshold={0.1} triggerOnce triggerOnHover respectReducedMotion loop={false} className="font-akira text-bone tracking-tight cursor-target" style={{ fontSize: CONFIG.title.fontSize[bp], lineHeight: 1.02, letterSpacing: '-0.01em', display: 'block', textAlign: 'left' }} />
                 <div style={{ width: 'clamp(36px,4vw,52px)', height: 1.5, background: `linear-gradient(90deg,${project.accent},transparent)`, borderRadius: 2 }} />
               </div>
               <div className="ca">{renderDescription()}</div>
-              <div className="ca mt-auto overflow-hidden" style={{ transform: `scale(${CONFIG.element.scale[bp]})`, transformOrigin: 'left bottom' }}>
+              <div className="ca overflow-hidden" style={{ transform: `scale(${CONFIG.element.scale[bp]})`, transformOrigin: 'left bottom', marginTop: (index === 0 && (bp === 'desktop' || bp === 'wide')) ? 0 : 'auto' }}>
                 <ProjectElement type={project.element} />
               </div>
             </div>
