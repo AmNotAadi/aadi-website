@@ -11,6 +11,7 @@ import ClientCards from './components/ClientCards'
 import Footer from './components/Footer'
 import IDCard from './components/IDCard'
 import TargetCursor from './components/TargetCursor'
+import MinecraftCursor from './components/MineCraftCursor'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -41,6 +42,7 @@ function App() {
       <Hero />
       {/* <IDCard/> */}
       <VaultGrid />
+      <MinecraftCursor skinUrl="https://minotar.net/skin/Eystreem" />
       <Services />
       <StatsMarquee />
       <ClientCards />

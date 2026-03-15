@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState } from 'react'
+﻿import { useRef, useEffect, useState } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGSAP } from '@gsap/react'
@@ -617,7 +617,7 @@ export default function VaultGrid() {
   }, { scope: introRef })
 
   return (
-    <div className="relative bg-ink">
+    <div id="vault-section" className="relative bg-ink">
 
       {/* ── INTRO ── */}
       <section ref={introRef} className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden px-6" style={{ zIndex: 1 }}>
