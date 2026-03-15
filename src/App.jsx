@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import Lenis from 'lenis'
+
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Layout from './components/Layout'
@@ -13,7 +13,7 @@ import IDCard from './components/IDCard'
 import TargetCursor from './components/TargetCursor'
 import MinecraftCursor from './components/MCCursor'
 import Connect from './components/Connect'
-import Preloader from './components/Preloader'
+import Preloader from './components/PreLoader'
 
 gsap.registerPlugin(ScrollTrigger)
 

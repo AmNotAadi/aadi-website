@@ -6,12 +6,15 @@ import tailwindcss from '@tailwindcss/vite'
 export default defineConfig({
   plugins: [react(), tailwindcss()],
   build: {
-    chunkSizeWarningLimit: 1000,
+    chunkSizeWarningLimit: 5000,
     rollupOptions: {
       output: {
-        manualChunks: {
-          three: ['three'],
-          gsap: ['gsap', '@gsap/react']
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            if (id.includes('three')) return 'three';
+            if (id.includes('gsap')) return 'gsap';
+            return 'vendor';
+          }
         }
       }
     }
