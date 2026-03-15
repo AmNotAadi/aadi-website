@@ -568,7 +568,7 @@ function ProjectCard({ project, index, total }) {
         borderRadius: br,
         height: `calc(100vh - ${CONFIG.page.paddingX[bp]} * 2)`,
         maxHeight: '90vh',
-        overflow: 'hidden',
+        overflow: 'visible',  // allow index numbers to overflow the card edge
         boxShadow: index > 0 ? '0 -8px 32px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.06)' : '0 0 0 1px rgba(255,255,255,0.06)',
       }}>
         {/* Accent glow */}
@@ -587,7 +587,7 @@ function ProjectCard({ project, index, total }) {
             </div>
             <div className="ca relative cursor-target" style={{ height: index === 0 ? 'auto' : index === 3 ? 'auto' : CONFIG.media.height[bp], minHeight: index === 0 ? '220px' : 'auto', borderRadius: CONFIG.media.borderRadius }}>
               {renderMedia(true)}
-              <div className="absolute font-akira font-black pointer-events-none select-none" style={{ top: '-10%', right: '-4%', fontSize: CONFIG.indexNum.fontSize[bp], color: project.accent, lineHeight: 0.85, textShadow: `0 0 50px ${project.accent}80`, zIndex: 100 }}>
+              <div className="absolute font-akira font-black pointer-events-none select-none" style={{ top: '4%', right: '2%', fontSize: CONFIG.indexNum.fontSize[bp], color: project.accent, lineHeight: 0.85, textShadow: `0 0 50px ${project.accent}80`, zIndex: 100, opacity: 0.9 }}>
                 {String(index + 1).padStart(2, '0')}
               </div>
             </div>
@@ -623,7 +623,7 @@ function ProjectCard({ project, index, total }) {
             <div style={{ padding: `${py} ${px} ${py} 0`, display: 'flex', alignItems: 'stretch' }}>
               <div className="ca relative w-full cursor-target" style={{ borderRadius: CONFIG.media.borderRadius, minHeight: 'clamp(320px, 35vw, 750px)' }}>
                 {renderMedia(false)}
-                <div className="absolute font-mono font-black pointer-events-none select-none cursor-target" style={{ top: '-12%', right: '-6%', fontSize: CONFIG.indexNum.fontSize[bp], color: project.accent, lineHeight: 0.85, textShadow: `0 0 70px ${project.accent}90`, zIndex: 100 }}>
+                <div className="absolute font-mono font-black pointer-events-none select-none cursor-target" style={{ top: '4%', right: '3%', fontSize: CONFIG.indexNum.fontSize[bp], color: project.accent, lineHeight: 0.85, textShadow: `0 0 70px ${project.accent}90`, zIndex: 100, opacity: 0.9 }}>
                   {String(index + 1).padStart(2, '0')}
                 </div>
               </div>
