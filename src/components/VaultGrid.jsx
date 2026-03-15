@@ -3,70 +3,44 @@ import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGSAP } from '@gsap/react'
 import Shuffle from './Shuffle'
-import PixelCard from './PixelCard'
 import IDCard from './IDCard'
 import setupImage2 from '../assets/setup2.jpg'
 
 gsap.registerPlugin(ScrollTrigger, useGSAP)
 
 /* ================================================================
-   ░░ CONFIG — CHANGE ALL SIZES HERE, NOWHERE ELSE ░░
-   ================================================================
-   Everything visual is controlled from here.
-   Breakpoints: mobile < 768 | tablet 768–1023 | desktop 1024–1535 | wide 1536+
+   CONFIG
    ================================================================ */
 const CONFIG = {
-
-  /* ── Outer page padding (space around the card) ── */
   page: {
     paddingX: { mobile: '1rem', tablet: '2rem', desktop: '4rem', wide: '6rem' },
     paddingY: { mobile: '1.5rem', tablet: '2.5rem', desktop: '4rem', wide: '12rem' },
     gap: { mobile: '1.5rem', tablet: '2rem', desktop: '3rem', wide: '5rem' },
   },
-
-  /* ── Card inner padding ── */
   card: {
     paddingX: { mobile: '1.25rem', tablet: '2rem', desktop: '1.5rem', wide: '2.5rem' },
     paddingY: { mobile: '1.5rem', tablet: '2.5rem', desktop: '2.5rem', wide: '4rem' },
     borderRadius: { mobile: 16, tablet: 28, desktop: 32, wide: 40 },
     gap: { mobile: '1.25rem', tablet: '2rem', desktop: '2.5rem', wide: '3.5rem' },
   },
-
-  /* ── Title font size ── */
   title: {
     fontSize: { mobile: '1.7rem', tablet: '2.4rem', desktop: '3rem', wide: '4rem' },
   },
-
-  /* ── Index number (big accent number, top-right corner) ── */
   indexNum: {
     fontSize: { mobile: '4rem', tablet: '6rem', desktop: '8rem', wide: '10rem' },
   },
-
-  /* ── Tagline ── */
   tagline: {
     fontSize: { mobile: '0.82rem', tablet: '0.9rem', desktop: '1rem', wide: '1.1rem' },
   },
-
-  /* ── Description typewriter ── */
   desc: {
     fontSize: { mobile: '0.82rem', tablet: '0.88rem', desktop: '0.92rem', wide: '1rem' },
     lineHeight: 1.75,
-    speed: 16, // ms per char — lower = faster typing
+    speed: 16,
   },
-
-  /* ── Media height inside the card ── */
   media: {
-    // On mobile, media is a horizontal strip. On tablet+, right side of card.
-    height: {
-      mobile: '200px',
-      tablet: '100%',   // fills right column height
-      desktop: '100%',
-      wide: '100%',
-    },
+    height: { mobile: '200px', tablet: '100%', desktop: '100%', wide: '100%' },
     borderRadius: 12,
   },
-
-  /* ── Animated element scale per breakpoint ── */
   element: {
     scale: { mobile: 0.7, tablet: 0.85, desktop: 1, wide: 1.3 },
   },
@@ -74,8 +48,6 @@ const CONFIG = {
 
 /* ================================================================
    PROJECTS DATA
-   desc: string OR string[] — joined into one typewriter string
-   element: 'orbit' | 'timeline' | 'waveform' | 'floatingicons' | 'stats'
    ================================================================ */
 const PROJECTS = [
   {
@@ -89,49 +61,33 @@ const PROJECTS = [
     thumb: 'https://images.unsplash.com/photo-1536240478700-b869ad10fbe2?w=800&q=80',
     src: 'https://assets.mixkit.co/videos/preview/mixkit-set-of-plateaus-seen-from-the-heights-in-a-sunset-26070-large.mp4',
     accent: '#C8FF00',
-    element: 'orbit',
+    element: 'none',
   },
   {
     id: 2,
     title: 'THE SETUP',
     tagline: 'Social Excellence',
     desc: [
-      'Powered by a a Ryzen 7 Series CPU, RTX 50 Series GPU and 32 Gigabytes of RAM, my workstation is capable of handling large projects, high-resolution footage, and fast turnaround times.',
-
+      'Powered by a Ryzen 7 Series CPU, RTX 50 Series GPU and 32 Gigabytes of RAM, my workstation is capable of handling large projects, high-resolution footage, and fast turnaround times.',
     ],
     type: 'image',
     thumb: setupImage2,
     src: setupImage2,
     accent: '#FF6B6B',
-    element: 'timeline',
+    element: 'techlogos',   // ← changed: AMD + Ryzen + NVIDIA logos
   },
   {
     id: 3,
     title: 'TREASURE HUNTING',
     tagline: 'Long-Form Mastery',
     desc: [
-      'I’m capable of scanning through long recordings to uncover the most engaging moments. The clips that capture attention, spark curiosity, and keep viewers watching. By identifying these “hidden gems”, I turn hours of raw footage into concise, compelling highlights.',
-
+      "I'm capable of scanning through long recordings to uncover the most engaging moments. The clips that capture attention, spark curiosity, and keep viewers watching. By identifying these \"hidden gems\", I turn hours of raw footage into concise, compelling highlights.",
     ],
     type: 'video',
     thumb: 'https://images.unsplash.com/photo-1492619375914-88005aa9e8fb?w=600&q=80',
     src: 'https://assets.mixkit.co/videos/preview/mixkit-hands-of-a-man-typing-on-a-laptop-on-a-wooden-table-23609-large.mp4',
     accent: '#FFD700',
     element: 'waveform',
-  },
-  {
-    id: 4,
-    title: 'NEVER LET GO',
-    tagline: 'Full Brand Suite',
-    desc: [
-      'Every cut, subtitle, and pacing decision is made to maintain attention. I focus on storytelling, rhythm, and visual clarity so viewers stay engaged from start to finish.',
-
-    ],
-    type: 'video',
-    thumb: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=600&q=80',
-    src: 'https://assets.mixkit.co/videos/preview/mixkit-woman-working-with-a-laptop-at-a-coffee-shop-2518-large.mp4',
-    accent: '#FF00FF',
-    element: 'floatingicons',
   },
   {
     id: 5,
@@ -146,7 +102,7 @@ const PROJECTS = [
     thumb: 'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=800&q=80',
     src: 'https://assets.mixkit.co/videos/preview/mixkit-young-woman-talking-on-a-video-call-at-home-43832-large.mp4',
     accent: '#00D9FF',
-    element: 'stats',
+    element: 'projectflow',  // ← changed: the timeline animation from image 2
   },
 ]
 
@@ -185,11 +141,8 @@ function Typewriter({ text, bp, delay = 0 }) {
     const st = ScrollTrigger.create({
       trigger: ref.current, start: 'top 90%', once: true,
       onEnter: () => {
-        if (delay > 0) {
-          setTimeout(() => setStarted(true), delay)
-        } else {
-          setStarted(true)
-        }
+        if (delay > 0) setTimeout(() => setStarted(true), delay)
+        else setStarted(true)
       },
     })
     return () => st.kill()
@@ -212,7 +165,6 @@ function Typewriter({ text, bp, delay = 0 }) {
       lineHeight: CONFIG.desc.lineHeight,
       letterSpacing: '0.01em',
     }}>
-      {/* Bullet - only if needed, logic handled in ProjectCard */}
       <span className="typewriter-content">
         {displayed}
         <span style={{
@@ -231,6 +183,8 @@ function Typewriter({ text, bp, delay = 0 }) {
 /* ================================================================
    ANIMATED ELEMENTS
    ================================================================ */
+
+/* ── 1. Orbit (card 1 — unchanged) ── */
 function OrbitElement() {
   const nodes = ['aadi2005', 'smooth af', 'one upload', 'crazier', 'results']
   const S = 290, R = 110, C = 145
@@ -255,26 +209,199 @@ function OrbitElement() {
   )
 }
 
-function TimelineElement() {
-  const steps = ['BRIEF', 'CONCEPT', 'EDIT', 'DELIVER']
+/* ── 1b. Large Orbit — used as the media panel for card 5 ── */
+function LargeOrbitElement({ accent = '#00D9FF' }) {
+  const nodes = ['aadi2005', 'smooth af', 'one upload', 'crazier', 'results']
+  // Size is responsive via CSS container — we use a large fixed SVG viewBox
+  // and let the wrapper scale it via width:100%
+  const S = 500, R = 190, C = 250
   return (
-    <div className="flex flex-col gap-4" style={{ width: 360 }}>
-      <p className="font-lemon-milk uppercase tracking-widest" style={{ fontSize: 10, color: 'rgba(255,255,255,0.25)' }}>Project Flow</p>
-      <div className="flex items-center">
-        {steps.map((s, i) => (
-          <div key={i} className="flex items-center">
-            <div className="flex flex-col items-center gap-2">
-              <div style={{ width: 44, height: 44, borderRadius: '50%', background: i === 0 ? 'rgba(255,255,255,0.9)' : 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.18)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 12, fontWeight: 700, color: i === 0 ? '#000' : 'rgba(255,255,255,0.45)', fontFamily: 'monospace' }}>{String(i + 1).padStart(2, '0')}</div>
-              <span style={{ fontSize: 9, color: 'rgba(255,255,255,0.35)', letterSpacing: '0.06em', fontFamily: 'var(--font-lemon-milk)' }}>{s}</span>
-            </div>
-            {i < steps.length - 1 && <div style={{ width: 40, height: 1, background: 'rgba(255,255,255,0.12)', margin: '0 5px', marginBottom: 22 }} />}
-          </div>
-        ))}
+    <div style={{
+      width: '100%', height: '100%',
+      display: 'flex', alignItems: 'center', justifyContent: 'center',
+      position: 'relative',
+    }}>
+      {/* Glow backdrop */}
+      <div style={{
+        position: 'absolute', inset: 0,
+        background: `radial-gradient(circle at center, ${accent}08 0%, transparent 70%)`,
+        pointerEvents: 'none',
+      }}/>
+
+      <div style={{
+        position: 'relative',
+        width: 'clamp(260px, 40vw, 460px)',
+        height: 'clamp(260px, 40vw, 460px)',
+        flexShrink: 0,
+      }}>
+        {/* Center circle */}
+        <div style={{
+          position: 'absolute',
+          width: 'clamp(90px,12vw,130px)', height: 'clamp(90px,12vw,130px)',
+          borderRadius: '50%',
+          border: `1px solid ${accent}33`,
+          background: 'rgba(255,255,255,0.04)',
+          top: '50%', left: '50%',
+          transform: 'translate(-50%,-50%)',
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          fontFamily: 'var(--font-lemon-milk, monospace)',
+          textTransform: 'uppercase',
+          textAlign: 'center',
+          fontSize: 'clamp(9px,1vw,13px)',
+          color: accent,
+          letterSpacing: '0.06em',
+          lineHeight: 1.4,
+          boxShadow: `0 0 30px ${accent}22`,
+          zIndex: 2,
+        }}>THE<br/>PROCESS</div>
+
+        {/* Spinning SVG ring + arrow */}
+        <svg
+          style={{
+            position: 'absolute', inset: 0, width: '100%', height: '100%',
+            animation: 'orbit-spin 14s linear infinite',
+          }}
+          viewBox={`0 0 ${S} ${S}`}
+        >
+          <circle cx={C} cy={C} r={R} fill="none" stroke={`${accent}22`} strokeWidth="1.5" strokeDasharray="8 6" />
+          <polygon
+            points={`${C},${C-R} ${C+8},${C-R+17} ${C-8},${C-R+17}`}
+            fill={accent}
+            opacity="0.6"
+          />
+        </svg>
+
+        {/* Node pills — absolutely positioned using % */}
+        {nodes.map((label, i) => {
+          const a = (i / nodes.length) * 2 * Math.PI - Math.PI / 2
+          // position as % of container
+          const px = 50 + (R / S * 100) * Math.cos(a)
+          const py = 50 + (R / S * 100) * Math.sin(a)
+          return (
+            <div key={i} style={{
+              position: 'absolute',
+              left: `${px}%`, top: `${py}%`,
+              transform: 'translate(-50%,-50%)',
+              background: `${accent}12`,
+              border: `1px solid ${accent}33`,
+              borderRadius: 24,
+              padding: 'clamp(4px,0.5vw,7px) clamp(10px,1.2vw,16px)',
+              fontSize: 'clamp(9px,1vw,12px)',
+              color: `${accent}cc`,
+              whiteSpace: 'nowrap',
+              letterSpacing: '0.05em',
+              fontFamily: 'monospace',
+              boxShadow: `0 0 12px ${accent}18`,
+              zIndex: 3,
+            }}>{label}</div>
+          )
+        })}
       </div>
     </div>
   )
 }
 
+/* ── 2. Tech Logos (card 2 — AMD + Ryzen + NVIDIA SVG logos) ── */
+function TechLogosElement() {
+  return (
+    <div className="flex flex-col gap-4" style={{ width: 360 }}>
+      <p className="font-lemon-milk uppercase tracking-widest" style={{ fontSize: 10, color: 'rgba(255,255,255,0.25)' }}>
+        Powered By
+      </p>
+
+      <div className="flex flex-col gap-3">
+
+        {/* AMD */}
+        <div className="flex items-center gap-3" style={{
+          padding: '10px 16px',
+          borderRadius: 10,
+          background: 'rgba(255,255,255,0.04)',
+          border: '1px solid rgba(255,255,255,0.08)',
+        }}>
+          {/* AMD SVG logo */}
+          <svg width="40" height="24" viewBox="0 0 120 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M28.5 4L4 56h14.5l4.8-11h21.4l4.8 11H64L39.5 4H28.5zm-1.2 30l6.7-15.5L40.7 34H27.3z" fill="#ED1C24"/>
+            <path d="M68 4v52h14V24l16 32h10l16-32v32h14V4h-19L104 34 88.5 4H68z" fill="#ED1C24"/>
+          </svg>
+          <div className="flex flex-col">
+            <span className="font-lemon-milk uppercase" style={{ fontSize: 10, color: 'rgba(255,255,255,0.75)', letterSpacing: '0.08em', fontWeight: 700 }}>Ryzen™ 7 Series</span>
+            <span className="font-mono" style={{ fontSize: 9, color: 'rgba(255,255,255,0.3)' }}>CPU · 8-Core Processor</span>
+          </div>
+          <div className="ml-auto" style={{
+            fontSize: 9, fontFamily: 'monospace',
+            color: '#ED1C24', letterSpacing: '0.1em',
+            background: 'rgba(237,28,36,0.08)',
+            padding: '3px 8px', borderRadius: 4,
+            border: '1px solid rgba(237,28,36,0.2)',
+          }}>ACTIVE</div>
+        </div>
+
+        {/* NVIDIA */}
+        <div className="flex items-center gap-3" style={{
+          padding: '10px 16px',
+          borderRadius: 10,
+          background: 'rgba(255,255,255,0.04)',
+          border: '1px solid rgba(255,255,255,0.08)',
+        }}>
+          {/* NVIDIA SVG logo — the eye / shield mark */}
+          <svg width="36" height="28" viewBox="0 0 90 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M38 14v-4C26 11 16 20 16 33c0 5 2 10 5 14L38 14z" fill="#76B900"/>
+            <path d="M38 10V6C20 7 6 20 6 37c0 9 4 18 11 24l6-6c-5-5-9-12-9-18 0-14 11-25 24-27z" fill="#76B900"/>
+            <path d="M38 43V18L22 47c4 5 10 8 16 9v-4c-4-1-8-4-10-8l10-1z" fill="#76B900"/>
+            <path d="M44 14v4c12 2 22 12 22 25 0 6-2 12-6 17l6 5c5-6 8-14 8-22 0-17-13-29-30-29z" fill="#76B900"/>
+            <path d="M44 47v5c7-1 13-5 17-10l-6-5c-3 5-7 9-11 10z" fill="#76B900"/>
+            <path d="M44 18v25l10 1c-2 4-6 7-10 8v4c6-1 12-4 16-9L44 18z" fill="#76B900"/>
+          </svg>
+          <div className="flex flex-col">
+            <span className="font-lemon-milk uppercase" style={{ fontSize: 10, color: 'rgba(255,255,255,0.75)', letterSpacing: '0.08em', fontWeight: 700 }}>RTX 50 Series</span>
+            <span className="font-mono" style={{ fontSize: 9, color: 'rgba(255,255,255,0.3)' }}>GPU · DLSS 4 · 12GB VRAM</span>
+          </div>
+          <div className="ml-auto" style={{
+            fontSize: 9, fontFamily: 'monospace',
+            color: '#76B900', letterSpacing: '0.1em',
+            background: 'rgba(118,185,0,0.08)',
+            padding: '3px 8px', borderRadius: 4,
+            border: '1px solid rgba(118,185,0,0.2)',
+          }}>ACTIVE</div>
+        </div>
+
+        {/* RAM */}
+        <div className="flex items-center gap-3" style={{
+          padding: '10px 16px',
+          borderRadius: 10,
+          background: 'rgba(255,255,255,0.04)',
+          border: '1px solid rgba(255,255,255,0.08)',
+        }}>
+          {/* RAM icon */}
+          <svg width="36" height="24" viewBox="0 0 90 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="4" y="16" width="82" height="28" rx="4" stroke="rgba(255,255,255,0.5)" strokeWidth="3" fill="none"/>
+            <rect x="4" y="36" width="82" height="8" rx="2" fill="rgba(255,255,255,0.08)"/>
+            {[14,24,34,44,54,64,74].map(x=>(
+              <rect key={x} x={x} y="8" width="6" height="10" rx="1" fill="rgba(255,255,255,0.3)"/>
+            ))}
+            {[14,24,34,44,54,64,74].map(x=>(
+              <rect key={x+'b'} x={x} y="42" width="6" height="10" rx="1" fill="rgba(255,255,255,0.3)"/>
+            ))}
+          </svg>
+          <div className="flex flex-col">
+            <span className="font-lemon-milk uppercase" style={{ fontSize: 10, color: 'rgba(255,255,255,0.75)', letterSpacing: '0.08em', fontWeight: 700 }}>32 GB DDR5</span>
+            <span className="font-mono" style={{ fontSize: 9, color: 'rgba(255,255,255,0.3)' }}>RAM · 6000MHz · Dual Channel</span>
+          </div>
+          <div className="ml-auto" style={{
+            fontSize: 9, fontFamily: 'monospace',
+            color: 'rgba(255,255,255,0.4)', letterSpacing: '0.1em',
+            background: 'rgba(255,255,255,0.05)',
+            padding: '3px 8px', borderRadius: 4,
+            border: '1px solid rgba(255,255,255,0.1)',
+          }}>ACTIVE</div>
+        </div>
+
+      </div>
+    </div>
+  )
+}
+
+/* ── 3. Waveform (card 3 — unchanged) ── */
 function WaveformElement() {
   const bars = Array.from({ length: 40 })
   return (
@@ -294,6 +421,7 @@ function WaveformElement() {
   )
 }
 
+/* ── 4. FloatingIcons (card 4 — unchanged) ── */
 function FloatingIconsElement() {
   const platforms = [
     { label: 'YT', delay: '0s', x: 10, y: 0 },
@@ -314,50 +442,152 @@ function FloatingIconsElement() {
   )
 }
 
-function StatsElement() {
-  const metrics = [{ value: '4.2M', label: 'Views' }, { value: '94%', label: 'Retention' }, { value: '52+', label: 'Episodes' }]
+/* ── 5. Project Flow (card 5 — the timeline animation from the screenshot) ── */
+function ProjectFlowElement() {
+  const steps = [
+    { id: '01', label: 'BRIEF',   desc: 'Understand goals' },
+    { id: '02', label: 'CONCEPT', desc: 'Plan the edit' },
+    { id: '03', label: 'EDIT',    desc: 'Craft the cut' },
+    { id: '04', label: 'DELIVER', desc: 'Ship it fast' },
+  ]
+  const [activeStep, setActiveStep] = useState(0)
+
+  // Auto-advance through steps
+  useEffect(() => {
+    const iv = setInterval(() => {
+      setActiveStep(s => (s + 1) % steps.length)
+    }, 1800)
+    return () => clearInterval(iv)
+  }, [])
+
   return (
-    <div className="flex gap-10">
-      {metrics.map((m, i) => (
-        <div key={i} className="flex flex-col gap-2">
-          <span className="font-akira font-black" style={{ fontSize: 'clamp(1.6rem,3vw,2.4rem)', color: 'rgba(255,255,255,0.9)', lineHeight: 1 }}>{m.value}</span>
-          <span className="font-lemon-milk uppercase tracking-widest" style={{ fontSize: 9, color: 'rgba(255,255,255,0.3)', lineHeight: 1.3 }}>{m.label}</span>
-        </div>
-      ))}
+    <div style={{ width: 'clamp(300px, 36vw, 420px)' }}>
+      <p className="font-lemon-milk uppercase tracking-widest mb-5" style={{ fontSize: 10, color: 'rgba(255,255,255,0.25)' }}>
+        Project Flow
+      </p>
+
+      {/* Step row */}
+      <div className="flex items-center">
+        {steps.map((s, i) => (
+          <div key={i} className="flex items-center">
+
+            {/* Circle + label */}
+            <div className="flex flex-col items-center gap-2" style={{ minWidth: 52 }}>
+              <div style={{
+                width: 48,
+                height: 48,
+                borderRadius: '50%',
+                background: i === activeStep
+                  ? 'rgba(255,255,255,0.92)'
+                  : i < activeStep
+                    ? 'rgba(255,255,255,0.18)'
+                    : 'rgba(255,255,255,0.05)',
+                border: i === activeStep
+                  ? 'none'
+                  : '1px solid rgba(255,255,255,0.15)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: 12,
+                fontWeight: 700,
+                fontFamily: 'monospace',
+                color: i === activeStep ? '#000' : 'rgba(255,255,255,0.4)',
+                transition: 'all 0.4s ease',
+                boxShadow: i === activeStep ? '0 0 22px rgba(255,255,255,0.35)' : 'none',
+              }}>
+                {/* checkmark for completed steps */}
+                {i < activeStep ? (
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <path d="M3 8l3.5 3.5L13 5" stroke="rgba(255,255,255,0.7)" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                ) : s.id}
+              </div>
+
+              <span style={{
+                fontSize: 9,
+                color: i === activeStep ? 'rgba(255,255,255,0.8)' : 'rgba(255,255,255,0.28)',
+                letterSpacing: '0.06em',
+                fontFamily: 'var(--font-lemon-milk, monospace)',
+                textTransform: 'uppercase',
+                transition: 'color 0.4s ease',
+                whiteSpace: 'nowrap',
+              }}>{s.label}</span>
+            </div>
+
+            {/* Connector line */}
+            {i < steps.length - 1 && (
+              <div style={{
+                position: 'relative',
+                width: 36,
+                height: 2,
+                background: 'rgba(255,255,255,0.08)',
+                margin: '0 4px',
+                marginBottom: 20,
+                borderRadius: 1,
+                overflow: 'hidden',
+              }}>
+                {/* Animated fill */}
+                <div style={{
+                  position: 'absolute', top: 0, left: 0,
+                  height: '100%',
+                  width: i < activeStep ? '100%' : '0%',
+                  background: 'rgba(255,255,255,0.5)',
+                  borderRadius: 1,
+                  transition: 'width 0.5s ease',
+                }}/>
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+
+      {/* Active step description */}
+      <div style={{
+        marginTop: 16,
+        padding: '8px 14px',
+        borderRadius: 8,
+        background: 'rgba(255,255,255,0.04)',
+        border: '1px solid rgba(255,255,255,0.08)',
+        minHeight: 36,
+        display: 'flex', alignItems: 'center', gap: 8,
+      }}>
+        <div style={{
+          width: 6, height: 6, borderRadius: '50%',
+          background: 'rgba(255,255,255,0.7)',
+          boxShadow: '0 0 8px rgba(255,255,255,0.5)',
+          flexShrink: 0,
+        }}/>
+        <span className="font-mono" style={{ fontSize: 10, color: 'rgba(255,255,255,0.45)', letterSpacing: '0.04em' }}>
+          {steps[activeStep].desc}
+        </span>
+      </div>
     </div>
   )
 }
 
 function ProjectElement({ type }) {
   switch (type) {
-    case 'orbit': return <OrbitElement />
-    case 'timeline': return <TimelineElement />
-    case 'waveform': return <WaveformElement />
+    case 'orbit':       return <OrbitElement />
+    case 'techlogos':   return <TechLogosElement />
+    case 'waveform':    return <WaveformElement />
     case 'floatingicons': return <FloatingIconsElement />
-    case 'stats': return <StatsElement />
-    default: return null
+    case 'projectflow': return <ProjectFlowElement />
+    default:            return null
   }
 }
 
 /* ================================================================
    PROJECT CARD
-   ─────────────────────────────────────────────────────────────────
-   The card IS the sticky element — rounded dark tile with padding.
-   Everything (title, desc, image, animation) lives INSIDE the card.
-
-   MOBILE layout (single col inside card):
-     Title row (index top-right) → Media → Desc → Animation
-
-   TABLET+ layout (two col inside card):
-     LEFT: title + desc + animation
-     RIGHT: media (fills card height)
+   FIX: All cards use identical sticky top + zIndex stacking.
+   The key was: paddingTop must be IDENTICAL for ALL cards so
+   the card face aligns. Only the first card gets page-level top
+   padding from above (from the intro section margin).
    ================================================================ */
 function ProjectCard({ project, index, total }) {
   const cardRef = useRef(null)
   const bp = useBreakpoint()
   const isMobile = bp === 'mobile'
 
-  /* ── Project Description Rendering ── */
   const renderDescription = () => {
     if (Array.isArray(project.desc)) {
       return (
@@ -379,6 +609,15 @@ function ProjectCard({ project, index, total }) {
   const br = CONFIG.card.borderRadius[bp]
   const gap = CONFIG.card.gap[bp]
 
+  /* ── STACKING FIX ──────────────────────────────────────────
+     sticky top must be the same constant for ALL cards so they
+     perfectly overlap. We use a fixed offset (20px) per card
+     so each card peeks a little above the previous.
+     The card body always starts at the same Y position.
+  ─────────────────────────────────────────────────────────── */
+  const STACK_OFFSET = 0    // cards stack flush on top of each other
+  const stickyTop = index * STACK_OFFSET
+
   useGSAP(() => {
     gsap.from(cardRef.current.querySelectorAll('.ca'), {
       y: 18, opacity: 0, duration: 0.55, stagger: 0.07, ease: 'power3.out',
@@ -387,90 +626,105 @@ function ProjectCard({ project, index, total }) {
   }, { scope: cardRef })
 
   return (
-    /*
-      Sticky wrapper — this is what does the stacking.
-      It has no visual styling — just a transparent scroll container.
-    */
-    <div style={{ position: 'sticky', top: 0, zIndex: index + 10 }}>
+    /* Sticky wrapper — fixed 100vh so all cards are identical height */
+    <div style={{
+      position: 'sticky',
+      top: stickyTop,
+      zIndex: index + 10,
+      height: '100vh',
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      padding: `0 ${CONFIG.page.paddingX[bp]}`,
+    }}>
 
-      {/* ── Page-level padding around the card ── */}
-      <div style={{
-        padding: `${CONFIG.page.paddingY[bp]} ${CONFIG.page.paddingX[bp]}`,
-        // First card has no top padding (sits right below intro)
-        paddingTop: index === 0 ? CONFIG.page.paddingY[bp] : 0,
-      }}>
+      {/* THE CARD */}
+      <div
+        ref={cardRef}
+        className="relative"
+        style={{
+          background: 'linear-gradient(150deg, #0e0e0e 0%, #121212 100%)',
+          borderRadius: br,
+          height: `calc(100vh - ${CONFIG.page.paddingX[bp]} * 2)`,
+          maxHeight: '90vh',
+          overflow: 'hidden',
+          boxShadow: index > 0
+            ? '0 -8px 32px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.06)'
+            : '0 0 0 1px rgba(255,255,255,0.06)',
+        }}
+      >
+        {/* Accent glow */}
+        <div className="absolute pointer-events-none" style={{
+          top: 0, right: 0,
+          width: 'clamp(120px,25vw,320px)', height: 'clamp(120px,25vw,320px)',
+          background: `radial-gradient(circle at top right,${project.accent}0c 0%,transparent 65%)`,
+          filter: 'blur(40px)',
+        }} />
 
-        {/* ══════════════════════════════════
-            THE CARD — dark rounded tile
-            This is the sorateq-style card.
-            Everything lives inside here.
-            ══════════════════════════════════ */}
-        <div
-          ref={cardRef}
-          className="relative"
-          style={{
-            background: 'linear-gradient(150deg, #0e0e0e 0%, #121212 100%)',
-            borderRadius: br,
-            // Stacking shadow — makes each card lift above the previous
-            boxShadow: index > 0
-              ? '0 -8px 32px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.06)'
-              : '0 0 0 1px rgba(255,255,255,0.06)',
-          }}
-        >
-          {/* Subtle accent glow top-right */}
-          <div className="absolute pointer-events-none" style={{
-            top: 0, right: 0,
-            width: 'clamp(120px,25vw,320px)', height: 'clamp(120px,25vw,320px)',
-            background: `radial-gradient(circle at top right,${project.accent}0c 0%,transparent 65%)`,
-            filter: 'blur(40px)',
-          }} />
+        {/* MOBILE layout */}
+        {isMobile && (
+          <div style={{ padding: `${py} ${px}`, display: 'flex', flexDirection: 'column', gap }}>
 
-          {/* ════════════════════════
-              MOBILE — single column
-              ════════════════════════ */}
-          {isMobile && (
-            <div style={{ padding: `${py} ${px}`, display: 'flex', flexDirection: 'column', gap }}>
-
-              {/* Title row: index number floats top-right */}
-              <div className="ca relative flex flex-col gap-1.5">
-                {/* Index — absolutely positioned top-right of this row */}
-                <div className="absolute top-0 right-0 font-akira font-black leading-none cursor-target" style={{
-                  fontSize: CONFIG.indexNum.fontSize[bp],
-                  color: project.accent,
-                  lineHeight: 0.85,
-                  textShadow: `0 0 30px ${project.accent}50`,
-                }}>
-                  {String(index + 1).padStart(2, '0')}
-                </div>
-
-                {/* Tagline */}
-                <span className="font-decipher cursor-target" style={{ fontSize: CONFIG.tagline.fontSize[bp], color: `${project.accent}90`, transform: 'rotate(-1.5deg)', display: 'inline-block' }}>
-                  {project.tagline}
-                </span>
-
-                {/* Title */}
-                <Shuffle text={project.title} tag="h2"
-                  shuffleDirection="right" duration={0.4} animationMode="evenodd"
-                  shuffleTimes={1} ease="power3.out" stagger={0.025}
-                  threshold={0.1} triggerOnce triggerOnHover respectReducedMotion loop={false}
-                  className="font-magazine text-bone tracking-tight cursor-target"
-                  style={{ fontSize: CONFIG.title.fontSize[bp], lineHeight: 1.05, letterSpacing: '-0.01em', display: 'block', textAlign: 'left', paddingRight: '3.5rem' }}
-                />
-
-                {/* Rule */}
-                <div style={{ width: 36, height: 1.5, background: `linear-gradient(90deg,${project.accent},transparent)`, borderRadius: 2 }} />
-              </div>
-
-              <div className="ca relative cursor-target" style={{
-                height: index === 0 ? 'auto' : CONFIG.media.height[bp],
-                minHeight: index === 0 ? '220px' : 'auto',
-                borderRadius: CONFIG.media.borderRadius,
+            <div className="ca relative flex flex-col gap-1.5">
+              <div className="absolute top-0 right-0 font-akira font-black leading-none cursor-target" style={{
+                fontSize: CONFIG.indexNum.fontSize[bp],
+                color: project.accent,
+                lineHeight: 0.85,
+                textShadow: `0 0 30px ${project.accent}50`,
               }}>
-                {index === 0 ? (
-                  <div className="relative w-full h-full" style={{ borderRadius: CONFIG.media.borderRadius, border: '1px solid rgba(255,255,255,0.07)' }}>
-                    <div className="w-full h-full flex items-center justify-center">
-                      <IDCard isInline />
-                    </div>
+                {String(index + 1).padStart(2, '0')}
+              </div>
+              <span className="font-decipher cursor-target" style={{ fontSize: CONFIG.tagline.fontSize[bp], color: `${project.accent}90`, transform: 'rotate(-1.5deg)', display: 'inline-block' }}>
+                {project.tagline}
+              </span>
+              <Shuffle text={project.title} tag="h2"
+                shuffleDirection="right" duration={0.4} animationMode="evenodd"
+                shuffleTimes={1} ease="power3.out" stagger={0.025}
+                threshold={0.1} triggerOnce triggerOnHover respectReducedMotion loop={false}
+                className="font-magazine text-bone tracking-tight cursor-target"
+                style={{ fontSize: CONFIG.title.fontSize[bp], lineHeight: 1.05, letterSpacing: '-0.01em', display: 'block', textAlign: 'left', paddingRight: '3.5rem' }}
+              />
+              <div style={{ width: 36, height: 1.5, background: `linear-gradient(90deg,${project.accent},transparent)`, borderRadius: 2 }} />
+            </div>
+
+            <div className="ca relative cursor-target" style={{
+              height: index === 0 ? 'auto' : CONFIG.media.height[bp],
+              minHeight: index === 0 ? '220px' : 'auto',
+              borderRadius: CONFIG.media.borderRadius,
+            }}>
+              {index === 0 ? (
+                <div className="relative w-full h-full" style={{ borderRadius: CONFIG.media.borderRadius, border: '1px solid rgba(255,255,255,0.07)' }}>
+                  <div className="w-full h-full flex items-center justify-center"><IDCard isInline /></div>
+                  <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom,transparent 60%,rgba(0,0,0,0.4))' }} />
+                  <div className="absolute top-2.5 right-2.5 font-mono font-bold px-2 py-0.5 rounded-full" style={{ fontSize: '0.55rem', background: 'rgba(0,0,0,0.7)', color: 'rgba(255,255,255,0.55)', border: '1px solid rgba(255,255,255,0.1)', backdropFilter: 'blur(8px)', letterSpacing: '0.1em' }}>
+                    {String(index + 1).padStart(2, '0')} / {total}
+                  </div>
+                  <div className="absolute bottom-2.5 left-3 font-decipher pointer-events-none" style={{ fontSize: '0.78rem', color: `${project.accent}75`, transform: 'rotate(-1.5deg)' }}>
+                    ~{project.tagline.toLowerCase()}~
+                  </div>
+                </div>
+              ) : index === 3 ? (
+                /* Card 5 mobile: Large orbit animation */
+                <div style={{
+                  width: '100%', height: '280px',
+                  borderRadius: CONFIG.media.borderRadius,
+                  border: `1px solid ${project.accent}20`,
+                  background: 'rgba(0,0,0,0.3)',
+                  overflow: 'hidden',
+                  position: 'relative',
+                }}>
+                  <LargeOrbitElement accent={project.accent} />
+                  <div className="absolute top-2.5 right-2.5 font-mono font-bold px-2 py-0.5 rounded-full" style={{ fontSize: '0.55rem', background: 'rgba(0,0,0,0.7)', color: 'rgba(255,255,255,0.55)', border: '1px solid rgba(255,255,255,0.1)', backdropFilter: 'blur(8px)', letterSpacing: '0.1em' }}>
+                    {String(index + 1).padStart(2, '0')} / {total}
+                  </div>
+                </div>
+              ) : (
+                                  <div className="relative w-full h-full overflow-hidden" style={{ borderRadius: CONFIG.media.borderRadius, border: '1px solid rgba(255,255,255,0.07)' }}>
+                    {project.type === 'video' ? (
+                      <video src={project.src} poster={project.thumb} autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover" />
+                    ) : (
+                      <img src={project.src} alt={project.title} className="absolute inset-0 w-full h-full object-cover" />
+                    )}
                     <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom,transparent 60%,rgba(0,0,0,0.4))' }} />
                     <div className="absolute top-2.5 right-2.5 font-mono font-bold px-2 py-0.5 rounded-full" style={{ fontSize: '0.55rem', background: 'rgba(0,0,0,0.7)', color: 'rgba(255,255,255,0.55)', border: '1px solid rgba(255,255,255,0.1)', backdropFilter: 'blur(8px)', letterSpacing: '0.1em' }}>
                       {String(index + 1).padStart(2, '0')} / {total}
@@ -479,115 +733,90 @@ function ProjectCard({ project, index, total }) {
                       ~{project.tagline.toLowerCase()}~
                     </div>
                   </div>
+              )}
+              <div className="absolute font-akira font-black pointer-events-none select-none" style={{ top: '-10%', right: '-4%', fontSize: CONFIG.indexNum.fontSize[bp], color: project.accent, lineHeight: 0.85, textShadow: `0 0 50px ${project.accent}80`, zIndex: 100 }}>
+                {String(index + 1).padStart(2, '0')}
+              </div>
+            </div>
+
+            <div className="ca">{renderDescription()}</div>
+
+            <div className="ca overflow-x-auto" style={{ transform: `scale(${CONFIG.element.scale[bp]})`, transformOrigin: 'left center', paddingBottom: '0.5rem' }}>
+              <ProjectElement type={project.element} />
+            </div>
+          </div>
+        )}
+
+        {/* TABLET+ layout */}
+        {!isMobile && (
+          <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 0.9fr) minmax(0, 1.1fr)', height: '100%' }}>
+
+            {/* LEFT */}
+            <div style={{ padding: `${py} ${px}`, display: 'flex', flexDirection: 'column', gap, borderRight: '1px solid rgba(255,255,255,0.05)' }}>
+
+              <div className="ca flex flex-col gap-2">
+                <span className="font-aerosoldier cursor-target" style={{ fontSize: CONFIG.tagline.fontSize[bp], color: `${project.accent}90`, transform: 'rotate(-1.5deg)', display: 'inline-block' }}>
+                  {project.tagline}
+                </span>
+                <Shuffle text={project.title} tag="h2"
+                  shuffleDirection="right" duration={0.4} animationMode="evenodd"
+                  shuffleTimes={1} ease="power3.out" stagger={0.025}
+                  threshold={0.1} triggerOnce triggerOnHover respectReducedMotion loop={false}
+                  className="font-akira text-bone tracking-tight cursor-target"
+                  style={{ fontSize: CONFIG.title.fontSize[bp], lineHeight: 1.02, letterSpacing: '-0.01em', display: 'block', textAlign: 'left' }}
+                />
+                <div style={{ width: 'clamp(36px,4vw,52px)', height: 1.5, background: `linear-gradient(90deg,${project.accent},transparent)`, borderRadius: 2 }} />
+              </div>
+
+              <div className="ca">{renderDescription()}</div>
+
+              <div className="ca mt-auto overflow-hidden" style={{ transform: `scale(${CONFIG.element.scale[bp]})`, transformOrigin: 'left bottom' }}>
+                <ProjectElement type={project.element} />
+              </div>
+            </div>
+
+            {/* RIGHT: media */}
+            <div style={{ padding: `${py} ${px} ${py} 0`, display: 'flex', alignItems: 'stretch' }}>
+              <div className="ca relative w-full cursor-target" style={{ borderRadius: CONFIG.media.borderRadius, minHeight: 'clamp(320px, 35vw, 750px)' }}>
+                {index === 0 ? (
+                  /* Card 1: ID card */
+                  <div className="relative w-full h-full" style={{ borderRadius: CONFIG.media.borderRadius, border: '1px solid rgba(255,255,255,0.07)' }}>
+                    <div className="w-full h-full flex items-center justify-center"><IDCard isInline /></div>
+                    <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom,transparent 55%,rgba(0,0,0,0.5))' }} />
+                    <div className="absolute top-3 left-3 font-mono font-bold px-2 py-0.5 rounded-full" style={{ fontSize: '0.6rem', background: 'rgba(0,0,0,0.65)', color: 'rgba(255,255,255,0.5)', border: '1px solid rgba(255,255,255,0.1)', backdropFilter: 'blur(10px)', letterSpacing: '0.1em' }}>
+                      {String(index + 1).padStart(2, '0')} / {total}
+                    </div>
+                    <div className="absolute bottom-3 left-4 font-decipher pointer-events-none" style={{ fontSize: 'clamp(0.78rem,1.1vw,0.92rem)', color: `${project.accent}80`, transform: 'rotate(-1.5deg)' }}>
+                      ~{project.tagline.toLowerCase()}~
+                    </div>
+                  </div>
+                ) : index === 3 ? (
+                  /* Card 5: Large Orbit animation replaces the video */
+                  <div style={{
+                    width: '100%', height: '100%',
+                    borderRadius: CONFIG.media.borderRadius,
+                    border: `1px solid ${project.accent}20`,
+                    background: 'rgba(0,0,0,0.3)',
+                    overflow: 'hidden',
+                    position: 'relative',
+                    minHeight: 'clamp(320px, 35vw, 750px)',
+                  }}>
+                    <LargeOrbitElement accent={project.accent} />
+                    <div className="absolute top-3 left-3 font-mono font-bold px-2 py-0.5 rounded-full" style={{ fontSize: '0.6rem', background: 'rgba(0,0,0,0.65)', color: 'rgba(255,255,255,0.5)', border: '1px solid rgba(255,255,255,0.1)', backdropFilter: 'blur(10px)', letterSpacing: '0.1em' }}>
+                      {String(index + 1).padStart(2, '0')} / {total}
+                    </div>
+                    <div className="absolute bottom-3 left-4 font-decipher pointer-events-none" style={{ fontSize: 'clamp(0.78rem,1.1vw,0.92rem)', color: `${project.accent}80`, transform: 'rotate(-1.5deg)' }}>
+                      ~{project.tagline.toLowerCase()}~
+                    </div>
+                  </div>
                 ) : (
-                  <PixelCard
-                    className="w-full h-full"
-                    colors={`${project.accent},#ffffff,${project.accent}80`}
-                    gap={6}
-                    speed={30}
-                  >
-                    <div className="relative w-full h-full overflow-hidden" style={{ borderRadius: CONFIG.media.borderRadius, border: '1px solid rgba(255,255,255,0.07)' }}>
+                  /* All other cards: video/image */
+                                      <div className="relative w-full h-full overflow-hidden" style={{ borderRadius: CONFIG.media.borderRadius, border: '1px solid rgba(255,255,255,0.07)' }}>
                       {project.type === 'video' ? (
                         <video src={project.src} poster={project.thumb} autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover" />
                       ) : (
                         <img src={project.src} alt={project.title} className="absolute inset-0 w-full h-full object-cover" />
                       )}
-                      <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom,transparent 60%,rgba(0,0,0,0.4))' }} />
-                      <div className="absolute top-2.5 right-2.5 font-mono font-bold px-2 py-0.5 rounded-full" style={{ fontSize: '0.55rem', background: 'rgba(0,0,0,0.7)', color: 'rgba(255,255,255,0.55)', border: '1px solid rgba(255,255,255,0.1)', backdropFilter: 'blur(8px)', letterSpacing: '0.1em' }}>
-                        {String(index + 1).padStart(2, '0')} / {total}
-                      </div>
-                      <div className="absolute bottom-2.5 left-3 font-decipher pointer-events-none" style={{ fontSize: '0.78rem', color: `${project.accent}75`, transform: 'rotate(-1.5deg)' }}>
-                        ~{project.tagline.toLowerCase()}~
-                      </div>
-                    </div>
-                  </PixelCard>
-                )}
-                {/* Overlay Index Number */}
-                <div className="absolute font-akira font-black pointer-events-none select-none cursor-target" style={{
-                  top: '-10%', right: '-4%',
-                  fontSize: CONFIG.indexNum.fontSize[bp],
-                  color: project.accent,
-                  lineHeight: 0.85,
-                  textShadow: `0 0 50px ${project.accent}80`,
-                  opacity: 1,
-                  zIndex: 100
-                }}>
-                  {String(index + 1).padStart(2, '0')}
-                </div>
-              </div>
-
-              {/* Description */}
-              <div className="ca">
-                {renderDescription()}
-              </div>
-
-              {/* Animated element */}
-              <div className="ca overflow-x-auto" style={{
-                transform: `scale(${CONFIG.element.scale[bp]})`,
-                transformOrigin: 'left center',
-                paddingBottom: '0.5rem',
-              }}>
-                <ProjectElement type={project.element} />
-              </div>
-
-            </div>
-          )}
-
-          {/* ════════════════════════════
-              TABLET+ — two columns
-              LEFT: content | RIGHT: media
-              ════════════════════════════ */}
-          {!isMobile && (
-            <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 0.9fr) minmax(0, 1.1fr)', minHeight: 'clamp(450px, 45vw, 850px)' }}>
-
-              {/* LEFT: title + desc + element */}
-              <div style={{
-                padding: `${py} ${px}`,
-                display: 'flex', flexDirection: 'column', gap,
-                borderRight: '1px solid rgba(255,255,255,0.05)',
-              }}>
-
-                {/* Title row */}
-                <div className="ca flex flex-col gap-2">
-                  <span className="font-aerosoldier cursor-target" style={{ fontSize: CONFIG.tagline.fontSize[bp], color: `${project.accent}90`, transform: 'rotate(-1.5deg)', display: 'inline-block' }}>
-                    {project.tagline}
-                  </span>
-                  <Shuffle text={project.title} tag="h2"
-                    shuffleDirection="right" duration={0.4} animationMode="evenodd"
-                    shuffleTimes={1} ease="power3.out" stagger={0.025}
-                    threshold={0.1} triggerOnce triggerOnHover respectReducedMotion loop={false}
-                    className="font-akira text-bone tracking-tight cursor-target"
-                    style={{ fontSize: CONFIG.title.fontSize[bp], lineHeight: 1.02, letterSpacing: '-0.01em', display: 'block', textAlign: 'left' }}
-                  />
-                  <div style={{ width: 'clamp(36px,4vw,52px)', height: 1.5, background: `linear-gradient(90deg,${project.accent},transparent)`, borderRadius: 2 }} />
-                </div>
-
-                {/* Description */}
-                <div className="ca">
-                  {renderDescription()}
-                </div>
-
-                {/* Animated element — pushes to bottom */}
-                <div className="ca mt-auto overflow-hidden" style={{
-                  transform: `scale(${CONFIG.element.scale[bp]})`,
-                  transformOrigin: 'left bottom',
-                }}>
-                  <ProjectElement type={project.element} />
-                </div>
-
-              </div>
-
-              {/* RIGHT: media — fills full card height */}
-              <div style={{ padding: `${py} ${px} ${py} 0`, display: 'flex', alignItems: 'stretch' }}>
-                <div className="ca relative w-full cursor-target" style={{
-                  borderRadius: CONFIG.media.borderRadius,
-                  minHeight: 'clamp(320px, 35vw, 750px)',
-                }}>
-                  {index === 0 ? (
-                    <div className="relative w-full h-full" style={{ borderRadius: CONFIG.media.borderRadius, border: '1px solid rgba(255,255,255,0.07)' }}>
-                      <div className="w-full h-full flex items-center justify-center">
-                        <IDCard isInline />
-                      </div>
                       <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom,transparent 55%,rgba(0,0,0,0.5))' }} />
                       <div className="absolute top-3 left-3 font-mono font-bold px-2 py-0.5 rounded-full" style={{ fontSize: '0.6rem', background: 'rgba(0,0,0,0.65)', color: 'rgba(255,255,255,0.5)', border: '1px solid rgba(255,255,255,0.1)', backdropFilter: 'blur(10px)', letterSpacing: '0.1em' }}>
                         {String(index + 1).padStart(2, '0')} / {total}
@@ -596,51 +825,17 @@ function ProjectCard({ project, index, total }) {
                         ~{project.tagline.toLowerCase()}~
                       </div>
                     </div>
-                  ) : (
-                    <PixelCard
-                      className="w-full h-full"
-                      colors={`${project.accent},#ffffff,${project.accent}80`}
-                      gap={6}
-                      speed={30}
-                    >
-                      <div className="relative w-full h-full overflow-hidden" style={{ borderRadius: CONFIG.media.borderRadius, border: '1px solid rgba(255,255,255,0.07)' }}>
-                        {project.type === 'video' ? (
-                          <video src={project.src} poster={project.thumb} autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover" />
-                        ) : (
-                          <img src={project.src} alt={project.title} className="absolute inset-0 w-full h-full object-cover" />
-                        )}
-                        <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom,transparent 55%,rgba(0,0,0,0.5))' }} />
-                        <div className="absolute top-3 left-3 font-mono font-bold px-2 py-0.5 rounded-full" style={{ fontSize: '0.6rem', background: 'rgba(0,0,0,0.65)', color: 'rgba(255,255,255,0.5)', border: '1px solid rgba(255,255,255,0.1)', backdropFilter: 'blur(10px)', letterSpacing: '0.1em' }}>
-                          {String(index + 1).padStart(2, '0')} / {total}
-                        </div>
-                        <div className="absolute bottom-3 left-4 font-decipher pointer-events-none" style={{ fontSize: 'clamp(0.78rem,1.1vw,0.92rem)', color: `${project.accent}80`, transform: 'rotate(-1.5deg)' }}>
-                          ~{project.tagline.toLowerCase()}~
-                        </div>
-                      </div>
-                    </PixelCard>
-                  )}
-                  {/* Overlay Index Number */}
-                  <div className="absolute font-mono font-black pointer-events-none select-none cursor-target" style={{
-                    top: '-12%', right: '-6%',
-                    fontSize: CONFIG.indexNum.fontSize[bp],
-                    color: project.accent,
-                    lineHeight: 0.85,
-                    textShadow: `0 0 70px ${project.accent}90`,
-                    opacity: 1,
-                    zIndex: 100
-                  }}>
-                    {String(index + 1).padStart(2, '0')}
-                  </div>
+                )}
+                <div className="absolute font-mono font-black pointer-events-none select-none cursor-target" style={{ top: '-12%', right: '-6%', fontSize: CONFIG.indexNum.fontSize[bp], color: project.accent, lineHeight: 0.85, textShadow: `0 0 70px ${project.accent}90`, zIndex: 100 }}>
+                  {String(index + 1).padStart(2, '0')}
                 </div>
               </div>
+            </div>
           </div>
-          )}
+        )}
 
-        </div>
-        {/* end card */}
       </div>
-      {/* end page padding */}
-
+      {/* end card */}
     </div>
   )
 }
@@ -659,7 +854,7 @@ export default function VaultGrid() {
   return (
     <div id="vault-section" className="relative bg-ink">
 
-      {/* ── INTRO ── */}
+      {/* INTRO */}
       <section ref={introRef} className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden px-6" style={{ zIndex: 1 }}>
         <div className="absolute inset-0 pointer-events-none">
           <div style={{ position: 'absolute', top: '15%', right: '8%', width: 'clamp(200px,35vw,420px)', height: 'clamp(200px,35vw,420px)', background: 'radial-gradient(circle,rgba(200,255,0,0.055) 0%,transparent 70%)', filter: 'blur(80px)' }} />
@@ -676,20 +871,6 @@ export default function VaultGrid() {
               style={{ fontSize: 'clamp(3.5rem,10vw,8rem)', lineHeight: 1, letterSpacing: '-0.02em', display: 'block', textAlign: 'center' }}
             />
           </div>
-          {/* <div className="vi flex items-center gap-4">
-            <div style={{ width: 44, height: 1, background: 'linear-gradient(90deg,transparent,rgba(200,255,0,0.5))' }} />
-            <span className="font-lemon-milk uppercase tracking-widest text-bone/35" style={{ fontSize: 'clamp(0.52rem,1vw,0.65rem)' }}>{PROJECTS.length} projects · scroll to explore</span>
-            <div style={{ width: 44, height: 1, background: 'linear-gradient(90deg,rgba(200,255,0,0.5),transparent)' }} />
-          </div> */}
-          {/* <div className="vi flex flex-col gap-2 w-full max-w-xs">
-            {PROJECTS.map((p, i) => (
-              <div key={p.id} className="flex items-center gap-3 font-lemon-milk uppercase tracking-widest" style={{ fontSize: 'clamp(0.52rem,0.9vw,0.62rem)' }}>
-                <span style={{ color: 'rgba(255,255,255,0.2)' }}>{String(i + 1).padStart(2, '0')}</span>
-                <div className="flex-1" style={{ height: 1, background: `linear-gradient(90deg,transparent,${p.accent}30,transparent)` }} />
-                <span style={{ color: `${p.accent}65` }}>{p.title}</span>
-              </div>
-            ))}
-          </div> */}
         </div>
 
         <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5">
@@ -700,8 +881,8 @@ export default function VaultGrid() {
         </div>
       </section>
 
-      {/* ── STACKING CARDS ── */}
-      <div style={{ paddingBottom: CONFIG.page.paddingY[bp] }}>
+      {/* STACKING CARDS — each card is 100vh so they scroll/stack evenly */}
+      <div style={{ paddingBottom: 0 }}>
         {PROJECTS.map((project, index) => (
           <ProjectCard key={project.id} project={project} index={index} total={PROJECTS.length} />
         ))}
@@ -710,4 +891,3 @@ export default function VaultGrid() {
     </div>
   )
 }
-
