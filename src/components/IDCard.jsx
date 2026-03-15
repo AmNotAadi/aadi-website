@@ -57,8 +57,8 @@ export default function IDCard({ isInline = false }) {
               <p className="text-[9px] tracking-widest uppercase text-black/60 font-bold">Identification Card</p>
               <p className="text-[9px] text-black/35 font-mono">No.2345687981798</p>
             </div>
-            <div className="font-decipher font-semibold mark text-3xl id-hologram-text">
-               license for chaos
+            <div className="font-decipher font-semibold text-3xl id-hologram-text">
+               <span className="graffiti-highlight">license for chaos</span>
             </div>
           </div>
 
@@ -151,8 +151,28 @@ export default function IDCard({ isInline = false }) {
 
   if (isInline) {
     return (
-      <div className="w-full flex justify-center items-center py-4">
-        {cardContent}
+      <div className="w-full flex justify-center items-center py-4 overflow-hidden">
+        <div className="id-scale-wrapper" style={{ width: 490, flexShrink: 0 }}>
+          {cardContent}
+        </div>
+        <style dangerouslySetInnerHTML={{ __html: `
+          .id-scale-wrapper {
+            transform-origin: center center;
+            transition: transform 0.3s ease;
+          }
+          @media (max-width: 600px) {
+            .id-scale-wrapper { transform: scale(0.85); }
+          }
+          @media (max-width: 500px) {
+            .id-scale-wrapper { transform: scale(0.7); }
+          }
+          @media (max-width: 400px) {
+            .id-scale-wrapper { transform: scale(0.6); }
+          }
+          @media (max-width: 350px) {
+            .id-scale-wrapper { transform: scale(0.5); }
+          }
+        `}} />
       </div>
     );
   }

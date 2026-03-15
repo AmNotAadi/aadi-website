@@ -29,8 +29,8 @@ const CONFIG = {
     scroll_end_mobile: { width: '96%', bottom: '8%' },
   },
   idCard: {
-    desktop_pos: { bottom: 32, left: 40 },
-    desktop2xl_pos: { bottom: 48, left: 48 },
+    desktop_pos: { bottom: '8%', left: '50%' },
+    desktop2xl_pos: { bottom: '10%', left: '50%' },
     tablet_pos: { top: '54%', left: '50%' },
     mobile_pos: { top: '47%', left: '50%' },
     fixedWidth: 420,
@@ -89,58 +89,75 @@ function Ornament({ flip = false }) {
 
 function HeroIDCard() {
   return (
-    <Tilt tiltMaxAngleX={12} tiltMaxAngleY={12} perspective={1100} glareEnable glareMaxOpacity={0.22} glareColor="#ddd0ff" scale={1.03} transitionSpeed={600} gyroscope>
-      <div className="rounded-2xl p-[2px] id-card-glow-border" style={{ width: 420 }}>
-        <div className="relative rounded-2xl overflow-hidden shadow-2xl" style={{ background: '#D4C4A8', width: 420 }}>
-          <div className="absolute inset-0 id-card-shimmer pointer-events-none z-20 rounded-2xl" />
-          <div className="flex justify-between items-center px-4 py-1 border-b border-black/10">
-            <div>
-              <p className="font-mono" style={{ fontSize: 8, letterSpacing: '0.1em', fontWeight: 700, color: 'rgba(0,0,0,0.6)', textTransform: 'uppercase' }}>Identification Card</p>
-              <p className="font-mono" style={{ fontSize: 8, color: 'rgba(0,0,0,0.35)' }}>No.2345687981798</p>
-            </div>
-            <div className="font-decipher id-hologram-text text-2xl graffiti-highlight font-semibold cursor-target">license for chaos</div>
-          </div>
-          <div className="relative flex flex-row gap-4 px-4 pt-3 pb-3">
-            <div className="shrink-0 cursor-target">
-              <div style={{ width: 88, height: 120, border: '2px solid rgba(0,0,0,0.2)', overflow: 'hidden', borderRadius: 2 }}>
-                <img src={portraitImg} alt="aadi2005" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+    <div className="hero-id-scale-wrapper">
+      <Tilt tiltMaxAngleX={12} tiltMaxAngleY={12} perspective={1100} glareEnable glareMaxOpacity={0.22} glareColor="#ddd0ff" scale={1.03} transitionSpeed={600} gyroscope>
+        <div className="rounded-2xl p-[2px] id-card-glow-border" style={{ width: 420 }}>
+          <div className="relative rounded-2xl overflow-hidden shadow-2xl" style={{ background: '#D4C4A8', width: 420 }}>
+            <div className="absolute inset-0 id-card-shimmer pointer-events-none z-20 rounded-2xl" />
+            <div className="flex justify-between items-center px-4 py-1 border-b border-black/10">
+              <div>
+                <p className="font-mono" style={{ fontSize: 8, letterSpacing: '0.1em', fontWeight: 700, color: 'rgba(0,0,0,0.6)', textTransform: 'uppercase' }}>Identification Card</p>
+                <p className="font-mono" style={{ fontSize: 8, color: 'rgba(0,0,0,0.35)' }}>No.2345687981798</p>
               </div>
+              <div className="font-decipher id-hologram-text text-2xl graffiti-highlight font-semibold cursor-target">license for chaos</div>
             </div>
-            <div className="flex-1 flex flex-col font-mono" style={{ fontSize: 10, fontWeight: 700, color: '#000', gap: 2 }}>
-              <div className="flex justify-between"><span>[Name] aadi2005</span><span>[DOB] 09/12/2005</span></div>
-              <div className="flex justify-between"><span>[gender] male</span><span>[location] internet</span></div>
-              <div className="border-t border-black/10 pt-1">
-                <p className="font-mono" style={{ fontSize: 9, color: 'rgba(0,0,0,0.45)', fontWeight: 400, marginBottom: 1 }}>[creativity score]</p>
-                <div className="font-decipher id-graffiti-score cursor-target" style={{ fontSize: 30, fontWeight: 700, lineHeight: 1 }}>tends to infinity</div>
+            <div className="relative flex flex-row gap-4 px-4 pt-3 pb-3">
+              <div className="shrink-0 cursor-target">
+                <div style={{ width: 88, height: 120, border: '2px solid rgba(0,0,0,0.2)', overflow: 'hidden', borderRadius: 2 }}>
+                  <img src={portraitImg} alt="aadi2005" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                </div>
               </div>
-              <div className="border-t border-black/10 pt-1">
-                <div className="flex justify-between items-end gap-2">
-                  <div>
-                    <p style={{ fontSize: 9, color: 'rgba(0,0,0,0.45)', fontWeight: 400 }}>[availability]</p><p>always</p>
-                    <p style={{ fontSize: 9, color: 'rgba(0,0,0,0.45)', fontWeight: 400 }}>[experience]</p><p>7+ years</p>
+              <div className="flex-1 flex flex-col font-mono" style={{ fontSize: 10, fontWeight: 700, color: '#000', gap: 2 }}>
+                <div className="flex justify-between"><span>[Name] aadi2005</span><span>[DOB] 09/12/2005</span></div>
+                <div className="flex justify-between"><span>[gender] male</span><span>[location] internet</span></div>
+                <div className="border-t border-black/10 pt-1">
+                  <p className="font-mono" style={{ fontSize: 9, color: 'rgba(0,0,0,0.45)', fontWeight: 400, marginBottom: 1 }}>[creativity score]</p>
+                  <div className="font-decipher id-graffiti-score cursor-target" style={{ fontSize: 30, fontWeight: 700, lineHeight: 1 }}>tends to infinity</div>
+                </div>
+                <div className="border-t border-black/10 pt-1">
+                  <div className="flex justify-between items-end gap-2">
+                    <div>
+                      <p style={{ fontSize: 9, color: 'rgba(0,0,0,0.45)', fontWeight: 400 }}>[availability]</p><p>always</p>
+                      <p style={{ fontSize: 9, color: 'rgba(0,0,0,0.45)', fontWeight: 400 }}>[experience]</p><p>7+ years</p>
+                    </div>
+                    <div className="text-right"><p style={{ fontSize: 8, color: 'rgba(0,0,0,0.45)' }}>Issue Date</p><p>never mind</p></div>
+                    <div className="text-right"><p style={{ fontSize: 8, color: 'rgba(0,0,0,0.45)' }}>Expiry Date</p><p>till die</p></div>
                   </div>
-                  <div className="text-right"><p style={{ fontSize: 8, color: 'rgba(0,0,0,0.45)' }}>Issue Date</p><p>never mind</p></div>
-                  <div className="text-right"><p style={{ fontSize: 8, color: 'rgba(0,0,0,0.45)' }}>Expiry Date</p><p>till die</p></div>
                 </div>
               </div>
             </div>
-          </div>
-          <div className="font-aerosoldier dame text-brutal-red cursor-target" style={{ fontSize: '2.4rem' }}>AADI</div>
-          <div className="font-aerosoldier id-graffiti-overlay cursor-target" style={{ fontSize: '2.4rem' }}>awesome</div>
-          <div className="flex items-center gap-3 border-t border-black/15 px-4 py-1 relative z-30">
-            <div className="flex flex-col font-mono shrink-0" style={{ fontSize: 7, color: 'rgba(0,0,0,0.4)', lineHeight: 0.8, width: 48 }}>
-              <span style={{ fontWeight: 700, color: 'rgba(0,0,0,0.6)' }}>aadi2005</span><span>portfolio</span><span style={{ fontSize: 6 }}>2345687</span>
-            </div>
-            <a href={PORTFOLIO_URL} target="_blank" rel="noopener noreferrer" className="flex-1 flex items-center gap-3 cursor-target group relative z-40" style={{ textDecoration: 'none' }}>
-              <div className="flex-1 overflow-hidden flex items-center opacity-85 group-hover:opacity-100 transition-opacity"><BarcodeEl value={PORTFOLIO_URL} /></div>
-              <div className="flex flex-col items-end font-mono shrink-0" style={{ fontSize: 7, color: 'rgba(0,0,0,0.4)', lineHeight: 1, width: 56 }}>
-                <span style={{ fontWeight: 700, color: 'rgba(0,0,0,0.6)' }} className="group-hover:text-brutal-red transition-colors">↗ visit</span><span style={{ fontSize: 6 }}>aadi2005.com</span>
+            <div className="font-aerosoldier dame text-brutal-red cursor-target" style={{ fontSize: '2.4rem' }}>AADI</div>
+            <div className="font-aerosoldier id-graffiti-overlay cursor-target" style={{ fontSize: '2.4rem' }}>awesome</div>
+            <div className="flex items-center gap-3 border-t border-black/15 px-4 py-1 relative z-30">
+              <div className="flex flex-col font-mono shrink-0" style={{ fontSize: 7, color: 'rgba(0,0,0,0.4)', lineHeight: 0.8, width: 48 }}>
+                <span style={{ fontWeight: 700, color: 'rgba(0,0,0,0.6)' }}>aadi2005</span><span>portfolio</span><span style={{ fontSize: 6 }}>2345687</span>
               </div>
-            </a>
+              <a href={PORTFOLIO_URL} target="_blank" rel="noopener noreferrer" className="flex-1 flex items-center gap-3 cursor-target group relative z-40" style={{ textDecoration: 'none' }}>
+                <div className="flex-1 overflow-hidden flex items-center opacity-85 group-hover:opacity-100 transition-opacity"><BarcodeEl value={PORTFOLIO_URL} /></div>
+                <div className="flex flex-col items-end font-mono shrink-0" style={{ fontSize: 7, color: 'rgba(0,0,0,0.4)', lineHeight: 1, width: 56 }}>
+                  <span style={{ fontWeight: 700, color: 'rgba(0,0,0,0.6)' }} className="group-hover:text-brutal-red transition-colors">↗ visit</span><span style={{ fontSize: 6 }}>aadi2005.com</span>
+                </div>
+              </a>
+            </div>
           </div>
         </div>
-      </div>
-    </Tilt>
+      </Tilt>
+      <style dangerouslySetInnerHTML={{ __html: `
+        .hero-id-scale-wrapper {
+          transform-origin: center center;
+          transition: transform 0.3s ease;
+        }
+        @media (max-width: 500px) {
+          .hero-id-scale-wrapper { transform: scale(0.85); }
+        }
+        @media (max-width: 440px) {
+          .hero-id-scale-wrapper { transform: scale(0.75); }
+        }
+        @media (max-width: 380px) {
+          .hero-id-scale-wrapper { transform: scale(0.65); }
+        }
+      `}} />
+    </div>
   )
 }
 
@@ -155,25 +172,25 @@ export default function Hero({ onNavigate }) {
     const mm = gsap.matchMedia()
     mm.add('(min-width: 1536px)', () => {
       gsap.set(headingRef.current, { top: CONFIG.heading_top.desktop })
-      gsap.set(idCardRef.current, { ...CONFIG.idCard.desktop2xl_pos, top: 'auto', scale: CONFIG.idCard.scale2xl, opacity: 0, y: 40, transformOrigin: 'bottom left' })
+      gsap.set(idCardRef.current, { ...CONFIG.idCard.desktop2xl_pos, xPercent: -50, top: 'auto', scale: CONFIG.idCard.scale2xl, opacity: 0, y: 40, transformOrigin: 'bottom center' })
       gsap.set(videoRef.current, { ...CONFIG.video.desktop2xl_pos, ...CONFIG.video.desktop2xl })
       gsap.from('.hero-line', { y: '115%', duration: 1.6, stagger: 0.13, ease: 'expo.out', delay: 0.2 })
       gsap.to(idCardRef.current, { y: 0, opacity: 1, duration: 1.4, ease: 'power4.out', delay: 0.5 })
       const tl = gsap.timeline({ scrollTrigger: { trigger: sectionRef.current, start: 'top top', end: 'bottom bottom', scrub: 1 } })
       tl.to(videoRef.current, { ...CONFIG.video.scroll_end, borderRadius: 6, ease: 'power2.inOut' }, 0)
       tl.to(headingRef.current, { opacity: 0.08, y: -24, scale: 0.97 }, 0)
-      tl.to(idCardRef.current, { opacity: 0, x: -60 }, 0)
+      tl.to(idCardRef.current, { opacity: 0, y: 100 }, 0)
     })
     mm.add('(min-width: 1024px) and (max-width: 1535px)', () => {
       gsap.set(headingRef.current, { top: CONFIG.heading_top.desktop })
-      gsap.set(idCardRef.current, { ...CONFIG.idCard.desktop_pos, top: 'auto', opacity: 0, y: 40, transformOrigin: 'bottom left' })
+      gsap.set(idCardRef.current, { ...CONFIG.idCard.desktop_pos, xPercent: -50, top: 'auto', opacity: 0, y: 40, transformOrigin: 'bottom center' })
       gsap.set(videoRef.current, { ...CONFIG.video.desktop_pos, ...CONFIG.video.desktop })
       gsap.from('.hero-line', { y: '115%', duration: 1.6, stagger: 0.13, ease: 'expo.out', delay: 0.2 })
       gsap.to(idCardRef.current, { y: 0, opacity: 1, duration: 1.4, ease: 'power4.out', delay: 0.5 })
       const tl = gsap.timeline({ scrollTrigger: { trigger: sectionRef.current, start: 'top top', end: 'bottom bottom', scrub: 1 } })
       tl.to(videoRef.current, { ...CONFIG.video.scroll_end, borderRadius: 6, ease: 'power2.inOut' }, 0)
       tl.to(headingRef.current, { opacity: 0.08, y: -24, scale: 0.97 }, 0)
-      tl.to(idCardRef.current, { opacity: 0, x: -60 }, 0)
+      tl.to(idCardRef.current, { opacity: 0, y: 100 }, 0)
     })
     mm.add('(min-width: 768px) and (max-width: 1023px)', () => {
       gsap.set(headingRef.current, { top: CONFIG.heading_top.tablet })
