@@ -4,7 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGSAP } from '@gsap/react'
 import Tilt from 'react-parallax-tilt'
 import JsBarcode from 'jsbarcode'
-import mainVideo from '../assets/main video.mp4'
+import mainVideo from '../assets/Website Hero Video.webm'
 import portraitImg from '../assets/idcard.png'
 
 gsap.registerPlugin(ScrollTrigger, useGSAP)
@@ -44,6 +44,7 @@ const CONFIG = {
     desktop: '14%',
     tablet: '8%',
     mobile: '10%',
+    wide: '50%',    // 2xl: vertically centered
   },
   graffiti: {
     ghostA: { fontSize: 'clamp(12rem, 40vw, 30rem)', opacity: 0.04 },
@@ -171,7 +172,7 @@ function Hero({ onNavigate }) {
   useGSAP(() => {
     const mm = gsap.matchMedia()
     mm.add('(min-width: 1536px)', () => {
-      gsap.set(headingRef.current, { top: CONFIG.heading_top.desktop })
+      gsap.set(headingRef.current, { top: '50%', yPercent: -50 })
       gsap.set(idCardRef.current, { ...CONFIG.idCard.desktop2xl_pos, xPercent: -50, top: 'auto', scale: CONFIG.idCard.scale2xl, opacity: 0, y: 40, transformOrigin: 'bottom center' })
       gsap.set(videoRef.current, { ...CONFIG.video.desktop2xl_pos, ...CONFIG.video.desktop2xl })
       gsap.from('.hero-line', { y: '115%', duration: 1.6, stagger: 0.13, ease: 'expo.out', delay: 0.2 })
@@ -251,7 +252,7 @@ function Hero({ onNavigate }) {
               href="mailto:edit@aadi2005.com"
               className="text-sm font-lemon-milk text-neutral-500 hover:text-bone transition-colors cursor-target"
             >
-              email-edit@aadi2005.com
+              edit@aadi2005.com
             </a>
           </div>
           {/* Brand — center on desktop, full width on mobile */}
