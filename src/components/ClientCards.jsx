@@ -28,7 +28,7 @@ const PROJECTS = [
   },
   {
     id: 2, col: 0,
-    client: 'RETENTION CUT',
+    client: 'HACKING THE SYSTEMMM',
     category: 'VIDEO',
     stats: { ig: '600K', yt: '2M' },
     accent: '#FFD700',
@@ -49,7 +49,7 @@ const PROJECTS = [
   // Column 2
   {
     id: 4, col: 1,
-    client: 'EMILY BLACK',
+    client: 'ACARADAY AUTOMOTIVE',
     category: 'VIDEO',
     stats: { ig: '820K', yt: '500K' },
     accent: '#FF3B3B',
@@ -59,7 +59,7 @@ const PROJECTS = [
   },
   {
     id: 5, col: 1,
-    client: 'MEW STUDIO',
+    client: 'BABY NOJAMIE',
     category: 'MOTION',
     stats: { ig: '210K', yt: '90K' },
     accent: '#FF6600',
@@ -69,7 +69,7 @@ const PROJECTS = [
   },
   {
     id: 6, col: 1,
-    client: 'YOUTUBE SERIES',
+    client: 'ARTEMIS SIM RACING ',
     category: 'DIGITAL',
     stats: { ig: '450K', yt: '1.1M' },
     accent: '#00D9FF',
@@ -80,7 +80,7 @@ const PROJECTS = [
   // Column 3
   {
     id: 7, col: 2,
-    client: 'CLASSDOJO',
+    client: 'DEEPER REALMS',
     category: 'DIGITAL',
     stats: { ig: '1.1M', yt: '900K' },
     accent: '#766dfa',
@@ -90,7 +90,7 @@ const PROJECTS = [
   },
   {
     id: 8, col: 2,
-    client: 'PRIVATE CLIENT',
+    client: 'AADI2005',
     category: 'BRANDING',
     stats: { ig: '200K', yt: '80K' },
     accent: '#FF3B3B',
@@ -100,7 +100,7 @@ const PROJECTS = [
   },
   {
     id: 9, col: 2,
-    client: 'NEW COLLAB',
+    client: 'POVO FAADI',
     category: 'MOTION',
     stats: { ig: '310K', yt: '140K' },
     accent: '#C8FF00',
@@ -179,7 +179,7 @@ function Card({ project, delay = 0 }) {
         background: 'linear-gradient(to bottom, transparent 25%, rgba(0,0,0,0.82) 100%)',
       }} />
 
-      {/* Top-left: category pill */}
+      {/* Top-left: category pill
       <div className="absolute top-3 left-3 z-10">
         <span className="font-lemon-milk uppercase" style={{
           fontSize: '0.56rem', letterSpacing: '0.1em', fontWeight: 700,
@@ -187,7 +187,7 @@ function Card({ project, delay = 0 }) {
           padding: '3px 9px', borderRadius: 20,
           backdropFilter: 'blur(6px)',
         }}>{project.category}</span>
-      </div>
+      </div> */}
 
       {/* Top-right: arrow */}
       <div className="absolute top-3 right-3 z-10 flex items-center justify-center" style={{
@@ -201,27 +201,27 @@ function Card({ project, delay = 0 }) {
       }}>↗</div>
 
       {/* Bottom-right: accent dot */}
-      <div className="absolute bottom-3 right-3 z-10" style={{
+      {/* <div className="absolute bottom-3 right-3 z-10" style={{
         width: 7, height: 7, borderRadius: '50%',
         background: project.accent,
         boxShadow: `0 0 10px ${project.accent}`,
-      }} />
+      }} /> */}
 
       {/* Bottom-left: client + stats */}
       <div className="absolute bottom-0 left-0 right-10 z-10 px-3 pb-3">
-        <p className="font-akira font-black text-white leading-none mb-1" style={{
-          fontSize: 'clamp(0.75rem, 1.4vw, 1.05rem)',
+        <p className="font-highrise font-black text-white leading-none mb-1" style={{
+          fontSize: 'clamp(2rem, 4vw, 6rem)',
           letterSpacing: '-0.01em',
           textShadow: '0 2px 10px rgba(0,0,0,0.7)',
         }}>{project.client}</p>
         <div className="flex items-center gap-2.5">
           {project.stats?.ig && (
-            <span className="font-mono" style={{ fontSize: '0.56rem', color: 'rgba(255,255,255,0.55)', letterSpacing: '0.04em' }}>
+            <span className="font-highrise" style={{ fontSize: '2rem', color: 'rgba(255,255,255,0.55)', letterSpacing: '0.04em' }}>
               <span style={{ opacity: 0.4 }}>IG </span>{project.stats.ig}
             </span>
           )}
           {project.stats?.yt && (
-            <span className="font-mono" style={{ fontSize: '0.56rem', color: 'rgba(255,255,255,0.55)', letterSpacing: '0.04em' }}>
+            <span className="font-highrise" style={{ fontSize: '2rem', color: 'rgba(255,255,255,0.55)', letterSpacing: '0.04em' }}>
               <span style={{ opacity: 0.4 }}>YT </span>{project.stats.yt}
             </span>
           )}
@@ -341,7 +341,7 @@ export default function VaultGrid() {
       <div className="flex flex-col md:flex-row gap-0 px-5 sm:px-10 md:px-16 pb-20 sm:pb-28">
 
         {/* ── LEFT: floating heading, no box ── */}
-        <div className="vault-heading md:w-[36%] md:sticky md:top-20 md:self-start pr-0 md:pr-12 mb-12 md:mb-0">
+        <div className="vault-heading md:w-[40%] md:sticky md:top-20 md:self-start pr-0 md:pr-12 mb-12 md:mb-0">
 
           <h2 className="font-moon-get font-black text-bone leading-none mb-4" style={{
             fontSize: 'clamp(3rem, 5.5vw, 5.5rem)',

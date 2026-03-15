@@ -199,6 +199,16 @@
   src: url('../fonts/extenda/Extenda-40-Hecto-trial.ttf') format('opentype');
   font-display: swap;
 }
+@font-face {
+  font-family: 'cinemato';
+  src: url('../fonts/cinematografica/Cinematografica-Bold-trial.ttf') format('opentype');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'highrise';
+  src: url('../fonts/highrise/HighriseFont-Bold-Demo.otf') format('opentype');
+  font-display: swap;
+}
 
 
 
@@ -217,6 +227,8 @@
   /* Font families - use these with class names like 'font-rosie-serif', 'font-akira', etc. */
 
   --font-timemachine:"Typewriter2", Georgia, "Times New Roman", serif;
+  --font-cinemato:"cinemato", Georgia, "Times New Roman", serif;
+  --font-highrise:"highrise", Georgia, "Times New Roman", serif;
   --font-extenda:"extenda", Georgia, "Times New Roman", serif;
   --font-typewriter:"Typewriter", Georgia, "Times New Roman", serif;
   --font-rosie-serif: "Rosie Brown Serif", Georgia, "Times New Roman", serif;
