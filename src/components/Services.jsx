@@ -225,7 +225,7 @@ function ServiceRow({ service, isActive, onEnter, onLeave }) {
         }}
       >
         {/* Inner content — fixed height, no layout cost */}
-        <div style={{ position: 'relative', height: 'clamp(200px, 35vw, 320px)' }}>
+        <div style={{ position: 'relative', height: 'clamp(200px, 35vw, 600px)' }}>
 
           {/* Ghost number */}
           <span

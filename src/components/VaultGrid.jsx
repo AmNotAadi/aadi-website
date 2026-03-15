@@ -19,16 +19,16 @@ const CONFIG = {
   /* ── Outer page padding (space around the card) ── */
   page: {
     paddingX: { mobile: '1rem', tablet: '2rem', desktop: '4rem', wide: '6rem' },
-    paddingY: { mobile: '1.5rem', tablet: '2.5rem', desktop: '3rem', wide: '4rem' },
-    gap: { mobile: '1.5rem', tablet: '2rem', desktop: '2.5rem', wide: '3rem' },
+    paddingY: { mobile: '1.5rem', tablet: '2.5rem', desktop: '4rem', wide: '12rem' },
+    gap: { mobile: '1.5rem', tablet: '2rem', desktop: '3rem', wide: '5rem' },
   },
 
   /* ── Card inner padding ── */
   card: {
     paddingX: { mobile: '1.25rem', tablet: '2rem', desktop: '2.5rem', wide: '3.5rem' },
-    paddingY: { mobile: '1.5rem', tablet: '2rem', desktop: '2.5rem', wide: '3rem' },
-    borderRadius: { mobile: 16, tablet: 20, desktop: 24, wide: 28 },
-    gap: { mobile: '1.25rem', tablet: '1.5rem', desktop: '1.75rem', wide: '2rem' },
+    paddingY: { mobile: '1.5rem', tablet: '2.5rem', desktop: '3.5rem', wide: '4rem' },
+    borderRadius: { mobile: 16, tablet: 28, desktop: 32, wide: 40 },
+    gap: { mobile: '1.25rem', tablet: '2rem', desktop: '2.5rem', wide: '3.5rem' },
   },
 
   /* ── Title font size ── */
@@ -67,7 +67,7 @@ const CONFIG = {
 
   /* ── Animated element scale per breakpoint ── */
   element: {
-    scale: { mobile: 0.7, tablet: 0.8, desktop: 0.95, wide: 1.1 },
+    scale: { mobile: 0.7, tablet: 0.85, desktop: 1, wide: 1.3 },
   },
 }
 
@@ -525,7 +525,7 @@ function ProjectCard({ project, index, total }) {
               LEFT: content | RIGHT: media
               ════════════════════════════ */}
           {!isMobile && (
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', minHeight: 'clamp(380px,50vw,600px)' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1.1fr) minmax(0, 0.9fr)', minHeight: 'clamp(450px, 45vw, 850px)' }}>
 
               {/* LEFT: title + desc + element */}
               <div style={{
@@ -568,7 +568,7 @@ function ProjectCard({ project, index, total }) {
               <div style={{ padding: `${py} ${px} ${py} 0`, display: 'flex', alignItems: 'stretch' }}>
                 <div className="ca relative w-full cursor-target" style={{
                   borderRadius: CONFIG.media.borderRadius,
-                  minHeight: 'clamp(280px,35vw,500px)',
+                  minHeight: 'clamp(320px, 35vw, 750px)',
                 }}>
                   {index === 0 ? (
                     <div className="relative w-full h-full overflow-hidden" style={{ borderRadius: CONFIG.media.borderRadius, border: '1px solid rgba(255,255,255,0.07)' }}>
