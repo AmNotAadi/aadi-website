@@ -44,7 +44,7 @@ const CONFIG = {
     desktop: '14%',
     tablet: '8%',
     mobile: '10%',
-    wide: '50%',    // 2xl: vertically centered
+    wide: '18%',    // 2xl: vertically centered
   },
   graffiti: {
     ghostA: { fontSize: 'clamp(12rem, 40vw, 30rem)', opacity: 0.04 },
@@ -172,7 +172,7 @@ function Hero({ onNavigate }) {
   useGSAP(() => {
     const mm = gsap.matchMedia()
     mm.add('(min-width: 1536px)', () => {
-      gsap.set(headingRef.current, { top: '50%', yPercent: -50 })
+      gsap.set(headingRef.current, { top: '20%', yPercent: -50 })
       gsap.set(idCardRef.current, { ...CONFIG.idCard.desktop2xl_pos, xPercent: -50, top: 'auto', scale: CONFIG.idCard.scale2xl, opacity: 0, y: 40, transformOrigin: 'bottom center' })
       gsap.set(videoRef.current, { ...CONFIG.video.desktop2xl_pos, ...CONFIG.video.desktop2xl })
       gsap.from('.hero-line', { y: '115%', duration: 1.6, stagger: 0.13, ease: 'expo.out', delay: 0.2 })
@@ -263,9 +263,9 @@ function Hero({ onNavigate }) {
           <div className="hidden md:block" style={{ width: 120 }} />
         </nav>
 
-        <div ref={headingRef} className="absolute inset-x-0 flex flex-col items-center justify-center z-10 px-4" style={{ top: CONFIG.heading_top.desktop }}>
+        <div ref={headingRef} className="absolute  2xl:top-{100px} inset-x-0 flex flex-col items-center justify-center z-10 px-4" style={{ top: CONFIG.heading_top.desktop }}>
           <div className="overflow-hidden">
-            <h1 className={`hero-line font-magazine text-bone leading-none tracking-tight text-center ${CONFIG.heading.fontSize}`}>
+            <h1 className={`hero-line font-magazine text-bone  leading-none tracking-tight text-center ${CONFIG.heading.fontSize}`}>
               TURNING CHAOS
             </h1>
           </div>
