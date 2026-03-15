@@ -1,9 +1,10 @@
-﻿import { useRef, useEffect, useState } from 'react'
+import { useRef, useEffect, useState } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGSAP } from '@gsap/react'
 import Shuffle from './Shuffle'
 import PixelCard from './PixelCard'
+import IDCard from './IDCard'
 
 gsap.registerPlugin(ScrollTrigger, useGSAP)
 
@@ -471,10 +472,15 @@ function ProjectCard({ project, index, total }) {
                   speed={30}
                 >
                   <div className="relative w-full h-full overflow-hidden" style={{ borderRadius: CONFIG.media.borderRadius, border: '1px solid rgba(255,255,255,0.07)' }}>
-                    {project.type === 'video'
-                      ? <video src={project.src} poster={project.thumb} autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover" />
-                      : <img src={project.src} alt={project.title} className="absolute inset-0 w-full h-full object-cover" />
-                    }
+                    {index === 0 ? (
+                      <div className="w-full h-full flex items-center justify-center bg-black/40">
+                        <IDCard isInline />
+                      </div>
+                    ) : project.type === 'video' ? (
+                      <video src={project.src} poster={project.thumb} autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover" />
+                    ) : (
+                      <img src={project.src} alt={project.title} className="absolute inset-0 w-full h-full object-cover" />
+                    )}
                     <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom,transparent 60%,rgba(0,0,0,0.4))' }} />
                     <div className="absolute top-2.5 right-2.5 font-mono font-bold px-2 py-0.5 rounded-full" style={{ fontSize: '0.55rem', background: 'rgba(0,0,0,0.7)', color: 'rgba(255,255,255,0.55)', border: '1px solid rgba(255,255,255,0.1)', backdropFilter: 'blur(8px)', letterSpacing: '0.1em' }}>
                       {String(index + 1).padStart(2, '0')} / {total}
@@ -560,10 +566,15 @@ function ProjectCard({ project, index, total }) {
                     speed={30}
                   >
                     <div className="relative w-full h-full overflow-hidden" style={{ borderRadius: CONFIG.media.borderRadius, border: '1px solid rgba(255,255,255,0.07)' }}>
-                      {project.type === 'video'
-                        ? <video src={project.src} poster={project.thumb} autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover" />
-                        : <img src={project.src} alt={project.title} className="absolute inset-0 w-full h-full object-cover" />
-                      }
+                      {index === 0 ? (
+                        <div className="w-full h-full flex items-center justify-center bg-black/40">
+                          <IDCard isInline />
+                        </div>
+                      ) : project.type === 'video' ? (
+                        <video src={project.src} poster={project.thumb} autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover" />
+                      ) : (
+                        <img src={project.src} alt={project.title} className="absolute inset-0 w-full h-full object-cover" />
+                      )}
                       {/* Vignette */}
                       <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom,transparent 55%,rgba(0,0,0,0.5))' }} />
 
