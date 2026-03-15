@@ -120,10 +120,10 @@ export default function Footer({ onNavigate }) {
       {/* Big AADDI text */}
       <div className="relative w-full overflow-hidden leading-none select-none">
         <span
-          aria-label="AADDI"
+          aria-label="AADI"
           className="block w-full text-center heading-brutal text-[23vw] leading-[0.82] text-stroke px-2 pb-[0.04em] cursor-target"
         >
-          AADDI
+          AADI
         </span>
         <span
           ref={fillTextRef}
@@ -131,13 +131,13 @@ export default function Footer({ onNavigate }) {
           className="absolute inset-0 block w-full text-center heading-brutal text-[23vw] leading-[0.82] text-stroke-fill px-2 pb-[0.04em]"
           style={{ clipPath: 'inset(100% 0 0 0)' }}
         >
-          AADDI
+          AADI
         </span>
       </div>
 
       <div className="flex flex-col sm:flex-row items-center justify-between px-5 sm:px-8 md:px-14 pb-5 pt-3 gap-2 sm:gap-0">
         <p className="text-meta text-[8px] tracking-[0.2em] text-bone/30">
-          © 2026 AADDI MEDIA. ALL RIGHTS RESERVED.
+          © 2026 AADI MEDIA. ALL RIGHTS RESERVED.
         </p>
         <p className="text-meta text-[8px] tracking-[0.2em] text-bone/30">
           MADE WITH PRECISION.
