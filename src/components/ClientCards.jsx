@@ -19,8 +19,8 @@ gsap.registerPlugin(ScrollTrigger, useGSAP)
    CONFIG — all tweakable values in one place
 ══════════════════════════════════════════════════════════════ */
 const CFG = {
-  scrubSpeed:     1.8,
-  rotateDuration: 0.6,
+  scrubSpeed:     0.8,   // low = fast + smooth response
+  rotateDuration: 0.4,  // fast snap
 
   // Ring radius per breakpoint (px)
   // The circle center is pushed left so only right half shows.
@@ -167,34 +167,43 @@ export default function ClientCards(){
     })
 
     // Scroll-driven wheel
+    // scrub:true ties rotation DIRECTLY to scroll position — 1:1, no lag
+    const stepDeg = 360 / N
+
+    // Use a gsap tween scrubbed to scroll — most performant approach
+    const totalRot = -(N - 1) * stepDeg
+    gsap.to(wheelRef.current, {
+      rotation: totalRot,
+      ease: 'none',                        // linear = matches scroll exactly
+      scrollTrigger: {
+        trigger: sectionRef.current,
+        start:   'top top',
+        end:     'bottom bottom',
+        scrub:   true,                     // true = instant 1:1 with scroll, no lag
+      }
+    })
+
+    // Separate onUpdate for info panel + node highlights
     ScrollTrigger.create({
       trigger: sectionRef.current,
       start:   'top top',
       end:     'bottom bottom',
-      scrub:   CFG.scrubSpeed,
+      scrub:   true,
       onUpdate(self){
-        const idx = Math.max(0, Math.min(N-1, Math.round(self.progress*(N-1))))
+        const raw = self.progress * (N - 1)
+        const idx = Math.max(0, Math.min(N-1, Math.round(raw)))
 
-        // Rotate wheel so node[idx] lands at 0° (3-o'clock = notch)
-        gsap.to(wheelRef.current,{
-          rotation: -nodeDeg(idx),
-          duration: CFG.rotateDuration,
-          ease:'power2.out',
-          overwrite:true,
-        })
-
-        // Mutate nodes (no React re-renders)
+        // Mutate nodes directly — zero React
         CLIENTS.forEach((_,i)=>{
           const nd = nodeRefs.current[i]
           if(!nd) return
-          const on = i===idx
-          gsap.to(nd,{
-            scale:      on ? CFG.nodeScaleOn : 1,
-            opacity:    on ? 1 : CFG.nodeOpacityOff,
-            background: on ? CLIENTS[i].accent : 'rgba(245,230,211,0.3)',
-            boxShadow:  on ? `0 0 0 4px ${CLIENTS[i].accent}33,0 0 16px ${CLIENTS[i].accent}77` : 'none',
-            duration:0.4, ease:'power2.out', overwrite:true,
-          })
+          const on = i === idx
+          nd.style.opacity    = on ? '1' : String(CFG.nodeOpacityOff)
+          nd.style.background = on ? CLIENTS[i].accent : 'rgba(245,230,211,0.3)'
+          nd.style.transform  = `translate(-50%,-50%) scale(${on ? CFG.nodeScaleOn : 1})`
+          nd.style.boxShadow  = on
+            ? `0 0 0 4px ${CLIENTS[i].accent}33,0 0 16px ${CLIENTS[i].accent}77`
+            : 'none'
         })
 
         // Swap portrait
@@ -205,13 +214,13 @@ export default function ClientCards(){
         if(notchTriRef.current)  notchTriRef.current.style.borderRightColor = acc
         if(notchLineRef.current) notchLineRef.current.style.background = acc
 
-        // React re-render only on index change
+        // React re-render only on index change (~8 times total)
         if(idx !== activeRef.current){
           activeRef.current = idx
           setActive(idx)
           gsap.fromTo(infoRef.current,
-            { opacity:0, y:20 },
-            { opacity:1, y:0, duration:0.45, ease:'power3.out' }
+            { opacity:0, y:16 },
+            { opacity:1, y:0, duration:0.35, ease:'power3.out' }
           )
         }
       }
@@ -223,7 +232,7 @@ export default function ClientCards(){
   return(
     <section
       ref={sectionRef}
-      style={{ background:CFG.bg, minHeight:`${N*130}vh`, position:'relative' }}
+      style={{ background:CFG.bg, minHeight:`${N*150}vh`, position:'relative' }}
     >
       <div className="sticky top-0 h-screen overflow-hidden">
 
@@ -338,8 +347,6 @@ export default function ClientCards(){
             })}
           </div>
 
-          {/* Static notch at 3-o'clock (right edge of circle) */}
-      
         </div>
 
         {/* ══════════════════════════════════════════════════
@@ -370,7 +377,7 @@ export default function ClientCards(){
 
           {/* Big name */}
           <h2 style={{
-            fontFamily:"'Lemon Milk','Helvetica Neue',sans-serif",
+            fontFamily:"'lemon milk','Helvetica Neue',sans-serif",
             fontWeight:900,
             fontSize:'clamp(2rem,5vw,5.5rem)',
             letterSpacing:'-0.04em',
