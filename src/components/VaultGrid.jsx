@@ -224,11 +224,11 @@ function LargeOrbitElement({ accent = '#00D9FF' }) {
   const LABEL_R = 230 // label centers pushed further out from ring
 
   const nodes = [
-    { label: 'YOU SEND',   sub: 'footage',  angle: -90  },
-    { label: 'I EDIT',     sub: 'the cut',  angle: -10  },
-    { label: 'I DELIVER',  sub: 'on time',  angle: 70   },
-    { label: 'YOU UPLOAD', sub: 'it live',  angle: 160  },
-    { label: 'YOU GET',    sub: 'results',  angle: -170 },
+    { label: 'YOU SEND  FOOTAGE',   sub: '.',  angle: -90  },
+    { label: 'I EDIT',     sub: '.',  angle: -20  },
+    { label: 'I DELIVER',  sub: '.',  angle: 45   },
+    { label: 'YOU UPLOAD', sub: '.',  angle: 130  },
+    { label: 'YOU GET  RESULTS',    sub: '.',  angle: -160 },
   ]
 
   // Full circle path for animateMotion arrows (clockwise)
