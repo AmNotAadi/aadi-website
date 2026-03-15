@@ -13,6 +13,7 @@ import IDCard from './components/IDCard'
 import TargetCursor from './components/TargetCursor'
 import MinecraftCursor from './components/MCCursor'
 import Connect from './components/Connect'
+import Preloader from './components/PreLoader'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -49,19 +50,22 @@ function App() {
   }, [])
 
   return (
-    <Layout>
-      <TargetCursor
-        spinDuration={2}
-        hideDefaultCursor
-        parallaxOn
-        hoverDuration={0.2}
-      />
-      {currentPage === 'home' ? (
-        <Home onNavigate={setCurrentPage} />
-      ) : (
-        <Connect onNavigate={setCurrentPage} />
-      )}
-    </Layout>
+    <>
+      <Preloader />
+      <Layout>
+        <TargetCursor
+          spinDuration={2}
+          hideDefaultCursor
+          parallaxOn
+          hoverDuration={0.2}
+        />
+        {currentPage === 'home' ? (
+          <Home onNavigate={setCurrentPage} />
+        ) : (
+          <Connect onNavigate={setCurrentPage} />
+        )}
+      </Layout>
+    </>
   )
 }
 

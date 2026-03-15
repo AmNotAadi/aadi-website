@@ -17,17 +17,17 @@ const CONFIG = {
 
   /* ── Outer page padding (space around the card) ── */
   page: {
-    paddingX: { mobile: '1rem',   tablet: '2rem',   desktop: '4rem',   wide: '6rem'   },
-    paddingY: { mobile: '1.5rem', tablet: '2.5rem', desktop: '3rem',   wide: '4rem'   },
-    gap:      { mobile: '1.5rem', tablet: '2rem',   desktop: '2.5rem', wide: '3rem'   },
+    paddingX: { mobile: '1rem', tablet: '2rem', desktop: '4rem', wide: '6rem' },
+    paddingY: { mobile: '1.5rem', tablet: '2.5rem', desktop: '3rem', wide: '4rem' },
+    gap: { mobile: '1.5rem', tablet: '2rem', desktop: '2.5rem', wide: '3rem' },
   },
 
   /* ── Card inner padding ── */
   card: {
-    paddingX: { mobile: '1.25rem', tablet: '2rem',  desktop: '2.5rem', wide: '3.5rem' },
-    paddingY: { mobile: '1.5rem',  tablet: '2rem',  desktop: '2.5rem', wide: '3rem'   },
+    paddingX: { mobile: '1.25rem', tablet: '2rem', desktop: '2.5rem', wide: '3.5rem' },
+    paddingY: { mobile: '1.5rem', tablet: '2rem', desktop: '2.5rem', wide: '3rem' },
     borderRadius: { mobile: 16, tablet: 20, desktop: 24, wide: 28 },
-    gap:      { mobile: '1.25rem', tablet: '1.5rem', desktop: '1.75rem', wide: '2rem' },
+    gap: { mobile: '1.25rem', tablet: '1.5rem', desktop: '1.75rem', wide: '2rem' },
   },
 
   /* ── Title font size ── */
@@ -47,19 +47,19 @@ const CONFIG = {
 
   /* ── Description typewriter ── */
   desc: {
-    fontSize:   { mobile: '0.82rem', tablet: '0.88rem', desktop: '0.92rem', wide: '1rem' },
+    fontSize: { mobile: '0.82rem', tablet: '0.88rem', desktop: '0.92rem', wide: '1rem' },
     lineHeight: 1.75,
-    speed:      16, // ms per char — lower = faster typing
+    speed: 16, // ms per char — lower = faster typing
   },
 
   /* ── Media height inside the card ── */
   media: {
     // On mobile, media is a horizontal strip. On tablet+, right side of card.
     height: {
-      mobile:  '200px',
-      tablet:  '100%',   // fills right column height
+      mobile: '200px',
+      tablet: '100%',   // fills right column height
       desktop: '100%',
-      wide:    '100%',
+      wide: '100%',
     },
     borderRadius: 12,
   },
@@ -95,7 +95,7 @@ const PROJECTS = [
     tagline: 'Social Excellence',
     desc: [
       'Powered by a a Ryzen 7 Series CPU, RTX 50 Series GPU and 32 Gigabytes of RAM, my workstation is capable of handling large projects, high-resolution footage, and fast turnaround times.',
-      
+
     ],
     type: 'video',
     thumb: 'https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=600&q=80',
@@ -109,7 +109,7 @@ const PROJECTS = [
     tagline: 'Long-Form Mastery',
     desc: [
       'I’m capable of scanning through long recordings to uncover the most engaging moments. The clips that capture attention, spark curiosity, and keep viewers watching. By identifying these “hidden gems”, I turn hours of raw footage into concise, compelling highlights.',
-      
+
     ],
     type: 'video',
     thumb: 'https://images.unsplash.com/photo-1492619375914-88005aa9e8fb?w=600&q=80',
@@ -123,7 +123,7 @@ const PROJECTS = [
     tagline: 'Full Brand Suite',
     desc: [
       'Every cut, subtitle, and pacing decision is made to maintain attention. I focus on storytelling, rhythm, and visual clarity so viewers stay engaged from start to finish.',
-      
+
     ],
     type: 'video',
     thumb: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=600&q=80',
@@ -155,7 +155,7 @@ function useBreakpoint() {
   const get = () => {
     if (typeof window === 'undefined') return 'desktop'
     const w = window.innerWidth
-    if (w < 768)  return 'mobile'
+    if (w < 768) return 'mobile'
     if (w < 1024) return 'tablet'
     if (w < 1536) return 'desktop'
     return 'wide'
@@ -173,10 +173,10 @@ function useBreakpoint() {
    TYPEWRITER
    ================================================================ */
 function Typewriter({ text, bp, delay = 0 }) {
-  const ref   = useRef(null)
+  const ref = useRef(null)
   const [displayed, setDisplayed] = useState('')
-  const [started, setStarted]     = useState(false)
-  const [done, setDone]           = useState(false)
+  const [started, setStarted] = useState(false)
+  const [done, setDone] = useState(false)
 
   useEffect(() => {
     if (!ref.current) return
@@ -294,11 +294,11 @@ function WaveformElement() {
 
 function FloatingIconsElement() {
   const platforms = [
-    { label: 'YT', delay: '0s',    x: 10,  y: 0  },
+    { label: 'YT', delay: '0s', x: 10, y: 0 },
     { label: 'IG', delay: '0.35s', x: 110, y: 12 },
-    { label: 'TK', delay: '0.7s',  x: 210, y: 0  },
-    { label: 'TW', delay: '0.4s',  x: 58,  y: 72 },
-    { label: 'LI', delay: '0.9s',  x: 158, y: 65 },
+    { label: 'TK', delay: '0.7s', x: 210, y: 0 },
+    { label: 'TW', delay: '0.4s', x: 58, y: 72 },
+    { label: 'LI', delay: '0.9s', x: 158, y: 65 },
   ]
   return (
     <div className="relative" style={{ width: 310, height: 140 }}>
@@ -328,12 +328,12 @@ function StatsElement() {
 
 function ProjectElement({ type }) {
   switch (type) {
-    case 'orbit':         return <OrbitElement />
-    case 'timeline':      return <TimelineElement />
-    case 'waveform':      return <WaveformElement />
+    case 'orbit': return <OrbitElement />
+    case 'timeline': return <TimelineElement />
+    case 'waveform': return <WaveformElement />
     case 'floatingicons': return <FloatingIconsElement />
-    case 'stats':         return <StatsElement />
-    default:              return null
+    case 'stats': return <StatsElement />
+    default: return null
   }
 }
 
@@ -352,7 +352,7 @@ function ProjectElement({ type }) {
    ================================================================ */
 function ProjectCard({ project, index, total }) {
   const cardRef = useRef(null)
-  const bp      = useBreakpoint()
+  const bp = useBreakpoint()
   const isMobile = bp === 'mobile'
 
   /* ── Project Description Rendering ── */
@@ -464,7 +464,7 @@ function ProjectCard({ project, index, total }) {
                 height: CONFIG.media.height[bp],
                 borderRadius: CONFIG.media.borderRadius,
               }}>
-                <PixelCard 
+                <PixelCard
                   className="w-full h-full"
                   colors={`${project.accent},#ffffff,${project.accent}80`}
                   gap={6}
@@ -553,7 +553,7 @@ function ProjectCard({ project, index, total }) {
                   borderRadius: CONFIG.media.borderRadius,
                   minHeight: 'clamp(280px,35vw,500px)',
                 }}>
-                  <PixelCard 
+                  <PixelCard
                     className="w-full h-full"
                     colors={`${project.accent},#ffffff,${project.accent}80`}
                     gap={6}
