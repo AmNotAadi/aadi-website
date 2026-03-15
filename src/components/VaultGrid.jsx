@@ -5,6 +5,8 @@ import { useGSAP } from '@gsap/react'
 import Shuffle from './Shuffle'
 import IDCard from './IDCard'
 import setupImage2 from '../assets/setup2.jpg'
+import page3 from '../assets/page3.jpeg'
+
 
 gsap.registerPlugin(ScrollTrigger, useGSAP)
 
@@ -83,9 +85,9 @@ const PROJECTS = [
     desc: [
       "I'm capable of scanning through long recordings to uncover the most engaging moments. The clips that capture attention, spark curiosity, and keep viewers watching. By identifying these \"hidden gems\", I turn hours of raw footage into concise, compelling highlights.",
     ],
-    type: 'video',
-    thumb: 'https://images.unsplash.com/photo-1492619375914-88005aa9e8fb?w=600&q=80',
-    src: 'https://assets.mixkit.co/videos/preview/mixkit-hands-of-a-man-typing-on-a-laptop-on-a-wooden-table-23609-large.mp4',
+    type: 'image',
+    thumb: page3,
+    src: page3,
     accent: '#FFD700',
     element: 'waveform',
   },
